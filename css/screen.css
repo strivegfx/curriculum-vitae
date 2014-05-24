@@ -1,0 +1,622 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,300,700);
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.clearFix:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+html, body {
+  height: 100%;
+  width: 100%; }
+
+body {
+  color: #6da8f3;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300; }
+
+h1, .h1 {
+  font-color: white;
+  font-size: 3.5em;
+  font-weight: 100;
+  margin: 0; }
+  @media only screen and (min-width: 37.5em) {
+    h1, .h1 {
+      font-size: 5em; } }
+  @media only screen and (min-width: 56.25em) {
+    h1, .h1 {
+      font-size: 7em; } }
+
+h2, .h2 {
+  color: #323e50;
+  font-size: 2em;
+  font-weight: 100;
+  margin: 0;
+  padding: 0 0 0 2em;
+  position: relative; }
+  h2:before, .h2:before {
+    position: absolute;
+    display: block;
+    content: "";
+    border: 1px solid #323e50;
+    border-radius: 50%;
+    height: 1.5em;
+    left: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 1.5em; }
+
+h3, .h3 {
+  color: #323e50;
+  font-size: 1.5em;
+  font-weight: 100;
+  margin: 0; }
+
+h4, .h4 {
+  font-size: 2em;
+  font-weight: 100;
+  margin: 0; }
+
+.center {
+  margin: 0 auto;
+  padding: 0 5%;
+  width: 100%; }
+  @media only screen and (min-width: 80em) {
+    .center {
+      padding: 0;
+      width: 75em; } }
+
+/*
+ * divider shadows
+ *
+ */
+.shadowTop, .shadowBottom {
+  height: 3em;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 100%; }
+  .shadowTop:before, .shadowBottom:before {
+    position: absolute;
+    display: block;
+    content: "";
+    border-radius: 50%;
+    -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.25);
+    height: 100%;
+    left: 0;
+    width: 100%; }
+
+.shadowTop:before {
+  top: 100%; }
+
+.shadowBottom:before {
+  bottom: 100%; }
+
+section, .shadowContainer {
+  position: relative; }
+
+#work > .shadowBottom, #myHistory > .shadowBottom, #references > .shadowBottom, #contact > .shadowBottom {
+  top: 0; }
+
+#about .shadowTop, #tools .shadowTop {
+  bottom: 100%; }
+
+#tools .shadowContainer .shadowTop, #work .shadowContainer .shadowTop, #myHistory .shadowContainer .shadowTop {
+  bottom: 100%; }
+
+/*
+ *
+ * portrait code blendng through two different modules (header & about)
+ *
+ */
+.portraitBody, .portraitHands {
+  left: 10%;
+  position: absolute;
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+  width: auto; }
+  @media only screen and (min-width: 23em) {
+    .portraitBody, .portraitHands {
+      left: 25%;
+      -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+      transform: translateX(0); } }
+  @media only screen and (min-width: 37.5em) {
+    .portraitBody, .portraitHands {
+      left: 25%;
+      -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+      transform: translateX(0); } }
+  @media only screen and (min-width: 56.25em) {
+    .portraitBody, .portraitHands {
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      transform: translateX(-50%); } }
+
+.portraitBody {
+  height: 40em;
+  top: 0; }
+  @media only screen and (min-width: 37.5em) {
+    .portraitBody {
+      height: 50em; } }
+  @media only screen and (min-width: 56.25em) {
+    .portraitBody {
+      height: 70em; } }
+  @media only screen and (min-width: 80em) {
+    .portraitBody {
+      height: 80em; } }
+
+.portraitHands {
+  height: 5em;
+  top: -2.5em; }
+  @media only screen and (min-width: 37.5em) {
+    .portraitHands {
+      height: 6.25em;
+      top: -3.125em; } }
+  @media only screen and (min-width: 56.25em) {
+    .portraitHands {
+      height: 8.75em;
+      top: -4.375em; } }
+  @media only screen and (min-width: 80em) {
+    .portraitHands {
+      height: 10em;
+      top: -5em; } }
+
+/*
+ *
+ * extended background
+ *
+ */
+.extendedBg {
+  background-color: #78ccfe;
+  position: relative;
+  z-index: -1; }
+  .extendedBg:before, .extendedBg:after {
+    position: absolute;
+    display: block;
+    content: "";
+    background-repeat: no-repeat;
+    -webkit-background-size: contain;
+    background-size: contain;
+    height: 100%;
+    top: 0;
+    width: 100%;
+    z-index: -1; }
+  .extendedBg:before {
+    background-image: url(../img/dark-rays.svg);
+    background-position: left top;
+    left: 0; }
+  .extendedBg:after {
+    background-image: url(../img/light-rays.svg);
+    background-position: right top;
+    right: 0; }
+
+header {
+  height: 20em;
+  position: relative; }
+  @media only screen and (min-width: 37.5em) {
+    header {
+      height: 25em; } }
+  @media only screen and (min-width: 56.25em) {
+    header {
+      height: 35em; } }
+  @media only screen and (min-width: 80em) {
+    header {
+      height: 40em; } }
+  header .hello {
+    position: absolute;
+    top: 2em;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    width: 45%; }
+    @media only screen and (min-width: 23em) {
+      header .hello {
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        width: 40%; } }
+    @media only screen and (min-width: 37.5em) {
+      header .hello {
+        width: 40%; } }
+    @media only screen and (min-width: 56.25em) {
+      header .hello {
+        width: 33%; } }
+    header .hello h1 {
+      color: white; }
+    header .hello p {
+      color: #323e50;
+      font-size: 1em;
+      font-weight: 300;
+      margin: 0; }
+      @media only screen and (min-width: 37.5em) {
+        header .hello p {
+          font-size: 1.5em;
+          font-weight: 100; } }
+
+#about {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.5)), to(rgba(255, 255, 255, 0.8)));
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8));
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8));
+  padding: 6em 0 3em 0; }
+  #about .intro {
+    padding: 0 0 3em 0; }
+    @media only screen and (min-width: 56.25em) {
+      #about .intro {
+        float: left;
+        width: 50%; }
+        #about .intro:nth-child(odd) {
+          padding-right: 3em; }
+        #about .intro:nth-child(even) {
+          padding-left: 3em; } }
+
+.spacer {
+  height: auto;
+  width: 100%; }
+
+.thumbList {
+  list-style-type: none;
+  padding: 0; }
+  .thumbList .thumbSquare {
+    float: left; }
+
+#tools, #work, #myHistory {
+  padding: 6em 0 0 0; }
+  #tools .intro, #work .intro, #myHistory .intro {
+    padding-bottom: 3em; }
+
+.thumbSquare {
+  cursor: pointer;
+  position: relative; }
+  .thumbSquare:before {
+    position: absolute;
+    display: block;
+    content: "";
+    background: #ddf2ff;
+    height: 100%;
+    right: 0;
+    top: 50%;
+    width: 2px;
+    z-index: 1; }
+  .thumbSquare:after {
+    position: absolute;
+    display: block;
+    content: "";
+    background: #ddf2ff;
+    bottom: 0;
+    height: 2px;
+    left: 50%;
+    width: 100%;
+    z-index: 1; }
+
+#tools li {
+  width: 25%; }
+  #tools li:nth-child(4n+4):before {
+    display: none; }
+  #tools li:nth-child(1n+12):before {
+    display: none; }
+  #tools li:nth-child(1n+13):after {
+    display: none; }
+  #tools li:nth-child(1n+17) {
+    display: none; }
+  #tools li:nth-child(4n+4):after {
+    display: none; }
+  @media only screen and (min-width: 37.5em) {
+    #tools li {
+      width: 20%; }
+      #tools li:nth-child(1n+1):before {
+        display: block; }
+      #tools li:nth-child(1n+1):after {
+        display: block;
+        left: 50%;
+        width: 100%; }
+      #tools li:nth-child(1n+1) {
+        display: block; }
+      #tools li:nth-child(5n+5):before {
+        display: none; }
+      #tools li:nth-child(1n+10):before {
+        display: none; }
+      #tools li:nth-child(1n+11):after {
+        display: none; }
+      #tools li:nth-child(5n+5):after {
+        display: none; }
+      #tools li:nth-child(1n+16) {
+        display: none; } }
+  @media only screen and (min-width: 56.25em) {
+    #tools li {
+      width: 16.6666666666666%; }
+      #tools li:nth-child(1n+1):before {
+        display: block; }
+      #tools li:nth-child(1n+1):after {
+        display: block;
+        left: 50%;
+        width: 100%; }
+      #tools li:nth-child(1n+1) {
+        display: block; }
+      #tools li:nth-child(6n+6):before {
+        display: none; }
+      #tools li:nth-child(1n+12):before {
+        display: none; }
+      #tools li:nth-child(1n+13):after {
+        display: none; }
+      #tools li:nth-child(6n+6):after {
+        display: none; } }
+  @media only screen and (min-width: 80em) {
+    #tools li {
+      width: 12.5%; }
+      #tools li:nth-child(1n+1):before {
+        display: block; }
+      #tools li:nth-child(1n+1):after {
+        display: block;
+        left: 50%;
+        width: 100%; }
+      #tools li:nth-child(1n+1) {
+        display: block; }
+      #tools li:nth-child(8n+8):before {
+        display: none; }
+      #tools li:nth-child(1n+9):before {
+        display: none; }
+      #tools li:nth-child(1n+9):after {
+        display: none; }
+      #tools li:nth-child(8n+8):after {
+        display: none; }
+      #tools li:nth-child(1n+17) {
+        display: none; } }
+
+#work li {
+  width: 100%; }
+  #work li:before {
+    display: none; }
+  #work li:after {
+    left: 25%;
+    width: 50%; }
+  #work li:nth-child(12):after {
+    display: none; }
+  @media only screen and (min-width: 23em) {
+    #work li {
+      width: 50%; }
+      #work li:nth-child(1n+1):before {
+        display: block; }
+      #work li:nth-child(1n+1):after {
+        display: block;
+        left: 50%;
+        width: 100%; }
+      #work li:nth-child(1n+1) {
+        display: block; }
+      #work li:nth-child(2n+2):before {
+        display: none; }
+      #work li:nth-child(1n+11):before {
+        display: none; }
+      #work li:nth-child(1n+11):after {
+        display: none; }
+      #work li:nth-child(2n+2):after {
+        display: none; } }
+  @media only screen and (min-width: 37.5em) {
+    #work li {
+      width: 33%; }
+      #work li:nth-child(1n+1):before {
+        display: block; }
+      #work li:nth-child(1n+1):after {
+        display: block;
+        left: 50%;
+        width: 100%; }
+      #work li:nth-child(1n+1) {
+        display: block; }
+      #work li:nth-child(3n+3):before {
+        display: none; }
+      #work li:nth-child(1n+9):before {
+        display: none; }
+      #work li:nth-child(1n+9):after {
+        display: none; }
+      #work li:nth-child(3n+3):after {
+        display: none; } }
+  @media only screen and (min-width: 56.25em) {
+    #work li {
+      width: 25%; }
+      #work li:nth-child(1n+1):before {
+        display: block; }
+      #work li:nth-child(1n+1):after {
+        display: block;
+        left: 50%;
+        width: 100%; }
+      #work li:nth-child(1n+1) {
+        display: block; }
+      #work li:nth-child(4n+4):before {
+        display: none; }
+      #work li:nth-child(1n+9):before {
+        display: none; }
+      #work li:nth-child(1n+9):after {
+        display: none; }
+      #work li:nth-child(4n+4):after {
+        display: none; } }
+  #work li#workInformation {
+    background-color: #78ccfe;
+    pointer-events: none;
+    position: absolute;
+    z-index: 100; }
+
+#myHistory {
+  background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(255, 255, 255, 0.25)), to(rgba(255, 255, 255, 0.8)));
+  background-image: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.8));
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.8));
+  padding: 6em 0 0 0; }
+
+.jobList {
+  list-style-type: none;
+  padding-top: 6em;
+  padding-bottom: 3em; }
+  .jobList .bma:after {
+    background-color: #cbecff; }
+  .jobList .bma .timeline:before, .jobList .bma .timeline:after {
+    background-color: #d2edfe; }
+  .jobList .nzpc:after {
+    background-color: #c5e9ff; }
+  .jobList .nzpc .timeline:before, .jobList .nzpc .timeline:after {
+    background-color: #d2edfe; }
+  .jobList .freelance:after {
+    background-color: #bde6ff; }
+  .jobList .freelance .timeline:before, .jobList .freelance .timeline:after {
+    background-color: #c6e9ff; }
+  .jobList .fairfax:after {
+    background-color: #b6e3fe; }
+  .jobList .fairfax .timeline:before, .jobList .fairfax .timeline:after {
+    background-color: #bde6ff; }
+  .jobList .seniorPosition:after {
+    background-color: #afe1fe; }
+  .jobList .seniorPosition .timeline:before, .jobList .seniorPosition .timeline:after {
+    background-color: #b5e3fe; }
+  .jobList .productDevelopment:after {
+    background-color: #a8defe; }
+  .jobList .productDevelopment .timeline:before, .jobList .productDevelopment .timeline:after {
+    background-color: #ace0fe; }
+  .jobList .digitalSpecialist:after {
+    background-color: #a1dcfe; }
+  .jobList .digitalSpecialist .timeline:before, .jobList .digitalSpecialist .timeline:after {
+    background-color: #a3dcfe; }
+  .jobList .jobPosition {
+    padding: 0 0 3em 3em;
+    position: relative; }
+    .jobList .jobPosition:before {
+      position: absolute;
+      display: block;
+      content: "";
+      background-color: #78ccfe;
+      height: 100%;
+      left: 6.5px;
+      top: -40%;
+      width: 1px; }
+    .jobList .jobPosition:after {
+      position: absolute;
+      display: block;
+      content: "";
+      border: 1px solid #78ccfe;
+      border-radius: 50%;
+      height: 13px;
+      right: -6.5px;
+      width: 13px;
+      left: 0;
+      top: 0.5em; }
+    @media only screen and (min-width: 37.5em) {
+      .jobList .jobPosition {
+        float: left;
+        padding: 0 0 3em 0;
+        position: relative; }
+        .jobList .jobPosition:before, .jobList .jobPosition:after {
+          display: none; } }
+    .jobList .jobPosition.bma:before {
+      background-image: -webkit-gradient(linear, left bottom, left top, from(#78ccfe), to(rgba(120, 204, 254, 0)));
+      background-image: -webkit-linear-gradient(bottom, #78ccfe, rgba(120, 204, 254, 0));
+      background-image: linear-gradient(to top, #78ccfe, rgba(120, 204, 254, 0));
+      background-color: transparent; }
+    .jobList .jobPosition.digitalSpecialist:before {
+      background-image: -webkit-gradient(linear, left top, left bottom, from(#78ccfe), to(rgba(120, 204, 254, 0)));
+      background-image: -webkit-linear-gradient(top, #78ccfe, rgba(120, 204, 254, 0));
+      background-image: linear-gradient(to bottom, #78ccfe, rgba(120, 204, 254, 0));
+      background-color: transparent; }
+  .jobList .timeline {
+    display: none; }
+  @media only screen and (min-width: 37.5em) {
+    .jobList .timeline {
+      background-color: #78ccfe;
+      display: block;
+      position: absolute;
+      top: 0;
+      width: 1px; }
+      .jobList .timeline.left, .jobList .timeline.middle, .jobList .timeline.right {
+        height: 100%;
+        padding-bottom: 1em;
+        top: 0.5em; }
+      .jobList .timeline.start:before, .jobList .timeline.end:after {
+        position: absolute;
+        display: block;
+        content: "";
+        border: 1px solid #78ccfe;
+        border-radius: 50%;
+        height: 13px;
+        right: -6.5px;
+        width: 13px; }
+      .jobList .timeline.start:before {
+        top: 0; }
+      .jobList .timeline.end:after {
+        bottom: 0; } }
+  @media only screen and (min-width: 37.5em) {
+    .jobList .bma {
+      padding-right: 3em;
+      text-align: right;
+      width: 50%; }
+      .jobList .bma .timeline.middle {
+        background-image: -webkit-gradient(linear, left bottom, left top, from(#78ccfe), to(rgba(120, 204, 254, 0)));
+        background-image: -webkit-linear-gradient(bottom, #78ccfe, rgba(120, 204, 254, 0));
+        background-image: linear-gradient(to top, #78ccfe, rgba(120, 204, 254, 0));
+        background-color: transparent;
+        height: 6em;
+        right: 0;
+        top: -4.6em; }
+    .jobList .nzpc {
+      padding-left: 6em;
+      width: 50%; }
+      .jobList .nzpc .timeline.right {
+        left: 3em; }
+    .jobList .freelance {
+      margin-right: 50%;
+      padding-right: 3em;
+      text-align: right;
+      width: 50%; }
+      .jobList .freelance .timeline.middle {
+        right: 0; }
+      .jobList .freelance .timeline.right {
+        left: 100%;
+        margin-left: 3em; }
+    .jobList .fairfax {
+      padding-right: 6em;
+      text-align: right;
+      width: 50%; }
+      .jobList .fairfax .timeline.left {
+        right: 3em; }
+      .jobList .fairfax .timeline.middle {
+        height: 0;
+        right: 0; }
+      .jobList .fairfax .timeline.right {
+        height: 0;
+        left: 100%;
+        margin-left: 3em; }
+    .jobList .seniorPosition, .jobList .productDevelopment, .jobList .digitalSpecialist {
+      margin-left: 50%;
+      padding-left: 3em;
+      width: 50%; }
+      .jobList .seniorPosition .timeline.left, .jobList .productDevelopment .timeline.left, .jobList .digitalSpecialist .timeline.left {
+        margin-right: 3em;
+        right: 100%; }
+      .jobList .seniorPosition .timeline.horizontal, .jobList .productDevelopment .timeline.horizontal, .jobList .digitalSpecialist .timeline.horizontal {
+        height: 1px;
+        right: 100%;
+        top: 1em;
+        width: 3em; }
+        .jobList .seniorPosition .timeline.horizontal.end:after, .jobList .productDevelopment .timeline.horizontal.end:after, .jobList .digitalSpecialist .timeline.horizontal.end:after {
+          right: 0;
+          bottom: -6.5px; }
+    .jobList .digitalSpecialist .timeline.left {
+      background-color: transparent;
+      background-image: -webkit-gradient(linear, left top, left bottom, from(#78ccfe), to(rgba(120, 204, 254, 0)));
+      background-image: -webkit-linear-gradient(top, #78ccfe, rgba(120, 204, 254, 0));
+      background-image: linear-gradient(to bottom, #78ccfe, rgba(120, 204, 254, 0));
+      height: 6em;
+      padding-bottom: 0.5em; } }
+
+#references {
+  padding: 6em 0 3em 0; }
+
+#contact {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(50, 62, 80, 0.5)), to(rgba(50, 62, 80, 0.8)));
+  background-image: -webkit-linear-gradient(top, rgba(50, 62, 80, 0.5), rgba(50, 62, 80, 0.8));
+  background-image: linear-gradient(to bottom, rgba(50, 62, 80, 0.5), rgba(50, 62, 80, 0.8));
+  padding: 6em 0 3em 0; }

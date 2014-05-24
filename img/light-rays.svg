@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="1000px" height="1000px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="995.5762" y1="-2696.3906" x2="2.0102" y2="-2696.3906" gradientTransform="matrix(1 0 0 1 0 2856.7344)">
+	<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0.2"/>
+	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+</linearGradient>
+<polygon fill="url(#SVGID_1_)" points="0,0 1000,0 1000,70.189 0,320.688 "/>
+<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="995.5762" y1="-2549.2461" x2="2.0102" y2="-2549.2461" gradientTransform="matrix(1 0 0 1 0 2856.7344)">
+	<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0.2"/>
+	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+</linearGradient>
+<polygon fill="url(#SVGID_2_)" points="0,196.912 1000,63.369 1000,133.558 0,551.607 "/>
+<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="995.5762" y1="-2475.8535" x2="2.0102" y2="-2475.8535" gradientTransform="matrix(1 0 0 1 0 2856.7344)">
+	<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0.2"/>
+	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+</linearGradient>
+<polygon fill="url(#SVGID_3_)" points="0,222.429 1000,63.369 1000,140.896 0,698.393 "/>
+<linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="995.5762" y1="-2287.6221" x2="2.0102" y2="-2287.6221" gradientTransform="matrix(1 0 0 1 0 2856.7344)">
+	<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0.2"/>
+	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+</linearGradient>
+<polygon fill="url(#SVGID_4_)" points="0,551.607 1000,133.558 1000,194.057 0,1004.667 "/>
+</svg>

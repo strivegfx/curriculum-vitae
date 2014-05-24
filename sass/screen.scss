@@ -1,0 +1,929 @@
+
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,300,700);
+
+*, *:after, *:before {
+	box-sizing: border-box;
+}
+
+.clearFix:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+// color values
+$gray: #787878; // generic
+$grayD: darken($gray, 25%); // dark
+$grayL: lighten($gray, 35%); // light
+
+$blueLight: #78ccfe;
+$blue: #6da8f3;
+$blueMedium: #325a8d;
+$blueDark: #323e50;
+
+$divider : lighten($blueLight, 20%);
+
+$shadow: rgba(black, 0.25);
+
+// generic values
+$ani: 0.25s;
+$pad: 6em;
+
+@mixin breakpoint($point){
+
+	@if $point == MICRO{
+		@media only screen and (min-width: 23em){ @content;} // 370px
+	}
+
+	@if $point == SMALL{
+		@media only screen and (min-width: 37.5em){ @content;} // 600px
+	}
+
+	@else if $point == MEDIUM{
+		@media only screen and (min-width: 56.25em){ @content;} // 900px
+	}
+
+	@else if $point == LARGE{
+		@media only screen and (min-width: 80em){@content;} // 1280px (more than 1200px so that there is a slight amount of padding when the .center width becomes static at 1200px)
+	}
+
+}
+
+@mixin vendorize($property, $value) {
+	-webkit-#{$property}: $value;
+	-moz-#{$property}: $value;
+	-ms-#{$property}: $value;
+	-o-#{$property}: $value;
+	#{$property}: $value;
+}
+
+@mixin pseudo{
+	position: absolute;
+	display: block;
+	content: "";
+}
+
+@mixin keyframes($aniName){
+
+    @-webkit-keyframes $aniName{
+        @content;
+    }
+    @-moz-keyframes $aniName{
+        @content;
+    }
+    @-o-keyframes $aniName{
+        @content;
+    }
+    @keyframes $aniName{
+        @content;
+    }
+}
+
+html, body{
+	height: 100%; // is this messing up the vertical scrolling on some devices?
+	width: 100%;
+}
+
+body{
+	color: $blue;
+	font: {
+		family: "Roboto", sans-serif;
+		weight: 300;
+	}
+}
+
+h1, .h1{
+	font: {
+		color: white;
+		size: 3.5em;
+		weight: 100;
+	}
+	margin: 0;
+
+	@include breakpoint(SMALL){
+		font-size: 5em;
+	}
+
+	@include breakpoint(MEDIUM){
+		font-size: 7em;
+	}
+}
+
+h2, .h2{
+	$width: $pad / 4;
+	color: $blueDark;
+	font: {
+		size: 2em;
+		weight: 100;
+	}
+	margin: 0;
+	padding: 0 0 0 ($width + 0.5em);
+	position: relative;
+
+	&:before{
+		@include pseudo;
+		background: {
+			// color: $blueDark;
+		}
+		border: 1px solid $blueDark;
+		border-radius: 50%;
+		height: $width;
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		width: $width;
+	}
+}
+
+h3, .h3{
+	color: $blueDark;
+	font: {
+		size: 1.5em;
+		weight: 100;
+	}
+	margin: 0;
+}
+
+h4, .h4{
+	font: {
+		size: 2em;
+		weight: 100;
+	}
+	margin: 0;
+}
+
+.center{
+	margin: 0 auto;
+	padding: 0 5%;
+	width: 100%;
+
+	@include breakpoint(LARGE){
+		padding: 0;
+		width: 75em; // 1200px
+	}
+}
+
+
+/*
+ * divider shadows
+ *
+ */
+
+// create the shadow modules
+// both shadows are the same apart from their pseudo element locations
+.shadowTop, .shadowBottom{
+	height: $pad / 2;
+	left: 0;
+	overflow: hidden; // hides the pseudo element and only shows the box-shadow
+	position: absolute;
+	width: 100%;
+
+	&:before{
+		@include pseudo;
+		border-radius: 50%;
+		box-shadow: 0px 0px 30px 0px $shadow;
+		height: 100%;
+		left: 0;
+		width: 100%;
+	}
+}
+
+.shadowTop:before{
+	top: 100%; // push the pesudo element under the mask
+}
+
+.shadowBottom:before{
+	bottom: 100%; // push the pesudo element above the mask
+}
+
+// position the shadows...
+section, .shadowContainer{
+	position: relative; // make these the anchor for the shadows to be positioned around
+}
+
+#work, #myHistory, #references, #contact{
+
+	& > .shadowBottom{
+		top: 0;
+	}
+}
+
+#about, #tools{
+
+	.shadowTop{
+		bottom: 100%;
+	}
+}
+
+#tools, #work, #myHistory{
+
+	.shadowContainer .shadowTop{
+		bottom: 100%;
+	}
+}
+
+/*
+ *
+ * portrait code blendng through two different modules (header & about)
+ *
+ */
+
+$portraitHeightTiny: 40em; 
+$portraitHeightSmall: 50em; 
+$portraitHeightMedium: 70em; 
+$portraitHeightLarge: 80em;
+
+$bodytoHandsRatio: 0.125; // the relation between the portrait body and hands svg image heights
+
+.portraitBody, .portraitHands{
+	left: 10%;
+	position: absolute;
+	transform: translateX(0);
+	width: auto;
+
+	@include breakpoint(MICRO){
+		left: 25%;
+		transform: translateX(0);
+	}
+
+	@include breakpoint(SMALL){
+		left: 25%;
+		transform: translateX(0);
+	}
+
+	@include breakpoint(MEDIUM){
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+
+.portraitBody{
+	height: $portraitHeightTiny;
+	top: 0;
+
+	@include breakpoint(SMALL){ height: $portraitHeightSmall; }
+	@include breakpoint(MEDIUM){ height: $portraitHeightMedium; }
+	@include breakpoint(LARGE){ height: $portraitHeightLarge; }
+}
+
+.portraitHands{
+	height: $portraitHeightTiny * $bodytoHandsRatio;
+	top: $portraitHeightTiny * $bodytoHandsRatio * -0.5;
+
+	@include breakpoint(SMALL){
+		height: $portraitHeightSmall * $bodytoHandsRatio;
+		top: $portraitHeightSmall * $bodytoHandsRatio * -0.5;
+	}
+	@include breakpoint(MEDIUM){
+		height: $portraitHeightMedium * $bodytoHandsRatio;
+		top: $portraitHeightMedium * $bodytoHandsRatio * -0.5;
+	}
+	@include breakpoint(LARGE){
+		height: $portraitHeightLarge * $bodytoHandsRatio;
+		top: $portraitHeightLarge * $bodytoHandsRatio * -0.5;
+	}
+}
+
+/*
+ *
+ * extended background
+ *
+ */
+
+.extendedBg{
+	background-color: $blueLight;
+	position: relative; // for portraitBody image to reference
+	z-index: -1; // push below all other content (moves light rays to the back also)
+
+	&:before, &:after{
+		@include pseudo;
+		background:{
+			repeat: no-repeat;
+			size: contain;
+		}
+		height: 100%;
+		top: 0;
+		width: 100%;
+		z-index: -1; // move light rays under other DOM content
+	}
+
+	&:before{
+		background: {
+			image: url(../img/dark-rays.svg);
+			position: left top;
+		}
+		left: 0;
+	}
+
+	&:after{
+		background: {
+			image: url(../img/light-rays.svg);
+			position: right top;
+		}
+		right: 0;
+	}
+}
+
+header{
+	height: $portraitHeightTiny / 2;
+	position: relative; // for hello copy to reference
+
+	@include breakpoint(SMALL){ height: $portraitHeightSmall / 2; }
+	@include breakpoint(MEDIUM){ height: $portraitHeightMedium / 2; }
+	@include breakpoint(LARGE){ height: $portraitHeightLarge / 2; }
+
+	.hello{
+		position: absolute;
+		top: $pad / 3;
+		transform: translateY(0);
+		width: 45%;
+
+		@include breakpoint(MICRO){
+			top: 50%;
+			transform: translateY(-50%);
+			width: 40%;
+		}
+
+		@include breakpoint(SMALL){ width: 40%; }
+
+		@include breakpoint(MEDIUM){ width: 33%; }
+
+		h1{
+			color: white;
+		}
+
+		p{
+			color: $blueDark;
+			font: {
+				size: 1em;
+				weight: 300;
+			}
+			margin: 0;
+
+			@include breakpoint(SMALL){
+				font: {
+					size: 1.5em;
+					weight: 100;
+				}
+			}
+		}
+	}
+}
+
+#about{
+	background-image: linear-gradient(to bottom, rgba(white, 0.5), rgba(white, 0.8));
+	padding: $pad 0 ($pad / 2) 0;
+
+	.intro{
+		padding: 0 0 ($pad / 2) 0;
+		@include breakpoint(MEDIUM){
+			&:nth-child(odd){
+				padding-right: $pad / 2;
+			}
+			&:nth-child(even){
+				padding-left: $pad / 2;
+			}
+			float: left;
+			width: 50%;
+		}
+	}
+}
+
+.spacer{
+	height: auto;
+	width: 100%;
+}
+
+.thumbList{
+	list-style-type: none;
+	padding: 0;
+
+	.thumbSquare{
+		float: left;
+	}
+}
+
+#tools, #work, #myHistory{
+	padding: $pad 0 0 0;
+
+	.intro{
+		padding-bottom: $pad / 2;
+	}
+}
+
+.thumbSquare{
+	cursor: pointer;
+	position: relative;
+
+	&:before{
+		@include pseudo;
+		background: $divider;
+		height: 100%;
+		right: 0;
+		top: 50%;
+		width: 2px;
+		z-index: 1;
+	}
+
+	&:after{
+		@include pseudo;
+		background: $divider;
+		bottom: 0;
+		height: 2px;
+		left: 50%;
+		width: 100%;
+		z-index: 1;
+	}
+}
+
+@mixin thumbReset(){
+
+	&:nth-child(1n+1):before{ // reset all thumbnail vertical lines to visible
+		display: block;
+	}
+
+	&:nth-child(1n+1):after{ // reset all thumbnail horizontal lines to visible
+		display: block;
+		left: 50%; // set the position to emulate every media query other than the smallest mobile layout
+		width: 100%; // set the width to emulate every media query other than the smallest mobile layout
+	}
+
+	&:nth-child(1n+1){ // reset all thumbnails to visible
+		display: block;
+	}
+}
+
+#tools li{
+	width: 25%;
+
+	&:nth-child(4n+4):before{ // get rid of the vertical lines on each right hand side at the end of each row
+		display: none;
+	}
+
+	&:nth-child(1n+12):before{ // get rid of the vertical lines on the last row
+		display: none;
+	}
+
+	&:nth-child(1n+13):after{ // get rid of the horizontal lines on the last row
+		display: none;
+	}
+
+	&:nth-child(1n+17){ // hide thumbnail in this media query (total of 16 thumbnails)
+		display: none;
+	}
+
+	&:nth-child(4n+4):after{ // get rid of the last horizontal line at the end of each row
+		display: none;
+	}
+
+	@include breakpoint(SMALL){
+		width: 20%;
+
+		@include thumbReset;
+
+		&:nth-child(5n+5):before{ // get rid of the vertical lines on each right hand side at the end of each row
+			display: none;
+		}
+
+		&:nth-child(1n+10):before{ // get rid of the vertical lines on the last row
+			display: none;
+		}
+
+		&:nth-child(1n+11):after{ // get rid of the horizontal lines on the last row
+			display: none;
+		}
+
+		&:nth-child(5n+5):after{ // get rid of the last horizontal line at the end of each row
+			display: none;
+		}
+
+		&:nth-child(1n+16){ // hide thumbnail in this media query (total of 15 thumbnails)
+			display: none;
+		}
+	}
+
+	@include breakpoint(MEDIUM){
+		width: 16.6666666666666%;
+
+		@include thumbReset;
+
+		&:nth-child(6n+6):before{ // get rid of the vertical lines on each right hand side at the end of each row
+			display: none;
+		}
+
+		&:nth-child(1n+12):before{ // get rid of the vertical lines on the last row
+			display: none;
+		}
+
+		&:nth-child(1n+13):after{ // get rid of the horizontal lines on the last row
+			display: none;
+		}
+
+		&:nth-child(6n+6):after{ // get rid of the last horizontal line at the end of each row
+			display: none;
+		}
+	}
+
+	@include breakpoint(LARGE){
+		width: 12.5%;
+
+		@include thumbReset;
+
+		&:nth-child(8n+8):before{ // get rid of the vertical lines on each right hand side at the end of each row
+			display: none;
+		}
+
+		&:nth-child(1n+9):before{ // get rid of the vertical lines on the last row
+			display: none;
+		}
+
+		&:nth-child(1n+9):after{ // get rid of the horizontal lines on the last row
+			display: none;
+		}
+
+		&:nth-child(8n+8):after{ // get rid of the last horizontal line at the end of each row
+			display: none;
+		}
+
+		&:nth-child(1n+17){ // hide thumbnail in this media query (total of 15 thumbnails)
+			display: none;
+		}
+	}
+}
+
+#work li{
+	width: 100%;
+	$gap: 20px;
+
+	&:before{ // get rid of the vertical lines on each right hand side at the end of each row
+		display: none;
+	}
+
+	&:after{ // get rid of the horizontal lines on the last row
+		left: 25%;
+		width: 50%;
+	}
+
+	&:nth-child(12):after{ // get rid of the last horizontal line at the end of each row
+		display: none;
+	}
+
+	@include breakpoint(MICRO){
+		width: 50%;
+
+		@include thumbReset;
+
+		&:nth-child(2n+2):before{ // get rid of the vertical lines on each right hand side at the end of each row
+			display: none;
+		}
+
+		&:nth-child(1n+11):before{ // get rid of the vertical lines on the last row
+			display: none;
+		}
+
+		&:nth-child(1n+11):after{ // get rid of the horizontal lines on the last row
+			display: none;
+		}
+
+		&:nth-child(2n+2):after{ // get rid of the last horizontal line at the end of each row
+			display: none;
+		}
+	}
+
+	@include breakpoint(SMALL){
+		width: 33%;
+
+		@include thumbReset;
+
+		&:nth-child(3n+3):before{ // get rid of the vertical lines on each right hand side at the end of each row
+			display: none;
+		}
+
+		&:nth-child(1n+9):before{ // get rid of the vertical lines on the last row
+			display: none;
+		}
+
+		&:nth-child(1n+9):after{ // get rid of the horizontal lines on the last row
+			display: none;
+		}
+
+		&:nth-child(3n+3):after{ // get rid of the last horizontal line at the end of each row
+			display: none;
+		}
+	}
+
+	@include breakpoint(MEDIUM){
+		width: 25%;
+
+		@include thumbReset;
+
+		&:nth-child(4n+4):before{ // get rid of the vertical lines on each right hand side at the end of each row
+			display: none;
+		}
+
+		&:nth-child(1n+9):before{ // get rid of the vertical lines on the last row
+			display: none;
+		}
+
+		&:nth-child(1n+9):after{ // get rid of the horizontal lines on the last row
+			display: none;
+		}
+
+		&:nth-child(4n+4):after{ // get rid of the last horizontal line at the end of each row
+			display: none;
+		}
+	}
+
+	&#workInformation{
+		background-color: $blueLight;
+		pointer-events: none;
+		position: absolute;
+		z-index: 100;
+	}
+}
+
+#myHistory{
+	background-image: linear-gradient(to top, rgba(white, 0.25), rgba(white, 0.8));
+	padding: $pad 0 0 0;
+}
+
+.jobList{
+	$dot: 15px; // the width of the timeline start and end "dot"
+	$stroke: 1px; // the width of the timeline
+	list-style-type: none;
+	padding-top: $pad;
+	padding-bottom: $pad / 2;
+
+	// colors...
+
+	.bma{
+		
+		&:after{
+			background-color: #cbecff;
+		}
+
+		& .timeline:before, & .timeline:after{
+			background-color: #d2edfe;
+		}
+	}
+
+	.nzpc{
+		
+		&:after{
+			background-color: #c5e9ff;
+		}	
+
+		& .timeline:before, & .timeline:after{
+			background-color: #d2edfe;
+		}
+	}
+
+	.freelance{
+		
+		&:after{
+			background-color: #bde6ff;
+		}
+
+		& .timeline:before, & .timeline:after{
+			background-color: #c6e9ff;
+		}
+	}
+
+	.fairfax{
+		
+		&:after{
+			background-color: #b6e3fe;
+		}
+
+		& .timeline:before, & .timeline:after{
+			background-color: #bde6ff;
+		}
+	}
+
+	.seniorPosition{
+		
+		&:after{
+			background-color: #afe1fe;
+		}
+
+		& .timeline:before, & .timeline:after{
+			background-color: #b5e3fe;
+		}
+	}
+
+	.productDevelopment{
+		
+		&:after{
+			background-color: #a8defe;
+		}
+
+		& .timeline:before, & .timeline:after{
+			background-color: #ace0fe;
+		}
+	}
+
+	.digitalSpecialist{
+		
+		&:after{
+			background-color: #a1dcfe;
+		}
+
+		& .timeline:before, & .timeline:after{
+			background-color: #a3dcfe;
+		}
+	}
+
+	@mixin dotBase{
+		@include pseudo;
+		// background-color: $color; // colour is set through the class system above
+		border: 1px solid $blueLight;
+		border-radius: 50%;
+		height: $dot - 2;
+		right: - ($dot / 2) + $stroke;
+		width: $dot - 2;
+	}
+
+	.jobPosition{
+		padding: 0 0 ($pad / 2) ($pad / 2);
+		position: relative;
+
+		&:before{
+			@include pseudo;
+			background-color: $blueLight;
+			height: 100%;
+			left: ($dot / 2) - $stroke;
+			top: -40%;
+			width: $stroke;
+		}
+
+		&:after{
+			@include dotBase;
+			left: 0;
+			top: 0.5em; // pull inline with header text
+		}
+
+		@include breakpoint(SMALL){
+			float: left;
+			padding: 0 0 ($pad / 2) 0;
+			position: relative;
+
+			&:before, &:after{
+				display: none;
+			}
+		}
+
+		&.bma:before{
+			background: {
+				image: linear-gradient(to top, $blueLight, rgba($blueLight, 0));
+				color: transparent;
+			}
+		}
+
+		&.digitalSpecialist:before{
+			background: {
+				image: linear-gradient(to bottom, $blueLight, rgba($blueLight, 0));
+				color: transparent;
+			}
+		}
+	}
+
+	.timeline{
+		display: none; // hide the dynamic timeline
+	}
+
+	@include breakpoint(SMALL){ // show the dynamic timeline
+
+		.timeline{
+			background-color: $blueLight;
+			display: block;
+			position: absolute;
+			top: 0;
+			width: $stroke;
+
+			&.left, &.middle, &.right{
+				height: 100%;
+				padding-bottom: 1em; // pull end "dot" inline with start "dot"
+				top: 0.5em; // pull inline with header text
+			}
+
+			&.start:before, &.end:after{
+				@include dotBase;
+			}
+
+			&.start:before{
+				top: 0;
+			}
+
+			&.end:after{
+				bottom: 0;
+			}
+		}
+	}
+
+	@include breakpoint(SMALL){
+
+		.bma{
+			padding-right: $pad / 2;
+			text-align: right;
+			width: 50%;
+
+			.timeline.middle{
+				background: {
+					image: linear-gradient(to top, $blueLight, rgba($blueLight, 0));
+					color: transparent;
+				}
+				height: $pad;
+				right: 0;
+				top: - $pad + 1.4em; // pull inline with header text
+			}
+		}
+
+		.nzpc{
+			padding-left: $pad;
+			width: 50%;
+
+			.timeline.right{
+				left: $pad / 2;
+			}
+		}
+
+		.freelance{
+			margin-right: 50%;
+			padding-right: $pad / 2;
+			text-align: right;
+			width: 50%;
+
+			.timeline.middle{
+				right: 0;
+			}
+
+			.timeline.right{
+				left: 100%;
+				margin-left: $pad / 2;
+			}
+		}
+
+		.fairfax{
+			padding-right: $pad;
+			text-align: right;
+			width: 50%;
+
+			.timeline.left{
+				right: $pad / 2;
+			}
+
+			.timeline.middle{
+				height: 0; // just show the ending "dot" no line
+				right: 0;
+			}
+
+			.timeline.right{
+				height: 0; // just show the ending "dot" no line
+				left: 100%;
+				margin-left: $pad / 2;
+			}
+		}
+
+		.seniorPosition, .productDevelopment, .digitalSpecialist{
+			margin-left: 50%;
+			padding-left: $pad / 2;
+			width: 50%;
+
+			.timeline.left{
+				margin-right: $pad / 2;
+				right: 100%;
+			}
+
+			.timeline.horizontal{
+				height: $stroke;
+				right: 100%;
+				top: 1em; // pull inline with header text
+				width: $pad / 2;
+
+				&.end:after{
+					right: 0;
+					bottom: - ($dot / 2) + $stroke;
+				}
+			}
+		}
+
+		.digitalSpecialist .timeline.left{
+			background: {
+				color: transparent;
+				image: linear-gradient(to bottom, $blueLight, rgba($blueLight, 0));
+			}
+			height: $pad; // just show the ending "dot" no line
+			padding-bottom: 0.5em;
+		}
+	} // of the SMALL breakpoint
+}
+
+#references{
+	padding: $pad 0 ($pad / 2) 0;
+}
+
+#contact{
+	background-image: linear-gradient(to bottom, rgba($blueDark, 0.5), rgba($blueDark, 0.8));
+	padding: $pad 0 ($pad / 2) 0;
+}
