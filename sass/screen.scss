@@ -24,7 +24,8 @@ $blueDark: #323e50;
 
 $divider : lighten($blueLight, 20%);
 
-$shadow: rgba(black, 0.25);
+$shadowRegular: rgba(black, 0.25);
+$shadowLight: rgba(black, 0.10);
 
 // generic values
 $ani: 0.25s;
@@ -124,10 +125,9 @@ h2, .h2{
 	&:before{
 		@include pseudo;
 		background: {
-			// color: $blueDark;
+			image: url(../img/icons.svg);
+			size: cover;
 		}
-		border: 1px solid $blueDark;
-		border-radius: 50%;
 		height: $width;
 		left: 0;
 		top: 50%;
@@ -140,6 +140,7 @@ h3, .h3{
 	color: $blueDark;
 	font: {
 		size: 1.5em;
+		style: normal; // fixes the italx from the <address>
 		weight: 100;
 	}
 	margin: 0;
@@ -154,6 +155,7 @@ h4, .h4{
 }
 
 .center{
+	list-style-type: none;
 	margin: 0 auto;
 	padding: 0 5%;
 	width: 100%;
@@ -182,7 +184,7 @@ h4, .h4{
 	&:before{
 		@include pseudo;
 		border-radius: 50%;
-		box-shadow: 0px 0px 30px 0px $shadow;
+		box-shadow: 0px 0px 30px 0px $shadowRegular;
 		height: 100%;
 		left: 0;
 		width: 100%;
@@ -202,24 +204,28 @@ section, .shadowContainer{
 	position: relative; // make these the anchor for the shadows to be positioned around
 }
 
-#work, #myHistory, #references, #contact{
+#work, #myHistory{
 
 	& > .shadowBottom{
 		top: 0;
 	}
 }
 
-#about, #tools{
+#about, #work{
 
 	.shadowTop{
 		bottom: 100%;
 	}
 }
 
-#tools, #work, #myHistory{
+#work, #myHistory, #details{
 
 	.shadowContainer .shadowTop{
 		bottom: 100%;
+
+		&:before{
+			box-shadow: 0px 0px 20px 0px $shadowLight;
+		}
 	}
 }
 
@@ -293,6 +299,7 @@ $bodytoHandsRatio: 0.125; // the relation between the portrait body and hands sv
 
 .extendedBg{
 	background-color: $blueLight;
+	overflow: hidden;
 	position: relative; // for portraitBody image to reference
 	z-index: -1; // push below all other content (moves light rays to the back also)
 
@@ -305,7 +312,7 @@ $bodytoHandsRatio: 0.125; // the relation between the portrait body and hands sv
 		height: 100%;
 		top: 0;
 		width: 100%;
-		z-index: -1; // move light rays under other DOM content
+		z-index: -100; // move light rays under other DOM content
 	}
 
 	&:before{
@@ -373,6 +380,25 @@ header{
 
 #about{
 	background-image: linear-gradient(to bottom, rgba(white, 0.5), rgba(white, 0.8));
+
+	.design h2:before{
+		background-position: 0 0;
+	}
+
+	.development h2:before{
+		background-position: 5% 0;
+	}
+
+	.experience h2:before{
+		background-position: 10% 0;
+	}
+
+	.employment h2:before{
+		background-position: 15% 0;
+	}
+}
+
+#about, #details{
 	padding: $pad 0 ($pad / 2) 0;
 
 	.intro{
@@ -390,6 +416,14 @@ header{
 	}
 }
 
+#work, #myHistory{
+	padding: $pad 0 0 0;
+
+	.intro{
+		padding-bottom: $pad / 2;
+	}
+}
+
 .spacer{
 	height: auto;
 	width: 100%;
@@ -398,17 +432,10 @@ header{
 .thumbList{
 	list-style-type: none;
 	padding: 0;
+	position: relative;
 
 	.thumbSquare{
 		float: left;
-	}
-}
-
-#tools, #work, #myHistory{
-	padding: $pad 0 0 0;
-
-	.intro{
-		padding-bottom: $pad / 2;
 	}
 }
 
@@ -454,198 +481,111 @@ header{
 	}
 }
 
-#tools li{
-	width: 25%;
+#work{
 
-	&:nth-child(4n+4):before{ // get rid of the vertical lines on each right hand side at the end of each row
-		display: none;
+	.intro h2:before{
+		background-position: 20% 0;
 	}
 
-	&:nth-child(1n+12):before{ // get rid of the vertical lines on the last row
-		display: none;
-	}
+	li{
+		width: 100%;
+		$gap: 20px;
 
-	&:nth-child(1n+13):after{ // get rid of the horizontal lines on the last row
-		display: none;
-	}
-
-	&:nth-child(1n+17){ // hide thumbnail in this media query (total of 16 thumbnails)
-		display: none;
-	}
-
-	&:nth-child(4n+4):after{ // get rid of the last horizontal line at the end of each row
-		display: none;
-	}
-
-	@include breakpoint(SMALL){
-		width: 20%;
-
-		@include thumbReset;
-
-		&:nth-child(5n+5):before{ // get rid of the vertical lines on each right hand side at the end of each row
+		&:before{ // get rid of the vertical lines on each right hand side at the end of each row
 			display: none;
 		}
 
-		&:nth-child(1n+10):before{ // get rid of the vertical lines on the last row
+		&:after{ // get rid of the horizontal lines on the last row
+			left: 25%;
+			width: 50%;
+		}
+
+		&:nth-child(12):after{ // get rid of the last horizontal line at the end of each row
 			display: none;
 		}
 
-		&:nth-child(1n+11):after{ // get rid of the horizontal lines on the last row
-			display: none;
+		@include breakpoint(MICRO){
+			width: 50%;
+
+			@include thumbReset;
+
+			&:nth-child(2n+2):before{ // get rid of the vertical lines on each right hand side at the end of each row
+				display: none;
+			}
+
+			&:nth-child(1n+11):before{ // get rid of the vertical lines on the last row
+				display: none;
+			}
+
+			&:nth-child(1n+11):after{ // get rid of the horizontal lines on the last row
+				display: none;
+			}
+
+			&:nth-child(2n+2):after{ // get rid of the last horizontal line at the end of each row
+				display: none;
+			}
 		}
 
-		&:nth-child(5n+5):after{ // get rid of the last horizontal line at the end of each row
-			display: none;
+		@include breakpoint(SMALL){
+			width: 33%;
+
+			@include thumbReset;
+
+			&:nth-child(3n+3):before{ // get rid of the vertical lines on each right hand side at the end of each row
+				display: none;
+			}
+
+			&:nth-child(1n+9):before{ // get rid of the vertical lines on the last row
+				display: none;
+			}
+
+			&:nth-child(1n+9):after{ // get rid of the horizontal lines on the last row
+				display: none;
+			}
+
+			&:nth-child(3n+3):after{ // get rid of the last horizontal line at the end of each row
+				display: none;
+			}
 		}
 
-		&:nth-child(1n+16){ // hide thumbnail in this media query (total of 15 thumbnails)
-			display: none;
-		}
-	}
+		@include breakpoint(MEDIUM){
+			width: 25%;
 
-	@include breakpoint(MEDIUM){
-		width: 16.6666666666666%;
+			@include thumbReset;
 
-		@include thumbReset;
+			&:nth-child(4n+4):before{ // get rid of the vertical lines on each right hand side at the end of each row
+				display: none;
+			}
 
-		&:nth-child(6n+6):before{ // get rid of the vertical lines on each right hand side at the end of each row
-			display: none;
-		}
+			&:nth-child(1n+9):before{ // get rid of the vertical lines on the last row
+				display: none;
+			}
 
-		&:nth-child(1n+12):before{ // get rid of the vertical lines on the last row
-			display: none;
-		}
+			&:nth-child(1n+9):after{ // get rid of the horizontal lines on the last row
+				display: none;
+			}
 
-		&:nth-child(1n+13):after{ // get rid of the horizontal lines on the last row
-			display: none;
-		}
-
-		&:nth-child(6n+6):after{ // get rid of the last horizontal line at the end of each row
-			display: none;
-		}
-	}
-
-	@include breakpoint(LARGE){
-		width: 12.5%;
-
-		@include thumbReset;
-
-		&:nth-child(8n+8):before{ // get rid of the vertical lines on each right hand side at the end of each row
-			display: none;
+			&:nth-child(4n+4):after{ // get rid of the last horizontal line at the end of each row
+				display: none;
+			}
 		}
 
-		&:nth-child(1n+9):before{ // get rid of the vertical lines on the last row
-			display: none;
+		&#workInformation{
+			background-color: $blueLight;
+			pointer-events: none;
+			position: absolute;
+			z-index: 100;
 		}
-
-		&:nth-child(1n+9):after{ // get rid of the horizontal lines on the last row
-			display: none;
-		}
-
-		&:nth-child(8n+8):after{ // get rid of the last horizontal line at the end of each row
-			display: none;
-		}
-
-		&:nth-child(1n+17){ // hide thumbnail in this media query (total of 15 thumbnails)
-			display: none;
-		}
-	}
-}
-
-#work li{
-	width: 100%;
-	$gap: 20px;
-
-	&:before{ // get rid of the vertical lines on each right hand side at the end of each row
-		display: none;
-	}
-
-	&:after{ // get rid of the horizontal lines on the last row
-		left: 25%;
-		width: 50%;
-	}
-
-	&:nth-child(12):after{ // get rid of the last horizontal line at the end of each row
-		display: none;
-	}
-
-	@include breakpoint(MICRO){
-		width: 50%;
-
-		@include thumbReset;
-
-		&:nth-child(2n+2):before{ // get rid of the vertical lines on each right hand side at the end of each row
-			display: none;
-		}
-
-		&:nth-child(1n+11):before{ // get rid of the vertical lines on the last row
-			display: none;
-		}
-
-		&:nth-child(1n+11):after{ // get rid of the horizontal lines on the last row
-			display: none;
-		}
-
-		&:nth-child(2n+2):after{ // get rid of the last horizontal line at the end of each row
-			display: none;
-		}
-	}
-
-	@include breakpoint(SMALL){
-		width: 33%;
-
-		@include thumbReset;
-
-		&:nth-child(3n+3):before{ // get rid of the vertical lines on each right hand side at the end of each row
-			display: none;
-		}
-
-		&:nth-child(1n+9):before{ // get rid of the vertical lines on the last row
-			display: none;
-		}
-
-		&:nth-child(1n+9):after{ // get rid of the horizontal lines on the last row
-			display: none;
-		}
-
-		&:nth-child(3n+3):after{ // get rid of the last horizontal line at the end of each row
-			display: none;
-		}
-	}
-
-	@include breakpoint(MEDIUM){
-		width: 25%;
-
-		@include thumbReset;
-
-		&:nth-child(4n+4):before{ // get rid of the vertical lines on each right hand side at the end of each row
-			display: none;
-		}
-
-		&:nth-child(1n+9):before{ // get rid of the vertical lines on the last row
-			display: none;
-		}
-
-		&:nth-child(1n+9):after{ // get rid of the horizontal lines on the last row
-			display: none;
-		}
-
-		&:nth-child(4n+4):after{ // get rid of the last horizontal line at the end of each row
-			display: none;
-		}
-	}
-
-	&#workInformation{
-		background-color: $blueLight;
-		pointer-events: none;
-		position: absolute;
-		z-index: 100;
 	}
 }
 
 #myHistory{
 	background-image: linear-gradient(to top, rgba(white, 0.25), rgba(white, 0.8));
 	padding: $pad 0 0 0;
+
+	.intro h2:before{
+		background-position: 25% 0;
+	}
 }
 
 .jobList{
@@ -792,11 +732,11 @@ header{
 		display: none; // hide the dynamic timeline
 	}
 
-	@include breakpoint(SMALL){ // show the dynamic timeline
+	@include breakpoint(SMALL){
 
 		.timeline{
 			background-color: $blueLight;
-			display: block;
+			display: block; // show the dynamic timeline
 			position: absolute;
 			top: 0;
 			width: $stroke;
@@ -819,9 +759,6 @@ header{
 				bottom: 0;
 			}
 		}
-	}
-
-	@include breakpoint(SMALL){
 
 		.bma{
 			padding-right: $pad / 2;
@@ -916,14 +853,94 @@ header{
 			height: $pad; // just show the ending "dot" no line
 			padding-bottom: 0.5em;
 		}
-	} // of the SMALL breakpoint
+	} // end of SMALL
 }
 
-#references{
-	padding: $pad 0 ($pad / 2) 0;
-}
+#details{
+	color: $blueDark;
 
-#contact{
-	background-image: linear-gradient(to bottom, rgba($blueDark, 0.5), rgba($blueDark, 0.8));
-	padding: $pad 0 ($pad / 2) 0;
+	&:before, &:after{
+		background-size: auto;
+		opacity: 0.5;
+
+		@include breakpoint(MEDIUM){
+			opacity: 0.75;
+			
+		}
+
+		@include breakpoint(LARGE){
+			opacity: 1;
+			
+		}	
+	}
+
+	&:before{
+		background-position: left center;
+	}
+
+	&:after{
+		background-position: right center;	
+	}	
+
+	h2{
+		color: white;
+	}
+
+	.contact h2:before{
+		background-position: 30% 0;
+	}
+
+	.references h2:before{
+		background-position: 35% 0;
+	}
+
+	address ul li{
+		$width: 5em;
+		display: block;
+		float: left;
+		padding-top: $width + 1.5em;
+		position: relative;
+		width: 100%;
+
+		a{
+			color: $blueDark;
+			text-decoration: none;
+		}
+
+		&.phone a{
+			margin-right: $pad / 2;
+
+			&:before{
+				background-position: 40% 0;
+			}
+		}
+
+		&.email a:before{
+			background-position: 45% 0;
+		}
+
+		& a:before{
+			@include pseudo;
+			background: {
+				image: url(../img/icons.svg);
+				size: cover;
+			}
+			height: $width;
+			left: 0;
+			top: 1.5em;
+			transform: translateX(0);
+			width: $width;
+		}
+
+		//change the icons to be left aligned when stacked on top of one another
+		@include breakpoint(SMALL){
+			display: inline;
+			width: auto;
+
+			&:before{
+				left: 50%;
+				transform: translateX(-50%);
+			}
+		}
+	}
 }

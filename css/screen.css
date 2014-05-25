@@ -41,8 +41,9 @@ h2, .h2 {
     position: absolute;
     display: block;
     content: "";
-    border: 1px solid #323e50;
-    border-radius: 50%;
+    background-image: url(../img/icons.svg);
+    -webkit-background-size: cover;
+    background-size: cover;
     height: 1.5em;
     left: 0;
     top: 50%;
@@ -54,6 +55,7 @@ h2, .h2 {
 h3, .h3 {
   color: #323e50;
   font-size: 1.5em;
+  font-style: normal;
   font-weight: 100;
   margin: 0; }
 
@@ -63,6 +65,7 @@ h4, .h4 {
   margin: 0; }
 
 .center {
+  list-style-type: none;
   margin: 0 auto;
   padding: 0 5%;
   width: 100%; }
@@ -101,14 +104,17 @@ h4, .h4 {
 section, .shadowContainer {
   position: relative; }
 
-#work > .shadowBottom, #myHistory > .shadowBottom, #references > .shadowBottom, #contact > .shadowBottom {
+#work > .shadowBottom, #myHistory > .shadowBottom {
   top: 0; }
 
-#about .shadowTop, #tools .shadowTop {
+#about .shadowTop, #work .shadowTop {
   bottom: 100%; }
 
-#tools .shadowContainer .shadowTop, #work .shadowContainer .shadowTop, #myHistory .shadowContainer .shadowTop {
+#work .shadowContainer .shadowTop, #myHistory .shadowContainer .shadowTop, #details .shadowContainer .shadowTop {
   bottom: 100%; }
+  #work .shadowContainer .shadowTop:before, #myHistory .shadowContainer .shadowTop:before, #details .shadowContainer .shadowTop:before {
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1); }
 
 /*
  *
@@ -177,6 +183,7 @@ section, .shadowContainer {
  */
 .extendedBg {
   background-color: #78ccfe;
+  overflow: hidden;
   position: relative;
   z-index: -1; }
   .extendedBg:before, .extendedBg:after {
@@ -189,7 +196,7 @@ section, .shadowContainer {
     height: 100%;
     top: 0;
     width: 100%;
-    z-index: -1; }
+    z-index: -100; }
   .extendedBg:before {
     background-image: url(../img/dark-rays.svg);
     background-position: left top;
@@ -246,18 +253,33 @@ header {
 #about {
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.5)), to(rgba(255, 255, 255, 0.8)));
   background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8));
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8));
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8)); }
+  #about .design h2:before {
+    background-position: 0 0; }
+  #about .development h2:before {
+    background-position: 5% 0; }
+  #about .experience h2:before {
+    background-position: 10% 0; }
+  #about .employment h2:before {
+    background-position: 15% 0; }
+
+#about, #details {
   padding: 6em 0 3em 0; }
-  #about .intro {
+  #about .intro, #details .intro {
     padding: 0 0 3em 0; }
     @media only screen and (min-width: 56.25em) {
-      #about .intro {
+      #about .intro, #details .intro {
         float: left;
         width: 50%; }
-        #about .intro:nth-child(odd) {
+        #about .intro:nth-child(odd), #details .intro:nth-child(odd) {
           padding-right: 3em; }
-        #about .intro:nth-child(even) {
+        #about .intro:nth-child(even), #details .intro:nth-child(even) {
           padding-left: 3em; } }
+
+#work, #myHistory {
+  padding: 6em 0 0 0; }
+  #work .intro, #myHistory .intro {
+    padding-bottom: 3em; }
 
 .spacer {
   height: auto;
@@ -265,14 +287,10 @@ header {
 
 .thumbList {
   list-style-type: none;
-  padding: 0; }
+  padding: 0;
+  position: relative; }
   .thumbList .thumbSquare {
     float: left; }
-
-#tools, #work, #myHistory {
-  padding: 6em 0 0 0; }
-  #tools .intro, #work .intro, #myHistory .intro {
-    padding-bottom: 3em; }
 
 .thumbSquare {
   cursor: pointer;
@@ -298,80 +316,8 @@ header {
     width: 100%;
     z-index: 1; }
 
-#tools li {
-  width: 25%; }
-  #tools li:nth-child(4n+4):before {
-    display: none; }
-  #tools li:nth-child(1n+12):before {
-    display: none; }
-  #tools li:nth-child(1n+13):after {
-    display: none; }
-  #tools li:nth-child(1n+17) {
-    display: none; }
-  #tools li:nth-child(4n+4):after {
-    display: none; }
-  @media only screen and (min-width: 37.5em) {
-    #tools li {
-      width: 20%; }
-      #tools li:nth-child(1n+1):before {
-        display: block; }
-      #tools li:nth-child(1n+1):after {
-        display: block;
-        left: 50%;
-        width: 100%; }
-      #tools li:nth-child(1n+1) {
-        display: block; }
-      #tools li:nth-child(5n+5):before {
-        display: none; }
-      #tools li:nth-child(1n+10):before {
-        display: none; }
-      #tools li:nth-child(1n+11):after {
-        display: none; }
-      #tools li:nth-child(5n+5):after {
-        display: none; }
-      #tools li:nth-child(1n+16) {
-        display: none; } }
-  @media only screen and (min-width: 56.25em) {
-    #tools li {
-      width: 16.6666666666666%; }
-      #tools li:nth-child(1n+1):before {
-        display: block; }
-      #tools li:nth-child(1n+1):after {
-        display: block;
-        left: 50%;
-        width: 100%; }
-      #tools li:nth-child(1n+1) {
-        display: block; }
-      #tools li:nth-child(6n+6):before {
-        display: none; }
-      #tools li:nth-child(1n+12):before {
-        display: none; }
-      #tools li:nth-child(1n+13):after {
-        display: none; }
-      #tools li:nth-child(6n+6):after {
-        display: none; } }
-  @media only screen and (min-width: 80em) {
-    #tools li {
-      width: 12.5%; }
-      #tools li:nth-child(1n+1):before {
-        display: block; }
-      #tools li:nth-child(1n+1):after {
-        display: block;
-        left: 50%;
-        width: 100%; }
-      #tools li:nth-child(1n+1) {
-        display: block; }
-      #tools li:nth-child(8n+8):before {
-        display: none; }
-      #tools li:nth-child(1n+9):before {
-        display: none; }
-      #tools li:nth-child(1n+9):after {
-        display: none; }
-      #tools li:nth-child(8n+8):after {
-        display: none; }
-      #tools li:nth-child(1n+17) {
-        display: none; } }
-
+#work .intro h2:before {
+  background-position: 20% 0; }
 #work li {
   width: 100%; }
   #work li:before {
@@ -449,6 +395,8 @@ header {
   background-image: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.8));
   background-image: linear-gradient(to top, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.8));
   padding: 6em 0 0 0; }
+  #myHistory .intro h2:before {
+    background-position: 25% 0; }
 
 .jobList {
   list-style-type: none;
@@ -547,8 +495,7 @@ header {
       .jobList .timeline.start:before {
         top: 0; }
       .jobList .timeline.end:after {
-        bottom: 0; } }
-  @media only screen and (min-width: 37.5em) {
+        bottom: 0; }
     .jobList .bma {
       padding-right: 3em;
       text-align: right;
@@ -612,11 +559,63 @@ header {
       height: 6em;
       padding-bottom: 0.5em; } }
 
-#references {
-  padding: 6em 0 3em 0; }
-
-#contact {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(50, 62, 80, 0.5)), to(rgba(50, 62, 80, 0.8)));
-  background-image: -webkit-linear-gradient(top, rgba(50, 62, 80, 0.5), rgba(50, 62, 80, 0.8));
-  background-image: linear-gradient(to bottom, rgba(50, 62, 80, 0.5), rgba(50, 62, 80, 0.8));
-  padding: 6em 0 3em 0; }
+#details {
+  color: #323e50; }
+  #details:before, #details:after {
+    -webkit-background-size: auto;
+    background-size: auto;
+    opacity: 0.5; }
+    @media only screen and (min-width: 56.25em) {
+      #details:before, #details:after {
+        opacity: 0.75; } }
+    @media only screen and (min-width: 80em) {
+      #details:before, #details:after {
+        opacity: 1; } }
+  #details:before {
+    background-position: left center; }
+  #details:after {
+    background-position: right center; }
+  #details h2 {
+    color: white; }
+  #details .contact h2:before {
+    background-position: 30% 0; }
+  #details .references h2:before {
+    background-position: 35% 0; }
+  #details address ul li {
+    display: block;
+    float: left;
+    padding-top: 6.5em;
+    position: relative;
+    width: 100%; }
+    #details address ul li a {
+      color: #323e50;
+      text-decoration: none; }
+    #details address ul li.phone a {
+      margin-right: 3em; }
+      #details address ul li.phone a:before {
+        background-position: 40% 0; }
+    #details address ul li.email a:before {
+      background-position: 45% 0; }
+    #details address ul li a:before {
+      position: absolute;
+      display: block;
+      content: "";
+      background-image: url(../img/icons.svg);
+      -webkit-background-size: cover;
+      background-size: cover;
+      height: 5em;
+      left: 0;
+      top: 1.5em;
+      -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+      transform: translateX(0);
+      width: 5em; }
+    @media only screen and (min-width: 37.5em) {
+      #details address ul li {
+        display: inline;
+        width: auto; }
+        #details address ul li:before {
+          left: 50%;
+          -webkit-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+          transform: translateX(-50%); } }
