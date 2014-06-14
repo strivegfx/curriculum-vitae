@@ -15,7 +15,8 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link href="css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <!-- <script src="js/vendor/modernizr-2.6.2.min.js"></script> --> <!-- generic build -->
+        <script src="js/vendor/modernizr-2.6.2-custom-build.min.js"></script> <!-- custom build -->
 
     </head>
     <body>
@@ -25,7 +26,11 @@
 
         <div class="extendedBg">
 
-            <img class="portraitBody" src="img/me-body.svg" alt="Portrait illustration body">
+            <img id="portraitBody" src="img/me-body.png" alt="Portrait illustration body">
+
+            <!-- <div class="portraitBody">
+                <img class="ratio" src="img/me-body-ratio.gif">
+            </div> -->
 
             <header class="center">
                 <div class="hello">
@@ -36,7 +41,7 @@
 
             <section id="about">
                 <div class="shadowTop"></div>
-                <img class="portraitHands" src="img/me-hands.svg" alt="Portrait illustration hands">
+                <img id="portraitHands" src="img/me-hands.png" alt="Portrait illustration hands">
                 <ul class="center clearFix">
                     <li class="intro design">
                         <h2>Design</h2>

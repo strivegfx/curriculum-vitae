@@ -1,6 +1,7 @@
 /*jshint devel: true*/
 /*global TweenMax: true*/
 /*global FastClick: true*/
+/*global Modernizr: true*/
 
 $(document).ready(function(){
 
@@ -9,6 +10,7 @@ $(document).ready(function(){
 		init: function(){
 
 			$m.s.init();
+			$m.features.init();
 			$m.work.init();
 			$m.details.init();
 			$m.fastClick();
@@ -50,6 +52,39 @@ $(document).ready(function(){
 			FastClick.attach(document.body);
 
 		}, // end of fastClick
+
+		features: {
+
+			init: function(){
+
+				$m.features.check();
+
+			}, // end of init
+
+			check: function(){
+
+				console.log('checking features');
+
+				var $html = $('html');
+
+				if(!Modernizr.mq('only all')){
+
+					$html.addClass('no-mediaquery');
+
+				} // end of statement
+
+				if(!$html.hasClass('no-svg')){
+
+					console.log('svg suport = false');
+
+					$('#portraitBody').attr({'src': 'img/me-body.png'});
+					$('#portraitHands').attr({'src': 'img/me-hands.png'});
+
+				} // end of statement
+
+			} // end of check
+
+		}, // end of features
 
 		work: {
 

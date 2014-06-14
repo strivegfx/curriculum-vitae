@@ -141,58 +141,62 @@ section, .shadowContainer {
 	|_|                                     
 
 */
-.portraitBody, .portraitHands {
+#portraitBody, #portraitHands {
   left: 0%;
   position: absolute;
   -webkit-transform: translateX(0);
   -ms-transform: translateX(0);
   transform: translateX(0);
-  width: auto; }
+  width: auto;
+  /*.ratio{
+  	width: auto;
+  	height: 100%;
+  }*/ }
   @media only screen and (min-width: 23em) {
-    .portraitBody, .portraitHands {
+    #portraitBody, #portraitHands {
       left: 15%;
       -webkit-transform: translateX(0);
       -ms-transform: translateX(0);
       transform: translateX(0); } }
   @media only screen and (min-width: 37.5em) {
-    .portraitBody, .portraitHands {
+    #portraitBody, #portraitHands {
       left: 25%;
       -webkit-transform: translateX(0);
       -ms-transform: translateX(0);
       transform: translateX(0); } }
   @media only screen and (min-width: 56.25em) {
-    .portraitBody, .portraitHands {
+    #portraitBody, #portraitHands {
       left: 50%;
       -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
       transform: translateX(-50%); } }
 
-.portraitBody {
+#portraitBody {
   height: 40em;
   top: 0; }
   @media only screen and (min-width: 37.5em) {
-    .portraitBody {
+    #portraitBody {
       height: 50em; } }
   @media only screen and (min-width: 56.25em) {
-    .portraitBody {
+    #portraitBody {
       height: 70em; } }
   @media only screen and (min-width: 80em) {
-    .portraitBody {
+    #portraitBody {
       height: 80em; } }
 
-.portraitHands {
+#portraitHands {
   height: 5em;
   top: -2.5em; }
   @media only screen and (min-width: 37.5em) {
-    .portraitHands {
+    #portraitHands {
       height: 6.25em;
       top: -3.125em; } }
   @media only screen and (min-width: 56.25em) {
-    .portraitHands {
+    #portraitHands {
       height: 8.75em;
       top: -4.375em; } }
   @media only screen and (min-width: 80em) {
-    .portraitHands {
+    #portraitHands {
       height: 10em;
       top: -5em; } }
 
@@ -867,6 +871,7 @@ header {
 
 */
 #lightBox {
+  display: none;
   height: 100%;
   left: 0;
   position: fixed;
@@ -925,6 +930,8 @@ header {
       #lightBox .top-ui .projectCurrent .dynamic, #lightBox .bottom-ui .projectCurrent .dynamic {
         display: inline-block;
         position: relative; }
+    #lightBox .top-ui .previous, #lightBox .top-ui .next, #lightBox .bottom-ui .previous, #lightBox .bottom-ui .next {
+      z-index: 1; }
     #lightBox .top-ui .close, #lightBox .top-ui .next, #lightBox .bottom-ui .close, #lightBox .bottom-ui .next {
       right: 1.5em; }
       #lightBox .top-ui .close .text, #lightBox .top-ui .next .text, #lightBox .bottom-ui .close .text, #lightBox .bottom-ui .next .text {
@@ -1006,3 +1013,99 @@ header {
 	|_|_|_|\___/\__,_|\___||_|  |_||_||_|/__||_|  
 
 */
+.no-borderradius #myHistory .jobPosition:after {
+  background-color: transparent;
+  background-image: url(../img/history-dot.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: 0;
+  height: 15px;
+  right: -7.5px;
+  width: 15px; }
+
+.no-boxshadow .shadowTop, .no-boxshadow .shadowBottom {
+  background-position: center center;
+  background-repeat: no-repeat; }
+  .no-boxshadow .shadowTop:before, .no-boxshadow .shadowBottom:before {
+    display: none; }
+.no-boxshadow .shadowTop {
+  background-image: url(../img/no-boxshadow-top.png); }
+.no-boxshadow .shadowBottom {
+  background-image: url(../img/no-boxshadow-bottom.png); }
+
+.no-cssgradients #about, .no-cssgradients #myHistory {
+  background-color: rgba(255, 255, 255, 0.7); }
+.no-cssgradients .jobList .jobPosition.bma:before, .no-cssgradients .jobList .jobPosition.digitalSpecialist:before {
+  background-color: #78ccfe; }
+@media only screen and (min-width: 37.5em) {
+  .no-cssgradients .jobList .jobPosition.bma .timeline.middle, .no-cssgradients .jobList .jobPosition.bma .timeline.left, .no-cssgradients .jobList .jobPosition.digitalSpecialist .timeline.middle, .no-cssgradients .jobList .jobPosition.digitalSpecialist .timeline.left {
+    background-color: #78ccfe; } }
+.no-cssgradients .jobList .jobPosition:after {
+  background-color: #d6f0ff; }
+.no-cssgradients .jobList .jobPosition .timeline:before, .no-cssgradients .jobList .jobPosition .timeline:after {
+  background-color: #d6f0ff; }
+
+.no-rgba #about, .no-rgba #myHistory {
+  background-image: url(../img/white-50percent-tile.png); }
+
+.no-mediaquery h1 {
+  font-size: 7em; }
+.no-mediaquery header {
+  height: 640px; }
+  .no-mediaquery header .hello {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 33%; }
+    .no-mediaquery header .hello h1 {
+      color: white; }
+    .no-mediaquery header .hello p {
+      font-size: 1.5em;
+      font-weight: 100; }
+.no-mediaquery #portraitBody {
+  height: 1280px;
+  left: 50%;
+  margin-left: -350px;
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+  width: 973px; }
+.no-mediaquery #portraitHands {
+  height: 160px;
+  top: -80px;
+  left: 50%;
+  margin-left: -350px;
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+  width: 973px; }
+.no-mediaquery .center {
+  width: 75em; }
+.no-mediaquery #about .intro, .no-mediaquery #details .intro {
+  float: left;
+  width: 50%; }
+  .no-mediaquery #about .intro.design, .no-mediaquery #about .intro.experience, .no-mediaquery #about .intro.contact, .no-mediaquery #details .intro.design, .no-mediaquery #details .intro.experience, .no-mediaquery #details .intro.contact {
+    padding-right: 3em; }
+  .no-mediaquery #about .intro.development, .no-mediaquery #about .intro.employment, .no-mediaquery #about .intro.references, .no-mediaquery #details .intro.development, .no-mediaquery #details .intro.employment, .no-mediaquery #details .intro.references {
+    padding-left: 3em; }
+.no-mediaquery #work li {
+  width: 25%; }
+.no-mediaquery #details address ul li {
+  display: inline;
+  width: auto; }
+  .no-mediaquery #details address ul li.phone a .icon-container {
+    left: 0.5em; }
+  .no-mediaquery #details address ul li.email a .icon-container {
+    left: 1.75em; }
+
+.no-svg {
+  /*#portraitBody{
+  	background: {
+  		// color: red;
+  		image: url(../img/me-body.png);
+  		position: center top;
+  		repeat: no-repeat;
+  		size: contain;
+  	}
+  }*/ }

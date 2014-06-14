@@ -181,6 +181,39 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/img\/history-dot.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1205,
+		"inputAbbreviatedPath": "\/img\/history-dot.png",
+		"outputAbbreviatedPath": "\/img\/history-dot.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/me-body.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 0,
+		"inputAbbreviatedPath": "\/img\/me-body.png",
+		"outputAbbreviatedPath": "\/img\/me-body.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/me-hands.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 17706,
+		"inputAbbreviatedPath": "\/img\/me-hands.png",
+		"outputAbbreviatedPath": "\/img\/me-hands.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/img\/neilsen-frame1-large.jpg": {
 		"fileType": 16384,
 		"ignore": 0,
@@ -199,6 +232,39 @@
 		"initialSize": 76145,
 		"inputAbbreviatedPath": "\/img\/neilsen-frame1-micro.jpg",
 		"outputAbbreviatedPath": "\/img\/neilsen-frame1-micro.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/no-boxshadow-bottom.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1000,
+		"inputAbbreviatedPath": "\/img\/no-boxshadow-bottom.png",
+		"outputAbbreviatedPath": "\/img\/no-boxshadow-bottom.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/no-boxshadow-top.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 941,
+		"inputAbbreviatedPath": "\/img\/no-boxshadow-top.png",
+		"outputAbbreviatedPath": "\/img\/no-boxshadow-top.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/white-50percent-tile.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 926,
+		"inputAbbreviatedPath": "\/img\/white-50percent-tile.png",
+		"outputAbbreviatedPath": "\/img\/white-50percent-tile.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -262,6 +328,28 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/js\/vendor\/jquery-1.10.2.min.js",
 		"outputAbbreviatedPath": "\/js\/vendor\/min\/jquery-1.10.2.min-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/vendor\/min\/modernizr-2.6.2-custom-build.min-ck.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/vendor\/min\/modernizr-2.6.2-custom-build.min-ck.js",
+		"outputAbbreviatedPath": "\/js\/vendor\/min\/min\/modernizr-2.6.2-custom-build.min-ck-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/vendor\/modernizr-2.6.2-custom-build.min.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/vendor\/modernizr-2.6.2-custom-build.min.js",
+		"outputAbbreviatedPath": "\/js\/vendor\/min\/modernizr-2.6.2-custom-build.min-ck.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,

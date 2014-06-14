@@ -1,5 +1,14 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:100,300,700);
 
+// @font-face {
+//   font-family: "Roboto";
+//   src: url('../fnt/roboto-light-webfont.eot'); /* IE9 Compat Modes */
+//   src: url('../fnt/roboto-light-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+//        url('../fnt/roboto-light-webfont.woff') format('woff'), /* Modern Browsers */
+//        url('../fnt/roboto-light-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+//        url('../fnt/roboto-light-webfont.svg#Roboto') format('svg'); /* Legacy iOS */
+// }
+
 *, *:after, *:before {
 	box-sizing: border-box;
 }
@@ -278,7 +287,7 @@ $portraitHeightLarge: 80em;
 
 $bodytoHandsRatio: 0.125; // the relation between the portrait body and hands svg image heights
 
-.portraitBody, .portraitHands{
+#portraitBody, #portraitHands{
 	left: 0%;
 	position: absolute;
 	transform: translateX(0);
@@ -298,9 +307,14 @@ $bodytoHandsRatio: 0.125; // the relation between the portrait body and hands sv
 		left: 50%;
 		transform: translateX(-50%);
 	}
+
+	/*.ratio{
+		width: auto;
+		height: 100%;
+	}*/
 }
 
-.portraitBody{
+#portraitBody{
 	height: $portraitHeightTiny;
 	top: 0;
 
@@ -309,7 +323,7 @@ $bodytoHandsRatio: 0.125; // the relation between the portrait body and hands sv
 	@include breakpoint(LARGE){ height: $portraitHeightLarge; }
 }
 
-.portraitHands{
+#portraitHands{
 	height: $portraitHeightTiny * $bodytoHandsRatio;
 	top: $portraitHeightTiny * $bodytoHandsRatio * -0.5;
 
@@ -865,11 +879,11 @@ header{
 	@mixin dotBase{
 		@include pseudo;
 		// background-color: $color; // colour is set through the class system above
-		border: 1px solid $blueLight;
+		border: $stroke solid $blueLight;
 		border-radius: 50%;
-		height: $dot - 2;
+		height: $dot - ($stroke * 2);
 		right: - ($dot / 2) + $stroke;
-		width: $dot - 2;
+		width: $dot - ($stroke * 2);
 	}
 
 	.jobPosition{
@@ -1196,7 +1210,7 @@ header{
 	$width: $pad / 4;
 	$grad: lighten($blueLight, 20%);
 	// background-color: rgba(white, 0.8);
-	// display: none;
+	display: none;
 	height: 100%;
 	left: 0;
 	position: fixed;
@@ -1257,6 +1271,10 @@ header{
 				position: relative;
 				// transform: translateY(50%);
 			}
+		}
+
+		.previous, .next{
+			z-index: 1; // layer ontop of the .projectCurrent content
 		}
 
 		.close, .next{
@@ -1370,12 +1388,50 @@ header{
 
 }
 
-.no-rgba{
+.no-borderradius{
 
+	#myHistory .jobPosition{
+		$dot: 15px; // the width of the timeline start and end "dot"
+
+		&:after{
+			background: {
+				color: transparent;
+				image: url(../img/history-dot.png);
+				position: center center;
+				repeat: no-repeat;
+			}
+			border: 0;
+			height: $dot;
+			right: - ($dot / 2);
+			width: $dot;
+		}
+	}
 }
 
 .no-backgroundsize{
 
+}
+
+.no-boxshadow{
+
+	.shadowTop, .shadowBottom{
+		background: {
+			position: center center;
+			repeat: no-repeat;
+		}
+
+		&:before{
+			display: none;
+		}
+	}
+
+	.shadowTop{
+		background-image: url(../img/no-boxshadow-top.png);
+	}
+
+	.shadowBottom{
+		background-image: url(../img/no-boxshadow-bottom.png);
+	}
 }
 
 .no-opacity{
@@ -1384,6 +1440,125 @@ header{
 
 .no-cssgradients{
 
+	#about, #myHistory{
+		background-color: rgba(white, 0.7);
+	}
+
+	.jobList .jobPosition{
+
+		&.bma, &.digitalSpecialist{
+
+			&:before{
+				background-color: $blueLight;
+			}
+
+			@include breakpoint(SMALL){
+
+				.timeline.middle, .timeline.left{
+					background-color: $blueLight;
+				}
+			}
+		}
+
+		&:after{
+			background-color: #d6f0ff;
+		}
+
+		& .timeline:before, & .timeline:after{
+			background-color: #d6f0ff;
+		}
+	}
+}
+
+.no-rgba{
+
+	#about, #myHistory{
+		background-image: url(../img/white-50percent-tile.png);
+	}
+
+}
+
+.no-mediaquery{ // reset everything to its largest STATIC state
+
+	h1{
+		font-size: 7em;
+	}
+
+	$portraitHeightLargeStatic: 1280px;
+	header{
+		height: $portraitHeightLargeStatic / 2;
+
+		.hello{
+			top: 50%;
+			transform: translateY(-50%);
+			width: 33%;
+
+			h1{
+				color: white;
+			}
+
+			p{
+				font: {
+					size: 1.5em;
+					weight: 100;
+				}
+			}
+		}
+	}
+
+	#portraitBody{
+		height: 1280px;
+		left: 50%;
+		margin-left: -350px;
+		transform: translateX(0);
+		width: 973px;
+	}
+
+	#portraitHands{
+		height: $portraitHeightLargeStatic * $bodytoHandsRatio;
+		top: $portraitHeightLargeStatic * $bodytoHandsRatio * -0.5;
+		left: 50%;
+		margin-left: -350px;
+		transform: translateX(0);
+		width: 973px;
+	}
+
+	.center{
+		width: 75em; // 1200px
+	}
+
+	#about, #details{
+
+		.intro{
+			float: left;
+			width: 50%;
+
+			&.design, &.experience, &.contact{
+				padding-right: $pad / 2;
+			}
+
+			&.development, &.employment, &.references{
+				padding-left: $pad / 2;
+			}
+		}
+	}
+
+	#work li{
+		width: 25%;
+	}
+
+	#details address ul li{
+		display: inline;
+		width: auto;
+
+		&.phone a .icon-container{
+			left: 0.5em
+		}
+
+		&.email a .icon-container{
+			left: 1.75em
+		}
+	}
 }
 
 .no-csstransforms{
@@ -1391,7 +1566,16 @@ header{
 }
 
 .no-svg{
-	
+
+	/*#portraitBody{
+		background: {
+			// color: red;
+			image: url(../img/me-body.png);
+			position: center top;
+			repeat: no-repeat;
+			size: contain;
+		}
+	}*/
 }
 
 
