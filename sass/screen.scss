@@ -1,5 +1,3 @@
-
-
 @import url(http://fonts.googleapis.com/css?family=Roboto:100,300,700);
 
 *, *:after, *:before {
@@ -18,7 +16,7 @@ $grayD: darken($gray, 25%); // dark
 $grayL: lighten($gray, 35%); // light
 
 $blueLight: #78ccfe;
-$blue: #6da8f3;
+$blue: #538ed9;
 $blueMedium: #325a8d;
 $blueDark: #323e50;
 
@@ -30,6 +28,7 @@ $shadowLight: rgba(black, 0.10);
 // generic values
 $ani: 0.25s;
 $pad: 6em;
+$icon: 2%;
 
 @mixin breakpoint($point){
 
@@ -81,6 +80,14 @@ $pad: 6em;
     }
 }
 
+@mixin iconSprite{
+	background: {
+		image: url(../img/icons.svg);
+		repeat: no-repeat;
+		size: cover;
+	}
+}
+
 html, body{
 	height: 100%; // is this messing up the vertical scrolling on some devices?
 	width: 100%;
@@ -124,15 +131,21 @@ h2, .h2{
 
 	&:before{
 		@include pseudo;
-		background: {
-			image: url(../img/icons.svg);
-			size: cover;
-		}
+		@include iconSprite;
 		height: $width;
 		left: 0;
 		top: 50%;
 		transform: translateY(-50%);
 		width: $width;
+	}
+
+	&.close, &.next{
+		padding: 0 ($width + 0.5em) 0 0;
+
+		&:before{
+			left: auto;
+			right: 0
+		}
 	}
 }
 
@@ -166,11 +179,17 @@ h4, .h4{
 	}
 }
 
+.oneWord{
+	white-space: nowrap;
+}
 
 /*
- * divider shadows
- *
- */
+	     _              _                  
+	 ___| |_   __ _  __| | ___ __ __ __ ___
+	(_-<| ' \ / _` |/ _` |/ _ \\ V  V /(_-<
+	/__/|_||_|\__,_|\__,_|\___/ \_/\_/ /__/
+	                                       
+*/
 
 // create the shadow modules
 // both shadows are the same apart from their pseudo element locations
@@ -218,6 +237,17 @@ section, .shadowContainer{
 	}
 }
 
+#lightBox{
+
+	.shadowTop{
+		bottom: 0;	
+	}
+
+	.shadowBottom{
+		top: 0;
+	}
+}
+
 #work, #myHistory, #details{
 
 	.shadowContainer .shadowTop{
@@ -230,10 +260,16 @@ section, .shadowContainer{
 }
 
 /*
- *
- * portrait code blendng through two different modules (header & about)
- *
- */
+	                 _               _  _   
+	 _ __  ___  _ _ | |_  _ _  __ _ (_)| |_ 
+	| '_ \/ _ \| '_||  _|| '_|/ _` || ||  _|
+	| .__/\___/|_|   \__||_|  \__,_||_| \__|
+	|_|                                     
+
+*/
+
+// portrait image blendng through two different modules (header & about)
+// hands grabbing onto and overlaying the divider
 
 $portraitHeightTiny: 40em; 
 $portraitHeightSmall: 50em; 
@@ -243,13 +279,13 @@ $portraitHeightLarge: 80em;
 $bodytoHandsRatio: 0.125; // the relation between the portrait body and hands svg image heights
 
 .portraitBody, .portraitHands{
-	left: 10%;
+	left: 0%;
 	position: absolute;
 	transform: translateX(0);
 	width: auto;
 
 	@include breakpoint(MICRO){
-		left: 25%;
+		left: 15%;
 		transform: translateX(0);
 	}
 
@@ -292,14 +328,17 @@ $bodytoHandsRatio: 0.125; // the relation between the portrait body and hands sv
 }
 
 /*
- *
- * extended background
- *
- */
+           _                  _          _   _               _                                   _ 
+ ___ __ __| |_  ___  _ _   __| | ___  __| | | |__  __ _  __ | |__ __ _  _ _  ___  _  _  _ _   __| |
+/ -_)\ \ /|  _|/ -_)| ' \ / _` |/ -_)/ _` | | '_ \/ _` |/ _|| / // _` || '_|/ _ \| || || ' \ / _` |
+\___|/_\_\ \__|\___||_||_|\__,_|\___|\__,_| |_.__/\__,_|\__||_\_\\__, ||_|  \___/ \_,_||_||_|\__,_|
+                                                                 |___/                                                                
+	
+*/
 
 .extendedBg{
 	background-color: $blueLight;
-	overflow: hidden;
+	overflow-x: hidden;
 	position: relative; // for portraitBody image to reference
 	z-index: -1; // push below all other content (moves light rays to the back also)
 
@@ -307,12 +346,24 @@ $bodytoHandsRatio: 0.125; // the relation between the portrait body and hands sv
 		@include pseudo;
 		background:{
 			repeat: no-repeat;
-			size: contain;
+			size: 400%;
 		}
 		height: 100%;
+		opacity: 0.5;
 		top: 0;
 		width: 100%;
 		z-index: -100; // move light rays under other DOM content
+
+		@include breakpoint(MICRO){ background-size: 300%; }
+		@include breakpoint(SMALL){ background-size: 150%; }
+
+		@include breakpoint(MEDIUM){
+			background-size: 100%;
+			opacity: 0.75;
+			
+		}
+
+		@include breakpoint(LARGE){ opacity: 1; }
 	}
 
 	&:before{
@@ -378,23 +429,31 @@ header{
 	}
 }
 
+/*
+	       _                _   
+	 __ _ | |__  ___  _  _ | |_ 
+	/ _` || '_ \/ _ \| || ||  _|
+	\__,_||_.__/\___/ \_,_| \__|
+                            
+*/
+
 #about{
 	background-image: linear-gradient(to bottom, rgba(white, 0.5), rgba(white, 0.8));
 
 	.design h2:before{
-		background-position: 0 0;
+		background-position: ($icon * 0) 0;
 	}
 
 	.development h2:before{
-		background-position: 5% 0;
+		background-position: ($icon * 1) 0;
 	}
 
 	.experience h2:before{
-		background-position: 10% 0;
+		background-position: ($icon * 2) 0;
 	}
 
 	.employment h2:before{
-		background-position: 15% 0;
+		background-position: ($icon * 3) 0;
 	}
 }
 
@@ -403,6 +462,7 @@ header{
 
 	.intro{
 		padding: 0 0 ($pad / 2) 0;
+
 		@include breakpoint(MEDIUM){
 			&:nth-child(odd){
 				padding-right: $pad / 2;
@@ -415,6 +475,14 @@ header{
 		}
 	}
 }
+
+/*
+	                   _   
+	__ __ __ ___  _ _ | |__
+	\ V  V // _ \| '_|| / /
+	 \_/\_/ \___/|_|  |_\_\
+
+*/
 
 #work, #myHistory{
 	padding: $pad 0 0 0;
@@ -431,6 +499,7 @@ header{
 
 .thumbList{
 	list-style-type: none;
+	// overflow-x: hidden; // stops the 2d scale adding more than 100% width to the broswer during animation
 	padding: 0;
 	position: relative;
 
@@ -484,12 +553,33 @@ header{
 #work{
 
 	.intro h2:before{
-		background-position: 20% 0;
+		background-position: ($icon * 4) 0;
 	}
 
 	li{
-		width: 100%;
 		$gap: 20px;
+		width: 100%;
+
+		&.thumbSquare{
+			@include iconSprite;
+
+			&[data-project="project-0"]{ background-position: ($icon * 10) 0; }
+			&[data-project="project-1"]{ background-position: ($icon * 11) 0; }
+			&[data-project="project-2"]{ background-position: ($icon * 12) 0; }
+			&[data-project="project-3"]{ background-position: ($icon * 13) 0; }
+			&[data-project="project-4"]{ background-position: ($icon * 14) 0; }
+			&[data-project="project-5"]{ background-position: ($icon * 15) 0; }
+			&[data-project="project-6"]{ background-position: ($icon * 16) 0; }
+			&[data-project="project-7"]{ background-position: ($icon * 17) 0; }
+			&[data-project="project-8"]{ background-position: ($icon * 18) 0; }
+			&[data-project="project-9"]{ background-position: ($icon * 19) 0; }
+			&[data-project="project-10"]{ background-position: ($icon * 20) 0; }
+			&[data-project="project-11"]{ background-position: ($icon * 21) 0; }
+
+			.description{
+				display: none;
+			}
+		}
 
 		&:before{ // get rid of the vertical lines on each right hand side at the end of each row
 			display: none;
@@ -570,21 +660,120 @@ header{
 			}
 		}
 
-		&#workInformation{
+		&#thumbInformation{
+			$gap: 1.5em;
 			background-color: $blueLight;
-			pointer-events: none;
+			display: none; // dormant state
 			position: absolute;
+			transform: scale(1.2); // dormant state
+			visibility: hidden; // dormant state - used instead of opacity = 0 as this works back to IE8 with TweenMax "autoAlpha"
 			z-index: 100;
+
+			.overflow{
+				height:100%;
+				left: 0;
+				overflow: hidden;
+				position: absolute;
+				top: 0;
+				width: 100%;      
+			}
+
+			.content{
+				$width: 7em;
+				bottom: 0;
+				color: white;
+				left: 0;
+				padding: $gap $gap 0 $gap;
+				position: absolute;
+			}
+
+			.shadow{
+				background-color: red;
+				border-radius: 50%;
+				box-shadow: 0 0 20px 0 rgba(black, 0.5);
+				height: $pad / 2;
+				left: 0;
+				position: absolute;
+				width: 100%;
+				z-index: 300;
+
+				&.top{ bottom: 100%; }
+				&.bottom{ top: 100%; }
+			}
+
+			.logo{
+				$width: 7em;
+				background-color: green;
+				// height: ???; // this is a varible relative to the size of the logo sprite
+				position: relative;
+				overflow: hidden; // hides the exess of the sprite in the pseudo element
+				width: $width;
+
+				&:before{
+					@include pseudo;
+					@include iconSprite;
+					background-color: red;
+					bottom: 0;
+					left: 0;
+					height: $width;
+					width: $width;
+				}
+			}
+
+			.description{
+				padding-top: $gap;
+			}
+
+			.view{
+				$width: 1.5em;
+				color: white;
+				padding: ($gap / 2) 0 ($gap / 2) ($width);
+				position: relative;
+
+				&:after{
+					@include pseudo;
+					@include iconSprite;
+					background-position: ($icon * 34) 0;
+					height: $width;
+					left: -0.25em;
+					top: 50%;
+					transform: translateY(-50%);
+					width: $width;
+				}
+			}
+
+			// set the icon sprite and the height of the .logo container...
+			&[data-project="project-0"] .logo{ height: 5em; &:before{ background-position: ($icon * 22) 0; } }
+			&[data-project="project-1"] .logo{ height: 3em; &:before{ background-position: ($icon * 23) 0; } }
+			&[data-project="project-2"] .logo{ height: 3em; &:before{ background-position: ($icon * 24) 0; } }
+			&[data-project="project-3"] .logo{ height: 3em; &:before{ background-position: ($icon * 25) 0; } }
+			&[data-project="project-4"] .logo{ height: 3em; &:before{ background-position: ($icon * 26) 0; } }
+			&[data-project="project-5"] .logo{ height: 3em; &:before{ background-position: ($icon * 27) 0; } }
+			&[data-project="project-6"] .logo{ height: 3em; &:before{ background-position: ($icon * 28) 0; } }
+			&[data-project="project-7"] .logo{ height: 3em; &:before{ background-position: ($icon * 29) 0; } }
+			&[data-project="project-8"] .logo{ height: 3em; &:before{ background-position: ($icon * 30) 0; } }
+			&[data-project="project-9"] .logo{ height: 3em; &:before{ background-position: ($icon * 31) 0; } }
+			&[data-project="project-10"] .logo{ height: 3em; &:before{ background-position: ($icon * 32) 0; } }
+			&[data-project="project-11"] .logo{ height: 3em; &:before{ background-position: ($icon * 33) 0; } }
 		}
 	}
 }
+
+/*
+	 _     _      _                   
+	| |_  (_) ___| |_  ___  _ _  _  _ 
+	| ' \ | |(_-<|  _|/ _ \| '_|| || |
+	|_||_||_|/__/ \__|\___/|_|   \_, |
+	                             |__/ 
+
+*/
 
 #myHistory{
 	background-image: linear-gradient(to top, rgba(white, 0.25), rgba(white, 0.8));
 	padding: $pad 0 0 0;
 
 	.intro h2:before{
-		background-position: 25% 0;
+		background-position: ($icon * 5) 0;
 	}
 }
 
@@ -596,7 +785,6 @@ header{
 	padding-bottom: $pad / 2;
 
 	// colors...
-
 	.bma{
 		
 		&:after{
@@ -691,7 +879,7 @@ header{
 		&:before{
 			@include pseudo;
 			background-color: $blueLight;
-			height: 100%;
+			height: 120%;
 			left: ($dot / 2) - $stroke;
 			top: -40%;
 			width: $stroke;
@@ -713,28 +901,157 @@ header{
 			}
 		}
 
-		&.bma:before{
-			background: {
-				image: linear-gradient(to top, $blueLight, rgba($blueLight, 0));
-				color: transparent;
+		&.bma{
+
+			&:before{
+				background: {
+					image: linear-gradient(to top, $blueLight, rgba($blueLight, 0));
+					color: transparent;
+				}
+			}
+
+			@include breakpoint(SMALL){
+				padding-right: $pad / 2;
+				text-align: right;
+				width: 50%;
+
+				.timeline.middle{
+					background: {
+						image: linear-gradient(to top, $blueLight, rgba($blueLight, 0));
+						color: transparent;
+					}
+					height: $pad;
+					right: 0;
+					top: - $pad + 1.4em; // pull inline with header text
+				}
 			}
 		}
 
-		&.digitalSpecialist:before{
-			background: {
-				image: linear-gradient(to bottom, $blueLight, rgba($blueLight, 0));
-				color: transparent;
+		&.nzpc{
+
+			@include breakpoint(SMALL){
+				padding-left: $pad;
+				width: 50%;
+
+				.timeline.right{
+					left: $pad / 2;
+				}
+			}
+		}
+
+		&.freelance{
+
+			@include breakpoint(SMALL){
+				margin-right: 50%;
+				padding-right: $pad / 2;
+				text-align: right;
+				width: 50%;
+
+				.timeline.middle{
+					right: 0;
+				}
+
+				.timeline.right{
+					left: 100%;
+					margin-left: $pad / 2;
+				}
+			}
+		}
+
+		&.fairfax{
+
+			@include breakpoint(SMALL){
+				padding-right: $pad;
+				text-align: right;
+				width: 50%;
+
+				.timeline.left{
+					right: $pad / 2;
+				}
+
+				.timeline.middle{
+					height: 0; // just show the ending "dot" no line
+					right: 0;
+				}
+
+				.timeline.right{
+					height: 0; // just show the ending "dot" no line
+					left: 100%;
+					margin-left: $pad / 2;
+				}
+			}
+		}
+
+		&.digitalSpecialist{
+
+			&:before{
+				background: {
+					image: linear-gradient(to bottom, $blueLight, rgba($blueLight, 0));
+					color: transparent;
+				}
+			}
+
+			@include breakpoint(SMALL){
+				.timeline.left{
+					background: {
+						color: transparent;
+						image: linear-gradient(to bottom, $blueLight, rgba($blueLight, 0));
+					}
+					height: $pad; // just show the ending "dot" no line
+					padding-bottom: 0.5em;
+				}
+			}
+		}
+
+		&.seniorPosition, &.productDevelopment, &.digitalSpecialist{
+			padding-left: $pad;
+
+			&:after{
+				left: $pad / 2;
+			}
+
+			h3:before{
+				@include pseudo;
+				background-color: $blueLight;
+				height: $stroke;
+				left: ($dot / 2) - $stroke;
+				top: 0.55em;
+				width: $pad / 3;
+			}
+
+			@include breakpoint(SMALL){
+				margin-left: 50%;
+				padding-left: $pad / 2;
+				width: 50%;
+
+				h3:before{
+					display: none;
+				}
+
+				.timeline.left{
+					margin-right: $pad / 2;
+					right: 100%;
+				}
+
+				.timeline.horizontal{
+					height: $stroke;
+					right: 100%;
+					top: 1em; // pull inline with header text
+					width: $pad / 2;
+
+					&.end:after{
+						right: 0;
+						bottom: - ($dot / 2) + $stroke;
+					}
+				}
 			}
 		}
 	}
 
 	.timeline{
 		display: none; // hide the dynamic timeline
-	}
 
-	@include breakpoint(SMALL){
-
-		.timeline{
+		@include breakpoint(SMALL){
 			background-color: $blueLight;
 			display: block; // show the dynamic timeline
 			position: absolute;
@@ -759,127 +1076,26 @@ header{
 				bottom: 0;
 			}
 		}
-
-		.bma{
-			padding-right: $pad / 2;
-			text-align: right;
-			width: 50%;
-
-			.timeline.middle{
-				background: {
-					image: linear-gradient(to top, $blueLight, rgba($blueLight, 0));
-					color: transparent;
-				}
-				height: $pad;
-				right: 0;
-				top: - $pad + 1.4em; // pull inline with header text
-			}
-		}
-
-		.nzpc{
-			padding-left: $pad;
-			width: 50%;
-
-			.timeline.right{
-				left: $pad / 2;
-			}
-		}
-
-		.freelance{
-			margin-right: 50%;
-			padding-right: $pad / 2;
-			text-align: right;
-			width: 50%;
-
-			.timeline.middle{
-				right: 0;
-			}
-
-			.timeline.right{
-				left: 100%;
-				margin-left: $pad / 2;
-			}
-		}
-
-		.fairfax{
-			padding-right: $pad;
-			text-align: right;
-			width: 50%;
-
-			.timeline.left{
-				right: $pad / 2;
-			}
-
-			.timeline.middle{
-				height: 0; // just show the ending "dot" no line
-				right: 0;
-			}
-
-			.timeline.right{
-				height: 0; // just show the ending "dot" no line
-				left: 100%;
-				margin-left: $pad / 2;
-			}
-		}
-
-		.seniorPosition, .productDevelopment, .digitalSpecialist{
-			margin-left: 50%;
-			padding-left: $pad / 2;
-			width: 50%;
-
-			.timeline.left{
-				margin-right: $pad / 2;
-				right: 100%;
-			}
-
-			.timeline.horizontal{
-				height: $stroke;
-				right: 100%;
-				top: 1em; // pull inline with header text
-				width: $pad / 2;
-
-				&.end:after{
-					right: 0;
-					bottom: - ($dot / 2) + $stroke;
-				}
-			}
-		}
-
-		.digitalSpecialist .timeline.left{
-			background: {
-				color: transparent;
-				image: linear-gradient(to bottom, $blueLight, rgba($blueLight, 0));
-			}
-			height: $pad; // just show the ending "dot" no line
-			padding-bottom: 0.5em;
-		}
-	} // end of SMALL
+	}
 }
+
+/*
+	    _       _          _  _     
+	 __| | ___ | |_  __ _ (_)| | ___
+	/ _` |/ -_)|  _|/ _` || || |(_-<
+	\__,_|\___| \__|\__,_||_||_|/__/
+
+*/
 
 #details{
 	color: $blueDark;
-
-	&:before, &:after{
-		background-size: auto;
-		opacity: 0.5;
-
-		@include breakpoint(MEDIUM){
-			opacity: 0.75;
-			
-		}
-
-		@include breakpoint(LARGE){
-			opacity: 1;
-			
-		}	
-	}
 
 	&:before{
 		background-position: left center;
 	}
 
 	&:after{
-		background-position: right center;	
+		background-position: right center;
 	}	
 
 	h2{
@@ -887,60 +1103,301 @@ header{
 	}
 
 	.contact h2:before{
-		background-position: 30% 0;
+		background-position: ($icon * 6) 0;
 	}
 
 	.references h2:before{
-		background-position: 35% 0;
+		background-position: ($icon * 7) 0;
 	}
 
 	address ul li{
 		$width: 5em;
+		color: $blueDark;
 		display: block;
 		float: left;
 		padding-top: $width + 1.5em;
 		position: relative;
 		width: 100%;
 
+		//change the icons to be left aligned when stacked on top of one another
+		@include breakpoint(SMALL){
+			display: inline;
+			width: auto;
+		}
+
 		a{
-			color: $blueDark;
+			color: inherit;
 			text-decoration: none;
+
+			.icon-container{
+				position: absolute;
+				height: $width;
+				top: 1.5em;
+
+				.icon{
+					// @include pseudo;
+					position: absolute;
+					@include iconSprite;
+					height: $width;
+					left: 0;
+					top: 0;
+					width: $width;
+
+					&.active{
+						visibility: hidden;
+					}
+				}
+			}
 		}
 
 		&.phone a{
 			margin-right: $pad / 2;
 
-			&:before{
-				background-position: 40% 0;
+			.icon-container{
+				@include breakpoint(SMALL){ left: 0.5em }
+			}
+
+			.dormant{
+				background-position: ($icon * 8) 0;	
+			}
+
+			.active{
+				background-position: ($icon * 35) 0;	
 			}
 		}
 
-		&.email a:before{
-			background-position: 45% 0;
-		}
+		&.email a{
 
-		& a:before{
-			@include pseudo;
-			background: {
-				image: url(../img/icons.svg);
-				size: cover;
+			.icon-container{
+				@include breakpoint(SMALL){ left: 1.75em }
 			}
-			height: $width;
-			left: 0;
-			top: 1.5em;
-			transform: translateX(0);
-			width: $width;
-		}
 
-		//change the icons to be left aligned when stacked on top of one another
-		@include breakpoint(SMALL){
-			display: inline;
-			width: auto;
+			.dormant{
+				background-position: ($icon * 9) 0;
+			}
 
-			&:before{
-				left: 50%;
-				transform: translateX(-50%);
+			.active{
+				background-position: ($icon * 36) 0;	
 			}
 		}
 	}
 }
+
+/*
+	 _  _        _    _     _              
+	| |(_) __ _ | |_ | |_  | |__  ___ __ __
+	| || |/ _` || ' \|  _| | '_ \/ _ \\ \ /
+	|_||_|\__, ||_||_|\__| |_.__/\___//_\_\
+	      |___/                            
+
+*/
+
+#lightBox{
+	$width: $pad / 4;
+	$grad: lighten($blueLight, 20%);
+	// background-color: rgba(white, 0.8);
+	// display: none;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 9999;
+
+	.top-ui{
+		background-image: linear-gradient(to top, rgba($grad, 1), rgba($grad, 0.6));
+		top: 0;
+	}
+
+	.bottom-ui{
+		background-image: linear-gradient(to bottom, rgba($grad, 1), rgba($grad, 0.6));
+		bottom: 0;
+	}
+
+	.top-ui, .bottom-ui{
+		height: $pad / 1.5;
+		left: 0;
+		position: absolute;
+		width: 100%;
+		z-index: 1;
+
+		@include breakpoint(MEDIUM){ height: $pad / 1.25; }
+		@include breakpoint(LARGE){ height: $pad; }
+
+		.center{
+			height: 100%;
+			position: relative;
+		}
+
+		.close, .previous, .next, .projectCurrent{
+			color: $blueDark;
+			position: absolute;
+			font-size: 1.5em;
+			top: 50%;
+			transform: translateY(-50%);
+
+			@include breakpoint(MEDIUM){ font-size: 1.7em; }
+			@include breakpoint(LARGE){ font-size: 2em; }
+
+			.text{
+				visibility: hidden;
+
+				@include breakpoint(SMALL){  display: block; }
+			}
+		}
+
+		.projectCurrent{
+			left: 0;
+			text-align: center;
+			width: 100%;
+			z-index: 0;
+
+			.dynamic{
+				display: inline-block;
+				position: relative;
+				// transform: translateY(50%);
+			}
+		}
+
+		.close, .next{
+			right: $pad / 4;
+
+			.text{ margin-right: $pad / 3; }
+			.icon-container{ right: 0; }
+		}
+
+		.previous{
+			left: $pad / 4;
+
+			.text{ margin-left: $pad / 3; }
+			.icon-container{ left: 0; }
+		}
+
+		a{
+			text-decoration: none;
+		}
+
+		.close{
+			
+			.dormant{ background-position: ($icon * 41) 0; }
+			.active{ background-position: ($icon * 42) 0; }
+		}
+
+		.previous{
+			
+			.dormant{ background-position: ($icon * 37) 0; }
+			.active{ background-position: ($icon * 38) 0; }
+		}
+
+		.next{
+			
+			.dormant{ background-position: ($icon * 39) 0; }
+			.active{ background-position: ($icon * 40) 0; }
+		}
+
+		.icon-container{
+			height: $width;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			width: $width;
+
+
+			.icon{
+				@include iconSprite;
+				height: $width;
+				position: absolute;
+				width: $width;
+
+				&.active{ visibility: hidden; }
+			}
+		}
+	}
+
+	.shadowContainer{
+		background-color: white;
+		bottom: $pad / 1.5;
+		// height: 100%;
+		position: absolute;
+		top: $pad / 1.5;
+		width: 100%;
+
+		@include breakpoint(MEDIUM){
+			bottom: $pad / 1.25;
+			top: $pad / 1.25;
+		}
+
+		@include breakpoint(LARGE){
+			bottom: $pad;
+			top: $pad;
+		}
+
+		li{
+			background: {
+				position: center center;
+				repeat: no-repeat;
+				size: contain;
+			}
+			bottom: $pad / 4;
+			// height: 100%;
+			left: $pad / 4;
+			// padding: $pad / 4;
+			position: absolute;
+			right: $pad / 4;
+			top: $pad / 4;
+			// width: 100%;
+		}
+
+		&[data-projectName="neilsenSurvey"]{
+
+			li[data-projectCurrent="0"]{
+				background-image: url(../img/neilsen-frame1-micro.jpg);
+				@include breakpoint(LARGE){ background-image: url(../img/neilsen-frame1-large.jpg); }
+			}
+		}
+	}
+}
+
+/*
+	                _                  _          
+	 _ __   ___  __| | ___  _ _  _ _  (_) ___ _ _ 
+	| '  \ / _ \/ _` |/ -_)| '_|| ' \ | ||_ /| '_|
+	|_|_|_|\___/\__,_|\___||_|  |_||_||_|/__||_|  
+
+*/
+
+.no-js{
+
+}
+
+.no-rgba{
+
+}
+
+.no-backgroundsize{
+
+}
+
+.no-opacity{
+
+}
+
+.no-cssgradients{
+
+}
+
+.no-csstransforms{
+
+}
+
+.no-svg{
+	
+}
+
+
+
+
+
+
+
+
