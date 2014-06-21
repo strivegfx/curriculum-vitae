@@ -11,9 +11,11 @@ $(document).ready(function(){
 
 			$m.s.init();
 			$m.features.init();
-			$m.work.init();
+			// $m.work.init();
 			$m.details.init();
 			$m.fastClick();
+
+			if($('html').hasClass('lt-ie9')){ $m.ie8.init(); }
 
 		}, // end of init
 
@@ -381,7 +383,22 @@ $(document).ready(function(){
 
 			} // end of actions
 
-		} // end of details
+		}, // end of details
+
+		ie8: {
+
+			init: function(){
+
+				$m.ie8.iconFont();
+
+			}, // end if init
+
+			iconFont: function(){
+
+				$('.icon').removeClass('ie8');
+
+			} // end of iconFont
+		}
 
 	}; // end of $m module container
 

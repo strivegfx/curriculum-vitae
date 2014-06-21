@@ -9,6 +9,107 @@
   display: table;
   clear: both; }
 
+/*
+	 _                   __            _   
+	(_) __  ___  _ _    / _| ___  _ _ | |_ 
+	| |/ _|/ _ \| ' \  |  _|/ _ \| ' \|  _|
+	|_|\__|\___/|_||_| |_|  \___/|_||_|\__|
+
+*/
+@font-face {
+  font-family: 'icomoon';
+  src: url("../fnt/icomoon.eot?-npddoi");
+  src: url("../fnt/icomoon.eot?#iefix-npddoi") format("embedded-opentype"), url("../fnt/icomoon.woff?-npddoi") format("woff"), url("../fnt/icomoon.ttf?-npddoi") format("truetype"), url("../fnt/icomoon.svg?-npddoi#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+.title {
+  color: #323e50;
+  position: relative; }
+  .title .icon, .title h2 {
+    display: inline-block; }
+  .title .icon {
+    height: 1.5em;
+    position: relative;
+    width: 3.25em; }
+  .title .icon:before {
+    display: block;
+    font-family: 'icomoon';
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    line-height: 1;
+    position: absolute;
+    speak: none;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 2.75em;
+    left: 0;
+    top: -0.2em; }
+
+#about .intro.design .title .icon:before {
+  content: "\e600"; }
+#about .intro.development .title .icon:before {
+  content: "\e601"; }
+#about .intro.experience .title .icon:before {
+  content: "\e602"; }
+#about .intro.employment .title .icon:before {
+  content: "\e603"; }
+
+#work .intro .title .icon:before {
+  content: "\e604"; }
+
+#myHistory .intro .title .icon:before {
+  content: "\e605"; }
+
+#details .intro.contact .title .icon:before {
+  content: "\e606"; }
+#details .intro.references .title .icon:before {
+  content: "\e607"; }
+#details .phone .icon.dormant:before {
+  content: "\e60f"; }
+#details .phone .icon.active:before {
+  content: "\e610"; }
+#details .email .icon.dormant:before {
+  content: "\e611"; }
+#details .email .icon.active:before {
+  content: "\e612"; }
+
+#lightbox .close .icon.dormant:before {
+  content: "\e606"; }
+#lightbox .close .icon.active:before {
+  content: "\e606"; }
+#lightbox .icon-container .icon:before {
+  content: "\e612" !important; }
+
+.icon-icon-view:before {
+  content: "\e608"; }
+
+.icon-icon-previous-dormant:before {
+  content: "\e609"; }
+
+.icon-icon-previous-active:before {
+  content: "\e60a"; }
+
+.icon-icon-next-dormant:before {
+  content: "\e60b"; }
+
+.icon-icon-next-active:before {
+  content: "\e60c"; }
+
+.icon-icon-close-dormant:before {
+  content: "\e60d"; }
+
+.icon-icon-close-active:before {
+  content: "\e60e"; }
+
+/*
+	              _       
+	 _ __   __ _ (_) _ _  
+	| '  \ / _` || || ' \ 
+	|_|_|_|\__,_||_||_||_|
+
+*/
 html, body {
   height: 100%;
   width: 100%; }
@@ -31,32 +132,32 @@ h1, .h1 {
       font-size: 7em; } }
 
 h2, .h2 {
-  color: #323e50;
   font-size: 2em;
   font-weight: 100;
   margin: 0;
-  padding: 0 0 0 2em;
-  position: relative; }
-  h2:before, .h2:before {
-    position: absolute;
-    display: block;
-    content: "";
-    background-image: url(../img/icons.svg);
-    background-repeat: no-repeat;
-    -webkit-background-size: cover;
-    background-size: cover;
-    height: 1.5em;
-    left: 0;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    width: 1.5em; }
-  h2.close, h2.next, .h2.close, .h2.next {
-    padding: 0 2em 0 0; }
-    h2.close:before, h2.next:before, .h2.close:before, .h2.next:before {
-      left: auto;
-      right: 0; }
+  padding: 0;
+  position: relative;
+  	/*&:before{
+  		@include pseudo;
+  		@include iconFont;
+  		// background-color: rgba(gray, 0.2);
+  		font-size: 1.5em;
+  		// height: $width;
+  		// left: 0;
+  		// padding-top: 0.25em;
+  		// top: 50%;
+  		// transform: translateY(-50%);
+  		// width: $width;
+  	}
+  
+  	&.close, &.next{
+  		padding: 0 ($width + 0.5em) 0 0;
+  
+  		&:before{
+  			left: auto;
+  			right: 0
+  		}
+  	}*/ }
 
 h3, .h3 {
   color: #323e50;
@@ -97,9 +198,9 @@ h4, .h4 {
   position: absolute;
   width: 100%; }
   .shadowTop:before, .shadowBottom:before {
-    position: absolute;
-    display: block;
     content: "";
+    display: block;
+    position: absolute;
     border-radius: 50%;
     -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.25);
     box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.25);
@@ -147,11 +248,7 @@ section, .shadowContainer {
   -webkit-transform: translateX(0);
   -ms-transform: translateX(0);
   transform: translateX(0);
-  width: auto;
-  /*.ratio{
-  	width: auto;
-  	height: 100%;
-  }*/ }
+  width: auto; }
   @media only screen and (min-width: 23em) {
     #portraitBody, #portraitHands {
       left: 15%;
@@ -214,9 +311,9 @@ section, .shadowContainer {
   position: relative;
   z-index: -1; }
   .extendedBg:before, .extendedBg:after {
-    position: absolute;
-    display: block;
     content: "";
+    display: block;
+    position: absolute;
     background-repeat: no-repeat;
     -webkit-background-size: 400%;
     background-size: 400%;
@@ -305,14 +402,6 @@ header {
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.5)), to(rgba(255, 255, 255, 0.8)));
   background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8));
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8)); }
-  #about .design h2:before {
-    background-position: 0% 0; }
-  #about .development h2:before {
-    background-position: 2% 0; }
-  #about .experience h2:before {
-    background-position: 4% 0; }
-  #about .employment h2:before {
-    background-position: 6% 0; }
 
 #about, #details {
   padding: 6em 0 3em 0; }
@@ -354,9 +443,9 @@ header {
   cursor: pointer;
   position: relative; }
   .thumbSquare:before {
-    position: absolute;
-    display: block;
     content: "";
+    display: block;
+    position: absolute;
     background: #ddf2ff;
     height: 100%;
     right: 0;
@@ -364,9 +453,9 @@ header {
     width: 2px;
     z-index: 1; }
   .thumbSquare:after {
-    position: absolute;
-    display: block;
     content: "";
+    display: block;
+    position: absolute;
     background: #ddf2ff;
     bottom: 0;
     height: 2px;
@@ -374,41 +463,43 @@ header {
     width: 100%;
     z-index: 1; }
 
-#work .intro h2:before {
-  background-position: 8% 0; }
 #work li {
+  height: 10em;
   width: 100%; }
   #work li.thumbSquare {
-    background-image: url(../img/icons.svg);
-    background-repeat: no-repeat;
-    -webkit-background-size: cover;
-    background-size: cover; }
-    #work li.thumbSquare[data-project="project-0"] {
-      background-position: 20% 0; }
-    #work li.thumbSquare[data-project="project-1"] {
-      background-position: 22% 0; }
-    #work li.thumbSquare[data-project="project-2"] {
-      background-position: 24% 0; }
-    #work li.thumbSquare[data-project="project-3"] {
-      background-position: 26% 0; }
-    #work li.thumbSquare[data-project="project-4"] {
-      background-position: 28% 0; }
-    #work li.thumbSquare[data-project="project-5"] {
-      background-position: 30% 0; }
-    #work li.thumbSquare[data-project="project-6"] {
-      background-position: 32% 0; }
-    #work li.thumbSquare[data-project="project-7"] {
-      background-position: 34% 0; }
-    #work li.thumbSquare[data-project="project-8"] {
-      background-position: 36% 0; }
-    #work li.thumbSquare[data-project="project-9"] {
-      background-position: 38% 0; }
-    #work li.thumbSquare[data-project="project-10"] {
-      background-position: 40% 0; }
-    #work li.thumbSquare[data-project="project-11"] {
-      background-position: 42% 0; }
+    color: #323e50; }
+    #work li.thumbSquare .description, #work li.thumbSquare .icon {
+      left: 0;
+      position: absolute;
+      text-align: center;
+      top: 0;
+      width: 100%; }
     #work li.thumbSquare .description {
-      display: none; }
+      height: 40%;
+      top: 60%; }
+      #work li.thumbSquare .description span {
+        border-top: 1px solid black;
+        padding-top: 1em; }
+    #work li.thumbSquare .icon {
+      height: 60%;
+      top: 0; }
+      #work li.thumbSquare .icon:after {
+        display: block;
+        font-family: 'icomoon';
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        line-height: 1;
+        position: absolute;
+        speak: none;
+        text-transform: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        bottom: 0;
+        content: "\e613";
+        font-size: 8em;
+        left: 0;
+        width: 100%; }
   #work li:before {
     display: none; }
   #work li:after {
@@ -418,6 +509,7 @@ header {
     display: none; }
   @media only screen and (min-width: 23em) {
     #work li {
+      height: 100%;
       width: 50%; }
       #work li:nth-child(1n+1):before {
         display: block; }
@@ -473,130 +565,6 @@ header {
         display: none; }
       #work li:nth-child(4n+4):after {
         display: none; } }
-  #work li#thumbInformation {
-    background-color: #78ccfe;
-    display: none;
-    position: absolute;
-    -webkit-transform: scale(1.2);
-    -ms-transform: scale(1.2);
-    transform: scale(1.2);
-    visibility: hidden;
-    z-index: 100; }
-    #work li#thumbInformation .overflow {
-      height: 100%;
-      left: 0;
-      overflow: hidden;
-      position: absolute;
-      top: 0;
-      width: 100%; }
-    #work li#thumbInformation .content {
-      bottom: 0;
-      color: white;
-      left: 0;
-      padding: 1.5em 1.5em 0 1.5em;
-      position: absolute; }
-    #work li#thumbInformation .shadow {
-      background-color: red;
-      border-radius: 50%;
-      -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
-      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
-      height: 3em;
-      left: 0;
-      position: absolute;
-      width: 100%;
-      z-index: 300; }
-      #work li#thumbInformation .shadow.top {
-        bottom: 100%; }
-      #work li#thumbInformation .shadow.bottom {
-        top: 100%; }
-    #work li#thumbInformation .logo {
-      background-color: green;
-      position: relative;
-      overflow: hidden;
-      width: 7em; }
-      #work li#thumbInformation .logo:before {
-        position: absolute;
-        display: block;
-        content: "";
-        background-image: url(../img/icons.svg);
-        background-repeat: no-repeat;
-        -webkit-background-size: cover;
-        background-size: cover;
-        background-color: red;
-        bottom: 0;
-        left: 0;
-        height: 7em;
-        width: 7em; }
-    #work li#thumbInformation .description {
-      padding-top: 1.5em; }
-    #work li#thumbInformation .view {
-      color: white;
-      padding: 0.75em 0 0.75em 1.5em;
-      position: relative; }
-      #work li#thumbInformation .view:after {
-        position: absolute;
-        display: block;
-        content: "";
-        background-image: url(../img/icons.svg);
-        background-repeat: no-repeat;
-        -webkit-background-size: cover;
-        background-size: cover;
-        background-position: 68% 0;
-        height: 1.5em;
-        left: -0.25em;
-        top: 50%;
-        -webkit-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
-        width: 1.5em; }
-    #work li#thumbInformation[data-project="project-0"] .logo {
-      height: 5em; }
-      #work li#thumbInformation[data-project="project-0"] .logo:before {
-        background-position: 44% 0; }
-    #work li#thumbInformation[data-project="project-1"] .logo {
-      height: 3em; }
-      #work li#thumbInformation[data-project="project-1"] .logo:before {
-        background-position: 46% 0; }
-    #work li#thumbInformation[data-project="project-2"] .logo {
-      height: 3em; }
-      #work li#thumbInformation[data-project="project-2"] .logo:before {
-        background-position: 48% 0; }
-    #work li#thumbInformation[data-project="project-3"] .logo {
-      height: 3em; }
-      #work li#thumbInformation[data-project="project-3"] .logo:before {
-        background-position: 50% 0; }
-    #work li#thumbInformation[data-project="project-4"] .logo {
-      height: 3em; }
-      #work li#thumbInformation[data-project="project-4"] .logo:before {
-        background-position: 52% 0; }
-    #work li#thumbInformation[data-project="project-5"] .logo {
-      height: 3em; }
-      #work li#thumbInformation[data-project="project-5"] .logo:before {
-        background-position: 54% 0; }
-    #work li#thumbInformation[data-project="project-6"] .logo {
-      height: 3em; }
-      #work li#thumbInformation[data-project="project-6"] .logo:before {
-        background-position: 56% 0; }
-    #work li#thumbInformation[data-project="project-7"] .logo {
-      height: 3em; }
-      #work li#thumbInformation[data-project="project-7"] .logo:before {
-        background-position: 58% 0; }
-    #work li#thumbInformation[data-project="project-8"] .logo {
-      height: 3em; }
-      #work li#thumbInformation[data-project="project-8"] .logo:before {
-        background-position: 60% 0; }
-    #work li#thumbInformation[data-project="project-9"] .logo {
-      height: 3em; }
-      #work li#thumbInformation[data-project="project-9"] .logo:before {
-        background-position: 62% 0; }
-    #work li#thumbInformation[data-project="project-10"] .logo {
-      height: 3em; }
-      #work li#thumbInformation[data-project="project-10"] .logo:before {
-        background-position: 64% 0; }
-    #work li#thumbInformation[data-project="project-11"] .logo {
-      height: 3em; }
-      #work li#thumbInformation[data-project="project-11"] .logo:before {
-        background-position: 66% 0; }
 
 /*
 	 _     _      _                   
@@ -611,8 +579,6 @@ header {
   background-image: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.8));
   background-image: linear-gradient(to top, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.8));
   padding: 6em 0 0 0; }
-  #myHistory .intro h2:before {
-    background-position: 10% 0; }
 
 .jobList {
   list-style-type: none;
@@ -650,18 +616,18 @@ header {
     padding: 0 0 3em 3em;
     position: relative; }
     .jobList .jobPosition:before {
-      position: absolute;
-      display: block;
       content: "";
+      display: block;
+      position: absolute;
       background-color: #78ccfe;
       height: 120%;
       left: 6.5px;
       top: -40%;
       width: 1px; }
     .jobList .jobPosition:after {
-      position: absolute;
-      display: block;
       content: "";
+      display: block;
+      position: absolute;
       border: 1px solid #78ccfe;
       border-radius: 50%;
       height: 13px;
@@ -743,9 +709,9 @@ header {
       .jobList .jobPosition.seniorPosition:after, .jobList .jobPosition.productDevelopment:after, .jobList .jobPosition.digitalSpecialist:after {
         left: 3em; }
       .jobList .jobPosition.seniorPosition h3:before, .jobList .jobPosition.productDevelopment h3:before, .jobList .jobPosition.digitalSpecialist h3:before {
-        position: absolute;
-        display: block;
         content: "";
+        display: block;
+        position: absolute;
         background-color: #78ccfe;
         height: 1px;
         left: 6.5px;
@@ -783,9 +749,9 @@ header {
           padding-bottom: 1em;
           top: 0.5em; }
         .jobList .timeline.start:before, .jobList .timeline.end:after {
-          position: absolute;
-          display: block;
           content: "";
+          display: block;
+          position: absolute;
           border: 1px solid #78ccfe;
           border-radius: 50%;
           height: 13px;
@@ -809,12 +775,8 @@ header {
     background-position: left center; }
   #details:after {
     background-position: right center; }
-  #details h2 {
+  #details .title {
     color: white; }
-  #details .contact h2:before {
-    background-position: 12% 0; }
-  #details .references h2:before {
-    background-position: 14% 0; }
   #details address ul li {
     color: #323e50;
     display: block;
@@ -835,14 +797,28 @@ header {
         top: 1.5em; }
         #details address ul li a .icon-container .icon {
           position: absolute;
-          background-image: url(../img/icons.svg);
-          background-repeat: no-repeat;
-          -webkit-background-size: cover;
-          background-size: cover;
           height: 5em;
           left: 0;
           top: 0;
           width: 5em; }
+          #details address ul li a .icon-container .icon.active:before, #details address ul li a .icon-container .icon.dormant:before {
+            display: block;
+            font-family: 'icomoon';
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            line-height: 1;
+            position: absolute;
+            speak: none;
+            text-transform: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: white;
+            font-size: 5em;
+            height: 100%;
+            left: 0;
+            top: 0;
+            width: 100%; }
           #details address ul li a .icon-container .icon.active {
             visibility: hidden; }
     #details address ul li.phone a {
@@ -850,17 +826,9 @@ header {
       @media only screen and (min-width: 37.5em) {
         #details address ul li.phone a .icon-container {
           left: 0.5em; } }
-      #details address ul li.phone a .dormant {
-        background-position: 16% 0; }
-      #details address ul li.phone a .active {
-        background-position: 70% 0; }
     @media only screen and (min-width: 37.5em) {
       #details address ul li.email a .icon-container {
         left: 1.75em; } }
-    #details address ul li.email a .dormant {
-      background-position: 18% 0; }
-    #details address ul li.email a .active {
-      background-position: 72% 0; }
 
 /*
 	 _  _        _    _     _              
@@ -906,27 +874,42 @@ header {
     #lightBox .top-ui .close, #lightBox .top-ui .previous, #lightBox .top-ui .next, #lightBox .top-ui .projectCurrent, #lightBox .bottom-ui .close, #lightBox .bottom-ui .previous, #lightBox .bottom-ui .next, #lightBox .bottom-ui .projectCurrent {
       color: #323e50;
       position: absolute;
-      font-size: 1.5em;
       top: 50%;
       -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
       transform: translateY(-50%); }
-      @media only screen and (min-width: 56.25em) {
-        #lightBox .top-ui .close, #lightBox .top-ui .previous, #lightBox .top-ui .next, #lightBox .top-ui .projectCurrent, #lightBox .bottom-ui .close, #lightBox .bottom-ui .previous, #lightBox .bottom-ui .next, #lightBox .bottom-ui .projectCurrent {
-          font-size: 1.7em; } }
-      @media only screen and (min-width: 80em) {
-        #lightBox .top-ui .close, #lightBox .top-ui .previous, #lightBox .top-ui .next, #lightBox .top-ui .projectCurrent, #lightBox .bottom-ui .close, #lightBox .bottom-ui .previous, #lightBox .bottom-ui .next, #lightBox .bottom-ui .projectCurrent {
-          font-size: 2em; } }
       #lightBox .top-ui .close .text, #lightBox .top-ui .previous .text, #lightBox .top-ui .next .text, #lightBox .top-ui .projectCurrent .text, #lightBox .bottom-ui .close .text, #lightBox .bottom-ui .previous .text, #lightBox .bottom-ui .next .text, #lightBox .bottom-ui .projectCurrent .text {
+        font-size: 1.5em;
         visibility: hidden; }
         @media only screen and (min-width: 37.5em) {
           #lightBox .top-ui .close .text, #lightBox .top-ui .previous .text, #lightBox .top-ui .next .text, #lightBox .top-ui .projectCurrent .text, #lightBox .bottom-ui .close .text, #lightBox .bottom-ui .previous .text, #lightBox .bottom-ui .next .text, #lightBox .bottom-ui .projectCurrent .text {
-            display: block; } }
+            visibility: inherit; } }
+        @media only screen and (min-width: 56.25em) {
+          #lightBox .top-ui .close .text, #lightBox .top-ui .previous .text, #lightBox .top-ui .next .text, #lightBox .top-ui .projectCurrent .text, #lightBox .bottom-ui .close .text, #lightBox .bottom-ui .previous .text, #lightBox .bottom-ui .next .text, #lightBox .bottom-ui .projectCurrent .text {
+            font-size: 1.7em; } }
+        @media only screen and (min-width: 80em) {
+          #lightBox .top-ui .close .text, #lightBox .top-ui .previous .text, #lightBox .top-ui .next .text, #lightBox .top-ui .projectCurrent .text, #lightBox .bottom-ui .close .text, #lightBox .bottom-ui .previous .text, #lightBox .bottom-ui .next .text, #lightBox .bottom-ui .projectCurrent .text {
+            font-size: 2em; } }
+      #lightBox .top-ui .close .icon:before, #lightBox .top-ui .previous .icon:before, #lightBox .top-ui .next .icon:before, #lightBox .top-ui .projectCurrent .icon:before, #lightBox .bottom-ui .close .icon:before, #lightBox .bottom-ui .previous .icon:before, #lightBox .bottom-ui .next .icon:before, #lightBox .bottom-ui .projectCurrent .icon:before {
+        font-size: 2.2em; }
+        @media only screen and (min-width: 56.25em) {
+          #lightBox .top-ui .close .icon:before, #lightBox .top-ui .previous .icon:before, #lightBox .top-ui .next .icon:before, #lightBox .top-ui .projectCurrent .icon:before, #lightBox .bottom-ui .close .icon:before, #lightBox .bottom-ui .previous .icon:before, #lightBox .bottom-ui .next .icon:before, #lightBox .bottom-ui .projectCurrent .icon:before {
+            font-size: 2.4em; } }
+        @media only screen and (min-width: 80em) {
+          #lightBox .top-ui .close .icon:before, #lightBox .top-ui .previous .icon:before, #lightBox .top-ui .next .icon:before, #lightBox .top-ui .projectCurrent .icon:before, #lightBox .bottom-ui .close .icon:before, #lightBox .bottom-ui .previous .icon:before, #lightBox .bottom-ui .next .icon:before, #lightBox .bottom-ui .projectCurrent .icon:before {
+            font-size: 2.75em; } }
     #lightBox .top-ui .projectCurrent, #lightBox .bottom-ui .projectCurrent {
+      font-size: 1.5em;
       left: 0;
       text-align: center;
       width: 100%;
       z-index: 0; }
+      @media only screen and (min-width: 56.25em) {
+        #lightBox .top-ui .projectCurrent, #lightBox .bottom-ui .projectCurrent {
+          font-size: 1.7em; } }
+      @media only screen and (min-width: 80em) {
+        #lightBox .top-ui .projectCurrent, #lightBox .bottom-ui .projectCurrent {
+          font-size: 2em; } }
       #lightBox .top-ui .projectCurrent .dynamic, #lightBox .bottom-ui .projectCurrent .dynamic {
         display: inline-block;
         position: relative; }
@@ -935,62 +918,76 @@ header {
     #lightBox .top-ui .close, #lightBox .top-ui .next, #lightBox .bottom-ui .close, #lightBox .bottom-ui .next {
       right: 1.5em; }
       #lightBox .top-ui .close .text, #lightBox .top-ui .next .text, #lightBox .bottom-ui .close .text, #lightBox .bottom-ui .next .text {
-        margin-right: 2em; }
+        margin-right: 2.18182em; }
       #lightBox .top-ui .close .icon-container, #lightBox .top-ui .next .icon-container, #lightBox .bottom-ui .close .icon-container, #lightBox .bottom-ui .next .icon-container {
         right: 0; }
+        #lightBox .top-ui .close .icon-container .icon:before, #lightBox .top-ui .next .icon-container .icon:before, #lightBox .bottom-ui .close .icon-container .icon:before, #lightBox .bottom-ui .next .icon-container .icon:before {
+          right: 0; }
     #lightBox .top-ui .previous, #lightBox .bottom-ui .previous {
       left: 1.5em; }
       #lightBox .top-ui .previous .text, #lightBox .bottom-ui .previous .text {
         margin-left: 2em; }
       #lightBox .top-ui .previous .icon-container, #lightBox .bottom-ui .previous .icon-container {
         left: 0; }
+        #lightBox .top-ui .previous .icon-container .icon:before, #lightBox .bottom-ui .previous .icon-container .icon:before {
+          left: 0; }
     #lightBox .top-ui a, #lightBox .bottom-ui a {
       text-decoration: none; }
-    #lightBox .top-ui .close .dormant, #lightBox .bottom-ui .close .dormant {
-      background-position: 82% 0; }
-    #lightBox .top-ui .close .active, #lightBox .bottom-ui .close .active {
-      background-position: 84% 0; }
-    #lightBox .top-ui .previous .dormant, #lightBox .bottom-ui .previous .dormant {
-      background-position: 74% 0; }
-    #lightBox .top-ui .previous .active, #lightBox .bottom-ui .previous .active {
-      background-position: 76% 0; }
-    #lightBox .top-ui .next .dormant, #lightBox .bottom-ui .next .dormant {
-      background-position: 78% 0; }
-    #lightBox .top-ui .next .active, #lightBox .bottom-ui .next .active {
-      background-position: 80% 0; }
     #lightBox .top-ui .icon-container, #lightBox .bottom-ui .icon-container {
-      height: 1.5em;
+      height: 100%;
       position: absolute;
       top: 50%;
       -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
       transform: translateY(-50%);
-      width: 1.5em; }
+      width: 3em; }
       #lightBox .top-ui .icon-container .icon, #lightBox .bottom-ui .icon-container .icon {
-        background-image: url(../img/icons.svg);
-        background-repeat: no-repeat;
-        -webkit-background-size: cover;
-        background-size: cover;
-        height: 1.5em;
+        height: 100%;
         position: absolute;
-        width: 1.5em; }
+        width: 100%; }
         #lightBox .top-ui .icon-container .icon.active, #lightBox .bottom-ui .icon-container .icon.active {
           visibility: hidden; }
-  #lightBox .shadowContainer {
+        #lightBox .top-ui .icon-container .icon:before, #lightBox .bottom-ui .icon-container .icon:before {
+          display: block;
+          font-family: 'icomoon';
+          font-style: normal;
+          font-weight: normal;
+          font-variant: normal;
+          line-height: 1;
+          position: absolute;
+          speak: none;
+          text-transform: none;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-align: center;
+          top: 0; }
+    #lightBox .top-ui .close .icon.dormant:before, #lightBox .bottom-ui .close .icon.dormant:before {
+      content: "\e60d"; }
+    #lightBox .top-ui .close .icon.active:before, #lightBox .bottom-ui .close .icon.active:before {
+      content: "\e60e"; }
+    #lightBox .top-ui .previous .icon.dormant:before, #lightBox .bottom-ui .previous .icon.dormant:before {
+      content: "\e609"; }
+    #lightBox .top-ui .previous .icon.active:before, #lightBox .bottom-ui .previous .icon.active:before {
+      content: "\e60a"; }
+    #lightBox .top-ui .next .icon.dormant:before, #lightBox .bottom-ui .next .icon.dormant:before {
+      content: "\e60b"; }
+    #lightBox .top-ui .next .icon.active:before, #lightBox .bottom-ui .next .icon.active:before {
+      content: "\e60c"; }
+  #lightBox .content {
     background-color: white;
     bottom: 4em;
     position: absolute;
     top: 4em;
     width: 100%; }
     @media only screen and (min-width: 56.25em) {
-      #lightBox .shadowContainer {
+      #lightBox .content {
         bottom: 4.8em;
         top: 4.8em; } }
     @media only screen and (min-width: 80em) {
-      #lightBox .shadowContainer {
+      #lightBox .content {
         bottom: 6em;
         top: 6em; } }
-    #lightBox .shadowContainer li {
+    #lightBox .content li {
       background-position: center center;
       background-repeat: no-repeat;
       -webkit-background-size: contain;
@@ -1000,10 +997,10 @@ header {
       position: absolute;
       right: 1.5em;
       top: 1.5em; }
-    #lightBox .shadowContainer[data-projectName="neilsenSurvey"] li[data-projectCurrent="0"] {
+    #lightBox .content[data-projectName="neilsenSurvey"] li[data-projectCurrent="0"] {
       background-image: url(../img/neilsen-frame1-micro.jpg); }
       @media only screen and (min-width: 80em) {
-        #lightBox .shadowContainer[data-projectName="neilsenSurvey"] li[data-projectCurrent="0"] {
+        #lightBox .content[data-projectName="neilsenSurvey"] li[data-projectCurrent="0"] {
           background-image: url(../img/neilsen-frame1-large.jpg); } }
 
 /*
@@ -1047,6 +1044,8 @@ header {
 
 .no-rgba #about, .no-rgba #myHistory {
   background-image: url(../img/white-50percent-tile.png); }
+.no-rgba #lightBox .top-ui, .no-rgba #lightBox .bottom-ui {
+  background-image: url(../img/white-80percent-tile.png); }
 
 .no-mediaquery h1 {
   font-size: 7em; }
@@ -1091,6 +1090,10 @@ header {
     padding-left: 3em; }
 .no-mediaquery #work li {
   width: 25%; }
+  .no-mediaquery #work li .icon:after {
+    left: 50%;
+    margin: -0.5em 0 0 -0.5em;
+    top: 50%; }
 .no-mediaquery #details address ul li {
   display: inline;
   width: auto; }
@@ -1098,14 +1101,36 @@ header {
     left: 0.5em; }
   .no-mediaquery #details address ul li.email a .icon-container {
     left: 1.75em; }
+.no-mediaquery #lightBox .top-ui, .no-mediaquery #lightBox .bottom-ui {
+  height: 6em; }
+  .no-mediaquery #lightBox .top-ui .center, .no-mediaquery #lightBox .bottom-ui .center {
+    height: 100%;
+    position: relative; }
+  .no-mediaquery #lightBox .top-ui .close, .no-mediaquery #lightBox .top-ui .previous, .no-mediaquery #lightBox .top-ui .next, .no-mediaquery #lightBox .top-ui .projectCurrent, .no-mediaquery #lightBox .bottom-ui .close, .no-mediaquery #lightBox .bottom-ui .previous, .no-mediaquery #lightBox .bottom-ui .next, .no-mediaquery #lightBox .bottom-ui .projectCurrent {
+    top: 25px; }
+    .no-mediaquery #lightBox .top-ui .close .text, .no-mediaquery #lightBox .top-ui .previous .text, .no-mediaquery #lightBox .top-ui .next .text, .no-mediaquery #lightBox .top-ui .projectCurrent .text, .no-mediaquery #lightBox .bottom-ui .close .text, .no-mediaquery #lightBox .bottom-ui .previous .text, .no-mediaquery #lightBox .bottom-ui .next .text, .no-mediaquery #lightBox .bottom-ui .projectCurrent .text {
+      font-size: 2em;
+      visibility: inherit; }
+    .no-mediaquery #lightBox .top-ui .close .icon:before, .no-mediaquery #lightBox .top-ui .previous .icon:before, .no-mediaquery #lightBox .top-ui .next .icon:before, .no-mediaquery #lightBox .top-ui .projectCurrent .icon:before, .no-mediaquery #lightBox .bottom-ui .close .icon:before, .no-mediaquery #lightBox .bottom-ui .previous .icon:before, .no-mediaquery #lightBox .bottom-ui .next .icon:before, .no-mediaquery #lightBox .bottom-ui .projectCurrent .icon:before {
+      font-size: 2.75em;
+      top: -20px; }
+  .no-mediaquery #lightBox .top-ui .projectCurrent, .no-mediaquery #lightBox .bottom-ui .projectCurrent {
+    font-size: 2em; }
+.no-mediaquery #lightBox .content {
+  bottom: 6em;
+  top: 6em; }
+  .no-mediaquery #lightBox .content li {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0; }
 
 .no-svg {
-  /*#portraitBody{
-  	background: {
-  		// color: red;
-  		image: url(../img/me-body.png);
-  		position: center top;
-  		repeat: no-repeat;
-  		size: contain;
-  	}
-  }*/ }
+  	/* #portraitBody, #portraitHands{
+  
+  		// this is taken care of via javascript / modernizer
+  	
+  	}*/ }
+
+.lt-ie9 .ie8:before {
+  content: "" !important; }

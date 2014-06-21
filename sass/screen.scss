@@ -68,9 +68,9 @@ $icon: 2%;
 }
 
 @mixin pseudo{
-	position: absolute;
-	display: block;
 	content: "";
+	display: block;
+	position: absolute;
 }
 
 @mixin keyframes($aniName){
@@ -89,13 +89,163 @@ $icon: 2%;
     }
 }
 
-@mixin iconSprite{
-	background: {
-		image: url(../img/icons.svg);
-		repeat: no-repeat;
-		size: cover;
+
+
+/*
+	 _                   __            _   
+	(_) __  ___  _ _    / _| ___  _ _ | |_ 
+	| |/ _|/ _ \| ' \  |  _|/ _ \| ' \|  _|
+	|_|\__|\___/|_||_| |_|  \___/|_||_|\__|
+
+*/
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fnt/icomoon.eot?-npddoi');
+	src:url('../fnt/icomoon.eot?#iefix-npddoi') format('embedded-opentype'),
+		url('../fnt/icomoon.woff?-npddoi') format('woff'),
+		url('../fnt/icomoon.ttf?-npddoi') format('truetype'),
+		url('../fnt/icomoon.svg?-npddoi#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@mixin iconFont{
+	display: block;
+	font-family: 'icomoon';
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	line-height: 1;
+	position: absolute;
+	speak: none;
+	text-transform: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.title{
+	color: $blueDark;
+	position: relative;
+
+	.icon, h2{
+		display: inline-block;
+	}
+
+	.icon{
+		$width: $pad / 4;
+		height: $width;
+		position: relative;
+		width: $width + 1.75em;
+	}
+
+	.icon:before{
+		@include iconFont;
+		font-size: 2.75em;
+		left: 0;
+		top: -0.2em;
 	}
 }
+
+#about .intro{
+
+	&.design .title .icon:before{ content: "\e600"; }
+	&.development .title .icon:before{ content: "\e601"; }
+	&.experience .title .icon:before{ content: "\e602"; }
+	&.employment .title .icon:before{ content: "\e603"; }
+}
+
+#work{
+
+	.intro .title .icon:before{ content: "\e604"; }
+
+	// WORK ICONS....
+}
+
+#myHistory{
+	.intro .title .icon:before{ content: "\e605"; }
+}
+
+#details{
+
+	.intro{
+		&.contact .title .icon:before{ content: "\e606"; }
+		&.references .title .icon:before{ content: "\e607"; }
+	}
+
+	.phone .icon{
+		&.dormant:before{ content: "\e60f"; }
+		&.active:before{ content: "\e610"; }
+	}
+
+	.email .icon{
+		&.dormant:before{ content: "\e611"; }
+		&.active:before{ content: "\e612"; }
+	}
+}
+
+#lightbox{
+
+	.close .icon{
+		
+		&.dormant:before{ content: "\e606"; }
+		&.active:before{ content: "\e606"; }
+	}
+
+	.previous{
+		
+		// *** icon fonts...
+		// .dormant{ background-position: ($icon * 37) 0; }
+		// .active{ background-position: ($icon * 38) 0; }
+	}
+
+	.next{
+		
+		// *** icon fonts...
+		// .dormant{ background-position: ($icon * 39) 0; }
+		// .active{ background-position: ($icon * 40) 0; }
+	}
+
+	.icon-container{
+
+		.icon{
+			
+			&:before{
+				content: "\e612" !important;
+			}
+		}
+	}
+}
+
+.icon-icon-view:before {
+	content: "\e608";
+}
+.icon-icon-previous-dormant:before {
+	content: "\e609";
+}
+.icon-icon-previous-active:before {
+	content: "\e60a";
+}
+.icon-icon-next-dormant:before {
+	content: "\e60b";
+}
+.icon-icon-next-active:before {
+	content: "\e60c";
+}
+.icon-icon-close-dormant:before {
+	content: "\e60d";
+}
+.icon-icon-close-active:before {
+	content: "\e60e";
+}
+
+/*
+	              _       
+	 _ __   __ _ (_) _ _  
+	| '  \ / _` || || ' \ 
+	|_|_|_|\__,_||_||_||_|
+
+*/
 
 html, body{
 	height: 100%; // is this messing up the vertical scrolling on some devices?
@@ -129,23 +279,26 @@ h1, .h1{
 
 h2, .h2{
 	$width: $pad / 4;
-	color: $blueDark;
 	font: {
 		size: 2em;
 		weight: 100;
 	}
 	margin: 0;
-	padding: 0 0 0 ($width + 0.5em);
+	// padding: 0 0 0 ($width + 0.5em);
+	padding: 0;
 	position: relative;
 
-	&:before{
+	/*&:before{
 		@include pseudo;
-		@include iconSprite;
-		height: $width;
-		left: 0;
-		top: 50%;
-		transform: translateY(-50%);
-		width: $width;
+		@include iconFont;
+		// background-color: rgba(gray, 0.2);
+		font-size: 1.5em;
+		// height: $width;
+		// left: 0;
+		// padding-top: 0.25em;
+		// top: 50%;
+		// transform: translateY(-50%);
+		// width: $width;
 	}
 
 	&.close, &.next{
@@ -155,7 +308,7 @@ h2, .h2{
 			left: auto;
 			right: 0
 		}
-	}
+	}*/
 }
 
 h3, .h3{
@@ -307,11 +460,6 @@ $bodytoHandsRatio: 0.125; // the relation between the portrait body and hands sv
 		left: 50%;
 		transform: translateX(-50%);
 	}
-
-	/*.ratio{
-		width: auto;
-		height: 100%;
-	}*/
 }
 
 #portraitBody{
@@ -454,21 +602,7 @@ header{
 #about{
 	background-image: linear-gradient(to bottom, rgba(white, 0.5), rgba(white, 0.8));
 
-	.design h2:before{
-		background-position: ($icon * 0) 0;
-	}
-
-	.development h2:before{
-		background-position: ($icon * 1) 0;
-	}
-
-	.experience h2:before{
-		background-position: ($icon * 2) 0;
-	}
-
-	.employment h2:before{
-		background-position: ($icon * 3) 0;
-	}
+	// *** icon fonts...
 }
 
 #about, #details{
@@ -566,32 +700,50 @@ header{
 
 #work{
 
-	.intro h2:before{
-		background-position: ($icon * 4) 0;
-	}
+	// *** icon fonts...
 
 	li{
-		$gap: 20px;
+		$gap: 1em;
+		height: 10em;
 		width: 100%;
 
 		&.thumbSquare{
-			@include iconSprite;
+			color: $blueDark;
 
-			&[data-project="project-0"]{ background-position: ($icon * 10) 0; }
-			&[data-project="project-1"]{ background-position: ($icon * 11) 0; }
-			&[data-project="project-2"]{ background-position: ($icon * 12) 0; }
-			&[data-project="project-3"]{ background-position: ($icon * 13) 0; }
-			&[data-project="project-4"]{ background-position: ($icon * 14) 0; }
-			&[data-project="project-5"]{ background-position: ($icon * 15) 0; }
-			&[data-project="project-6"]{ background-position: ($icon * 16) 0; }
-			&[data-project="project-7"]{ background-position: ($icon * 17) 0; }
-			&[data-project="project-8"]{ background-position: ($icon * 18) 0; }
-			&[data-project="project-9"]{ background-position: ($icon * 19) 0; }
-			&[data-project="project-10"]{ background-position: ($icon * 20) 0; }
-			&[data-project="project-11"]{ background-position: ($icon * 21) 0; }
+			.description, .icon{
+				left: 0;
+				position: absolute;
+				text-align: center;
+				top: 0;
+				width: 100%;
+			}
 
 			.description{
-				display: none;
+				height: 40%;
+				top: 60%;
+
+				span{
+					border-top: 1px solid black;
+					padding-top: $gap;
+				}
+			}
+
+			.icon{
+				height: 60%;
+				top: 0;
+
+				&:after{
+					@include iconFont;
+					bottom: 0;
+					content: "\e613";
+					font-size: 8em;
+					left: 0;
+					// top: 0;
+					width: 100%;
+					// margin: -0.5em 0 0 -0.5em;
+					// top: 50%;
+					// transform: translate(-50%, -50%);
+				}
 			}
 		}
 
@@ -609,6 +761,7 @@ header{
 		}
 
 		@include breakpoint(MICRO){
+			height: 100%;
 			width: 50%;
 
 			@include thumbReset;
@@ -673,103 +826,6 @@ header{
 				display: none;
 			}
 		}
-
-		&#thumbInformation{
-			$gap: 1.5em;
-			background-color: $blueLight;
-			display: none; // dormant state
-			position: absolute;
-			transform: scale(1.2); // dormant state
-			visibility: hidden; // dormant state - used instead of opacity = 0 as this works back to IE8 with TweenMax "autoAlpha"
-			z-index: 100;
-
-			.overflow{
-				height:100%;
-				left: 0;
-				overflow: hidden;
-				position: absolute;
-				top: 0;
-				width: 100%;      
-			}
-
-			.content{
-				$width: 7em;
-				bottom: 0;
-				color: white;
-				left: 0;
-				padding: $gap $gap 0 $gap;
-				position: absolute;
-			}
-
-			.shadow{
-				background-color: red;
-				border-radius: 50%;
-				box-shadow: 0 0 20px 0 rgba(black, 0.5);
-				height: $pad / 2;
-				left: 0;
-				position: absolute;
-				width: 100%;
-				z-index: 300;
-
-				&.top{ bottom: 100%; }
-				&.bottom{ top: 100%; }
-			}
-
-			.logo{
-				$width: 7em;
-				background-color: green;
-				// height: ???; // this is a varible relative to the size of the logo sprite
-				position: relative;
-				overflow: hidden; // hides the exess of the sprite in the pseudo element
-				width: $width;
-
-				&:before{
-					@include pseudo;
-					@include iconSprite;
-					background-color: red;
-					bottom: 0;
-					left: 0;
-					height: $width;
-					width: $width;
-				}
-			}
-
-			.description{
-				padding-top: $gap;
-			}
-
-			.view{
-				$width: 1.5em;
-				color: white;
-				padding: ($gap / 2) 0 ($gap / 2) ($width);
-				position: relative;
-
-				&:after{
-					@include pseudo;
-					@include iconSprite;
-					background-position: ($icon * 34) 0;
-					height: $width;
-					left: -0.25em;
-					top: 50%;
-					transform: translateY(-50%);
-					width: $width;
-				}
-			}
-
-			// set the icon sprite and the height of the .logo container...
-			&[data-project="project-0"] .logo{ height: 5em; &:before{ background-position: ($icon * 22) 0; } }
-			&[data-project="project-1"] .logo{ height: 3em; &:before{ background-position: ($icon * 23) 0; } }
-			&[data-project="project-2"] .logo{ height: 3em; &:before{ background-position: ($icon * 24) 0; } }
-			&[data-project="project-3"] .logo{ height: 3em; &:before{ background-position: ($icon * 25) 0; } }
-			&[data-project="project-4"] .logo{ height: 3em; &:before{ background-position: ($icon * 26) 0; } }
-			&[data-project="project-5"] .logo{ height: 3em; &:before{ background-position: ($icon * 27) 0; } }
-			&[data-project="project-6"] .logo{ height: 3em; &:before{ background-position: ($icon * 28) 0; } }
-			&[data-project="project-7"] .logo{ height: 3em; &:before{ background-position: ($icon * 29) 0; } }
-			&[data-project="project-8"] .logo{ height: 3em; &:before{ background-position: ($icon * 30) 0; } }
-			&[data-project="project-9"] .logo{ height: 3em; &:before{ background-position: ($icon * 31) 0; } }
-			&[data-project="project-10"] .logo{ height: 3em; &:before{ background-position: ($icon * 32) 0; } }
-			&[data-project="project-11"] .logo{ height: 3em; &:before{ background-position: ($icon * 33) 0; } }
-		}
 	}
 }
 
@@ -786,9 +842,7 @@ header{
 	background-image: linear-gradient(to top, rgba(white, 0.25), rgba(white, 0.8));
 	padding: $pad 0 0 0;
 
-	.intro h2:before{
-		background-position: ($icon * 5) 0;
-	}
+	// *** icon fonts...
 }
 
 .jobList{
@@ -1112,17 +1166,11 @@ header{
 		background-position: right center;
 	}	
 
-	h2{
+	.title{
 		color: white;
 	}
 
-	.contact h2:before{
-		background-position: ($icon * 6) 0;
-	}
-
-	.references h2:before{
-		background-position: ($icon * 7) 0;
-	}
+	// *** icon fonts...
 
 	address ul li{
 		$width: 5em;
@@ -1151,11 +1199,23 @@ header{
 				.icon{
 					// @include pseudo;
 					position: absolute;
-					@include iconSprite;
 					height: $width;
 					left: 0;
 					top: 0;
 					width: $width;
+
+					&.active, &.dormant{
+						
+						&:before{
+							@include iconFont;
+							color: white;
+							font-size: 5em;
+							height: 100%;
+							left: 0;
+							top: 0;
+							width: 100%;
+						}
+					}
 
 					&.active{
 						visibility: hidden;
@@ -1171,13 +1231,7 @@ header{
 				@include breakpoint(SMALL){ left: 0.5em }
 			}
 
-			.dormant{
-				background-position: ($icon * 8) 0;	
-			}
-
-			.active{
-				background-position: ($icon * 35) 0;	
-			}
+			// *** icon fonts...
 		}
 
 		&.email a{
@@ -1186,13 +1240,7 @@ header{
 				@include breakpoint(SMALL){ left: 1.75em }
 			}
 
-			.dormant{
-				background-position: ($icon * 9) 0;
-			}
-
-			.active{
-				background-position: ($icon * 36) 0;	
-			}
+			// *** icon fonts...
 		}
 	}
 }
@@ -1209,7 +1257,6 @@ header{
 #lightBox{
 	$width: $pad / 4;
 	$grad: lighten($blueLight, 20%);
-	// background-color: rgba(white, 0.8);
 	display: none;
 	height: 100%;
 	left: 0;
@@ -1246,30 +1293,39 @@ header{
 		.close, .previous, .next, .projectCurrent{
 			color: $blueDark;
 			position: absolute;
-			font-size: 1.5em;
 			top: 50%;
 			transform: translateY(-50%);
 
-			@include breakpoint(MEDIUM){ font-size: 1.7em; }
-			@include breakpoint(LARGE){ font-size: 2em; }
-
 			.text{
+				font-size: 1.5em;
 				visibility: hidden;
 
-				@include breakpoint(SMALL){  display: block; }
+				@include breakpoint(SMALL){  visibility: inherit; }
+				@include breakpoint(MEDIUM){ font-size: 1.7em; }
+				@include breakpoint(LARGE){ font-size: 2em; }
+			}
+
+			.icon:before{
+				font-size: 2.2em;
+
+				@include breakpoint(MEDIUM){ font-size: 2.4em; }
+				@include breakpoint(LARGE){ font-size: 2.75em; }
 			}
 		}
 
 		.projectCurrent{
+			font-size: 1.5em;
 			left: 0;
 			text-align: center;
 			width: 100%;
 			z-index: 0;
 
+			@include breakpoint(MEDIUM){ font-size: 1.7em; }
+			@include breakpoint(LARGE){ font-size: 2em; }
+
 			.dynamic{
 				display: inline-block;
 				position: relative;
-				// transform: translateY(50%);
 			}
 		}
 
@@ -1280,62 +1336,77 @@ header{
 		.close, .next{
 			right: $pad / 4;
 
-			.text{ margin-right: $pad / 3; }
-			.icon-container{ right: 0; }
+			.text{ margin-right: $pad / 2.75; }
+			.icon-container{
+				right: 0;
+
+				.icon:before{
+					right: 0;
+				}
+			}
 		}
 
 		.previous{
 			left: $pad / 4;
 
 			.text{ margin-left: $pad / 3; }
-			.icon-container{ left: 0; }
+			.icon-container{
+				left: 0;
+
+				.icon:before{
+					left: 0;
+				}
+			}
 		}
 
 		a{
 			text-decoration: none;
 		}
 
-		.close{
-			
-			.dormant{ background-position: ($icon * 41) 0; }
-			.active{ background-position: ($icon * 42) 0; }
-		}
-
-		.previous{
-			
-			.dormant{ background-position: ($icon * 37) 0; }
-			.active{ background-position: ($icon * 38) 0; }
-		}
-
-		.next{
-			
-			.dormant{ background-position: ($icon * 39) 0; }
-			.active{ background-position: ($icon * 40) 0; }
-		}
-
 		.icon-container{
-			height: $width;
+			height: 100%;
 			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
-			width: $width;
-
+			width: 3em;
 
 			.icon{
-				@include iconSprite;
-				height: $width;
+				height: 100%;
 				position: absolute;
-				width: $width;
+				width: 100%;
 
 				&.active{ visibility: hidden; }
+
+				&:before{
+					@include iconFont;
+					text-align: center;
+					top: 0;
+				}
 			}
+		}
+
+		.close .icon{
+
+			&.dormant:before{ content: "\e60d"; }
+			&.active:before{ content: "\e60e"; }
+		}
+
+		.previous .icon{
+
+			&.dormant:before{ content: "\e609"; }
+			&.active:before{ content: "\e60a"; }	
+		}
+
+		.next .icon{
+
+			&.dormant:before{ content: "\e60b"; }
+			&.active:before{ content: "\e60c"; }
 		}
 	}
 
-	.shadowContainer{
+	.content{
 		background-color: white;
 		bottom: $pad / 1.5;
-		// height: 100%;
 		position: absolute;
 		top: $pad / 1.5;
 		width: 100%;
@@ -1357,13 +1428,10 @@ header{
 				size: contain;
 			}
 			bottom: $pad / 4;
-			// height: 100%;
 			left: $pad / 4;
-			// padding: $pad / 4;
 			position: absolute;
 			right: $pad / 4;
 			top: $pad / 4;
-			// width: 100%;
 		}
 
 		&[data-projectName="neilsenSurvey"]{
@@ -1476,6 +1544,12 @@ header{
 		background-image: url(../img/white-50percent-tile.png);
 	}
 
+	#lightBox{
+
+		.top-ui, .bottom-ui{
+			background-image: url(../img/white-80percent-tile.png);
+		}
+	}
 }
 
 .no-mediaquery{ // reset everything to its largest STATIC state
@@ -1545,6 +1619,12 @@ header{
 
 	#work li{
 		width: 25%;
+
+		.icon:after{
+			left: 50%;
+			margin: -0.5em 0 0 -0.5em;
+			top: 50%
+		}
 	}
 
 	#details address ul li{
@@ -1559,6 +1639,48 @@ header{
 			left: 1.75em
 		}
 	}
+
+	#lightBox{
+
+		.top-ui, .bottom-ui{
+			height: $pad;
+
+			.center{
+				height: 100%;
+				position: relative;
+			}
+
+			.close, .previous, .next, .projectCurrent{
+				top: 25px;
+
+				.text{
+					font-size: 2em;
+					visibility: inherit;
+				}
+
+				.icon:before{
+					font-size: 2.75em;
+					top: -20px;
+				}
+			}
+
+			.projectCurrent{
+				font-size: 2em;
+			}
+		}
+
+		.content{
+			bottom: $pad;
+			top: $pad;
+
+			li{
+				bottom: 0;
+				left: 0;
+				right: 0;
+				top: 0;
+			}
+		}
+	}
 }
 
 .no-csstransforms{
@@ -1567,17 +1689,23 @@ header{
 
 .no-svg{
 
-	/*#portraitBody{
-		background: {
-			// color: red;
-			image: url(../img/me-body.png);
-			position: center top;
-			repeat: no-repeat;
-			size: contain;
-		}
+	/* #portraitBody, #portraitHands{
+
+		// this is taken care of via javascript / modernizer
+	
 	}*/
+
 }
 
+.lt-ie9{
+
+	// this fixes the icon font rendering issue in IE8 where sometime the font will not load
+	// the fix is to add an extra class to any icon font in the DOM that overides the "content" CSS stribute
+	// then remove this class on document.ready via javascript to update the icon font reference correctly
+	.ie8:before{
+		content: "" !important;
+	}
+}
 
 
 
