@@ -1,5 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:100,300,700);
 
+@import "normalize";
+@import "ht5bp";
+
 // @font-face {
 //   font-family: "Roboto";
 //   src: url('../fnt/roboto-light-webfont.eot'); /* IE9 Compat Modes */
@@ -29,7 +32,9 @@ $blue: #538ed9;
 $blueMedium: #325a8d;
 $blueDark: #323e50;
 
-$divider : lighten($blueLight, 20%);
+$lightBoxBg: rgba(black, 0.8);
+
+$divider : lighten($blueLight, 24%);
 
 $shadowRegular: rgba(black, 0.25);
 $shadowLight: rgba(black, 0.10);
@@ -42,19 +47,27 @@ $icon: 2%;
 @mixin breakpoint($point){
 
 	@if $point == MICRO{
-		@media only screen and (min-width: 23em){ @content;} // 370px
+		@media only screen and (min-width: 23em){ @content; } // 370px
 	}
 
-	@if $point == SMALL{
-		@media only screen and (min-width: 37.5em){ @content;} // 600px
+	/*else if  $point == TINY{
+		@media only screen and (min-width: 30em){ @content; } // 480px
+	}*/
+
+	@else if $point == SMALL{
+		@media only screen and (min-width: 37.5em){ @content; } // 600px
 	}
 
 	@else if $point == MEDIUM{
-		@media only screen and (min-width: 56.25em){ @content;} // 900px
+		@media only screen and (min-width: 56.25em){ @content; } // 900px
 	}
 
+	/*@else if $point == BIG{
+		@media only screen and (min-width: 69em){ @content; } // 1104px
+	}*/
+
 	@else if $point == LARGE{
-		@media only screen and (min-width: 80em){@content;} // 1280px (more than 1200px so that there is a slight amount of padding when the .center width becomes static at 1200px)
+		@media only screen and (min-width: 80em){ @content; } // 1280px (more than 1200px so that there is a slight amount of padding when the .center width becomes static at 1200px)
 	}
 
 }
@@ -88,7 +101,6 @@ $icon: 2%;
         @content;
     }
 }
-
 
 
 /*
@@ -280,35 +292,16 @@ h1, .h1{
 h2, .h2{
 	$width: $pad / 4;
 	font: {
-		size: 2em;
+		size: 1.5em;
 		weight: 100;
 	}
 	margin: 0;
-	// padding: 0 0 0 ($width + 0.5em);
 	padding: 0;
 	position: relative;
 
-	/*&:before{
-		@include pseudo;
-		@include iconFont;
-		// background-color: rgba(gray, 0.2);
-		font-size: 1.5em;
-		// height: $width;
-		// left: 0;
-		// padding-top: 0.25em;
-		// top: 50%;
-		// transform: translateY(-50%);
-		// width: $width;
+	@include breakpoint(SMALL){
+		font-size: 2em;
 	}
-
-	&.close, &.next{
-		padding: 0 ($width + 0.5em) 0 0;
-
-		&:before{
-			left: auto;
-			right: 0
-		}
-	}*/
 }
 
 h3, .h3{
@@ -634,197 +627,191 @@ header{
 
 #work, #myHistory{
 	padding: $pad 0 0 0;
-
-	.intro{
-		padding-bottom: $pad / 2;
-	}
-}
-
-.spacer{
-	height: auto;
-	width: 100%;
-}
-
-.thumbList{
-	list-style-type: none;
-	// overflow-x: hidden; // stops the 2d scale adding more than 100% width to the broswer during animation
-	padding: 0;
-	position: relative;
-
-	.thumbSquare{
-		float: left;
-	}
-}
-
-.thumbSquare{
-	cursor: pointer;
-	position: relative;
-
-	&:before{
-		@include pseudo;
-		background: $divider;
-		height: 100%;
-		right: 0;
-		top: 50%;
-		width: 2px;
-		z-index: 1;
-	}
-
-	&:after{
-		@include pseudo;
-		background: $divider;
-		bottom: 0;
-		height: 2px;
-		left: 50%;
-		width: 100%;
-		z-index: 1;
-	}
-}
-
-@mixin thumbReset(){
-
-	&:nth-child(1n+1):before{ // reset all thumbnail vertical lines to visible
-		display: block;
-	}
-
-	&:nth-child(1n+1):after{ // reset all thumbnail horizontal lines to visible
-		display: block;
-		left: 50%; // set the position to emulate every media query other than the smallest mobile layout
-		width: 100%; // set the width to emulate every media query other than the smallest mobile layout
-	}
-
-	&:nth-child(1n+1){ // reset all thumbnails to visible
-		display: block;
-	}
 }
 
 #work{
 
-	// *** icon fonts...
+	@mixin breakpoint($point){
 
-	li{
-		$gap: 1em;
-		height: 10em;
-		width: 100%;
+		@if $point == twoSMALL{
+			@media only screen and (min-width: 40em){ @content; }
+		}
 
-		&.thumbSquare{
-			color: $blueDark;
+		@else if $point == twoBIG{
+			@media only screen and (min-width: 50em){ @content; }
+		}
 
-			.description, .icon{
-				left: 0;
-				position: absolute;
-				text-align: center;
-				top: 0;
+		@else if $point == threeSMALL{
+			@media only screen and (min-width: 70em){ @content; }
+		}
+
+		@else if $point == threeBIG{
+			@media only screen and (min-width: 80em){ @content; }
+		}
+
+	}
+
+	.thumbList{
+		list-style-type: none;
+		padding-bottom: $pad / 2;
+		@include breakpoint(twoBIG){ padding-bottom: $pad / 3; }
+		@include breakpoint(threeSMALL){ padding-bottom: $pad / 4; }
+		@include breakpoint(threeBIG){ padding-bottom: $pad / 5; }
+
+		.thumbSquare{
+			cursor: pointer;
+			float: left;
+			position: relative;
+			width: 100%;
+
+			@include breakpoint(twoSMALL){ width: 50%; }
+			@include breakpoint(threeSMALL){ width: 33.3%; }
+
+			a{
+				$width: 7em;
+				color: $blueDark;
+				display: block;
+				height: 10em;
+				text-decoration: none;
 				width: 100%;
-			}
 
-			.description{
-				height: 40%;
-				top: 60%;
+				.icon{
+					display: inline-block;
+					float: left;
+					height: 100%;
+					position: relative;
+					width: $width + 2em;
 
-				span{
-					border-top: 1px solid black;
-					padding-top: $gap;
+					&:before{
+						@include iconFont;
+						// content: "\e615"; // set up via the icon values below...
+						font-size: $width;
+						left: 0;
+						top: 50%;
+						transform: translateY(-50%);
+					}
+				}
+
+				.description{
+					color: inherit;
+					display: block;
+					position: relative;
+					top: 50%;
+					transform: translateY(-50%);
+
+					&:before{
+						@include pseudo;
+						background-image: linear-gradient(to top, rgba($blueDark, 0), $blueDark, rgba($blueDark, 0));
+						bottom: -0.5em;
+						left: 5.3em;
+						top: - 0.5em;
+						width: 1px;
+					}
+				}
+
+				@include breakpoint(twoSMALL){
+
+					.description{
+						font: {
+							size: 1em;
+							weight: 300;
+						}
+
+						&:before{ left: $width + 1em; }
+					}
+				}
+
+				@include breakpoint(twoBIG){
+					height: 13em;
+					
+					.description{
+						font: {
+							size: 1.5em;
+							weight: 100;
+						}
+
+						&:before{ left: 5.3em; }
+					}
+				}
+
+				@include breakpoint(threeSMALL){
+					height: 15em;
+
+					.description{
+						font: {
+							size: 1em;
+							weight: 300;
+						}
+
+						&:before{ left: $width + 1em; }
+					}
+				}
+
+				@include breakpoint(threeBIG){
+					height: 17em;
+					.description{
+						font: {
+							size: 1.5em;
+							weight: 100;
+						}
+
+						&:before{ left: 5.3em; }
+					}
 				}
 			}
 
-			.icon{
-				height: 60%;
-				top: 0;
+			@include breakpoint(twoSMALL){
 
-				&:after{
-					@include iconFont;
-					bottom: 0;
-					content: "\e613";
-					font-size: 8em;
-					left: 0;
-					// top: 0;
-					width: 100%;
-					// margin: -0.5em 0 0 -0.5em;
-					// top: 50%;
-					// transform: translate(-50%, -50%);
+				$gap: 2em;
+
+				&:nth-child(2n + 1){
+					padding: 0 $gap 0 0;
+				}
+
+				&:nth-child(2n + 2){
+					padding-left: 0 0 0 $gap;
 				}
 			}
-		}
 
-		&:before{ // get rid of the vertical lines on each right hand side at the end of each row
-			display: none;
-		}
+			// @media only screen and (min-width: 61em){ // 976px
+			@include breakpoint(threeSMALL){
 
-		&:after{ // get rid of the horizontal lines on the last row
-			left: 25%;
-			width: 50%;
-		}
+				$gap: 2.5em;
 
-		&:nth-child(12):after{ // get rid of the last horizontal line at the end of each row
-			display: none;
-		}
+				&:nth-child(3n + 1){
+					padding-right: 0 $gap 0 0;
+				}
 
-		@include breakpoint(MICRO){
-			height: 100%;
-			width: 50%;
+				&:nth-child(3n + 2){
+					padding: 0 ($gap / 2);
+				}
 
-			@include thumbReset;
-
-			&:nth-child(2n+2):before{ // get rid of the vertical lines on each right hand side at the end of each row
-				display: none;
+				&:nth-child(3n + 3){
+					padding-left: 0 0 0 $gap;
+				}
 			}
 
-			&:nth-child(1n+11):before{ // get rid of the vertical lines on the last row
-				display: none;
+			&[data-state="enter"] .description:before{
+				background-image: linear-gradient(to top, rgba($blueLight, 0), $blueLight, rgba($blueLight, 0));
 			}
 
-			&:nth-child(1n+11):after{ // get rid of the horizontal lines on the last row
-				display: none;
-			}
+			&[data-project="travelHub"] .icon:before{ content: "\e615"; }
 
-			&:nth-child(2n+2):after{ // get rid of the last horizontal line at the end of each row
-				display: none;
-			}
-		}
+			&[data-project="rateCard"] .icon:before{ content: "\e613"; }
 
-		@include breakpoint(SMALL){
-			width: 33%;
+			&[data-project="nielsen"] .icon:before{ content: "\e616"; }
 
-			@include thumbReset;
+			&[data-project="waterboy"] .icon:before{ content: "\e619"; }
 
-			&:nth-child(3n+3):before{ // get rid of the vertical lines on each right hand side at the end of each row
-				display: none;
-			}
+			&[data-project="dealsSection"] .icon:before{ content: "\e615"; }
 
-			&:nth-child(1n+9):before{ // get rid of the vertical lines on the last row
-				display: none;
-			}
+			&[data-project="silverFernFarms"] .icon:before{ content: "\e617"; }
 
-			&:nth-child(1n+9):after{ // get rid of the horizontal lines on the last row
-				display: none;
-			}
+			&[data-project="stuffRedesign"] .icon:before{ content: "\e614"; }
 
-			&:nth-child(3n+3):after{ // get rid of the last horizontal line at the end of each row
-				display: none;
-			}
-		}
+			&[data-project="travelInfographic"] .icon:before{ content: "\e615"; }
 
-		@include breakpoint(MEDIUM){
-			width: 25%;
-
-			@include thumbReset;
-
-			&:nth-child(4n+4):before{ // get rid of the vertical lines on each right hand side at the end of each row
-				display: none;
-			}
-
-			&:nth-child(1n+9):before{ // get rid of the vertical lines on the last row
-				display: none;
-			}
-
-			&:nth-child(1n+9):after{ // get rid of the horizontal lines on the last row
-				display: none;
-			}
-
-			&:nth-child(4n+4):after{ // get rid of the last horizontal line at the end of each row
-				display: none;
-			}
+			&[data-project="smithCity"] .icon:before{ content: "\e618"; }
 		}
 	}
 }
@@ -1173,13 +1160,14 @@ header{
 	// *** icon fonts...
 
 	address ul li{
-		$width: 5em;
+		$width: 4em;
 		color: $blueDark;
 		display: block;
 		float: left;
 		padding-top: $width + 1.5em;
 		position: relative;
 		width: 100%;
+		z-index: 100;
 
 		//change the icons to be left aligned when stacked on top of one another
 		@include breakpoint(SMALL){
@@ -1194,10 +1182,9 @@ header{
 			.icon-container{
 				position: absolute;
 				height: $width;
-				top: 1.5em;
+				top: 0.75em;
 
 				.icon{
-					// @include pseudo;
 					position: absolute;
 					height: $width;
 					left: 0;
@@ -1257,22 +1244,37 @@ header{
 #lightBox{
 	$width: $pad / 4;
 	$grad: lighten($blueLight, 20%);
-	display: none;
-	height: 100%;
+	background-color: $lightBoxBg;
+	bottom: $pad / 1.5;
+	// display: none;
+	// height: 100%;
 	left: 0;
 	position: fixed;
-	top: 0;
+	top: $pad / 1.5;
+	visibility: hidden;
 	width: 100%;
 	z-index: 9999;
 
+	@include breakpoint(MEDIUM){
+		bottom: $pad / 1.25;
+		top: $pad / 1.25;
+	}
+
+	@include breakpoint(LARGE){
+		bottom: $pad;
+		top: $pad;
+	}
+
 	.top-ui{
-		background-image: linear-gradient(to top, rgba($grad, 1), rgba($grad, 0.6));
-		top: 0;
+		background-color: $lightBoxBg;
+		// background-image: linear-gradient(to top, rgba($grad, 1), rgba($grad, 0.6));
+		bottom: 100%
 	}
 
 	.bottom-ui{
-		background-image: linear-gradient(to bottom, rgba($grad, 1), rgba($grad, 0.6));
-		bottom: 0;
+		background-color: $lightBoxBg;
+		// background-image: linear-gradient(to bottom, rgba($grad, 1), rgba($grad, 0.6));
+		top: 100%;
 	}
 
 	.top-ui, .bottom-ui{
@@ -1291,18 +1293,29 @@ header{
 		}
 
 		.close, .previous, .next, .projectCurrent{
-			color: $blueDark;
+			color: white;
 			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
 
 			.text{
-				font-size: 1.5em;
+				font: {
+					size: 1.5em;
+					weight: 100;
+				}
+
+				@include breakpoint(MEDIUM){ font-size: 1.7em; }
+				@include breakpoint(LARGE){ font-size: 2em; }
+			}
+		}
+
+		.close, .previous, .next{
+
+			.text{
 				visibility: hidden;
 
 				@include breakpoint(SMALL){  visibility: inherit; }
-				@include breakpoint(MEDIUM){ font-size: 1.7em; }
-				@include breakpoint(LARGE){ font-size: 2em; }
+
 			}
 
 			.icon:before{
@@ -1314,14 +1327,10 @@ header{
 		}
 
 		.projectCurrent{
-			font-size: 1.5em;
 			left: 0;
 			text-align: center;
 			width: 100%;
 			z-index: 0;
-
-			@include breakpoint(MEDIUM){ font-size: 1.7em; }
-			@include breakpoint(LARGE){ font-size: 2em; }
 
 			.dynamic{
 				display: inline-block;
@@ -1330,7 +1339,7 @@ header{
 		}
 
 		.previous, .next{
-			z-index: 1; // layer ontop of the .projectCurrent content
+			z-index: 1; // layer ontop of the .projectCurrent element
 		}
 
 		.close, .next{
@@ -1405,40 +1414,125 @@ header{
 	}
 
 	.content{
-		background-color: white;
-		bottom: $pad / 1.5;
-		position: absolute;
-		top: $pad / 1.5;
-		width: 100%;
+		$gap: 0.35em;
+		background: {
+			// color: gold;
+			size: contain;
+			position: center center;
+			repeat: no-repeat;
+		};
+		height: 100%;
+		position: relative;
+		width: 90%;
 
-		@include breakpoint(MEDIUM){
-			bottom: $pad / 1.25;
-			top: $pad / 1.25;
-		}
+		// get rid of the next and previous buttons if there is only one image in the lighbox
+		&[data-projectLength="1"] + .bottom-ui{
 
-		@include breakpoint(LARGE){
-			bottom: $pad;
-			top: $pad;
-		}
-
-		li{
-			background: {
-				position: center center;
-				repeat: no-repeat;
-				size: contain;
+			& .previous, & .next{
+				display: none;
 			}
-			bottom: $pad / 4;
-			left: $pad / 4;
-			position: absolute;
-			right: $pad / 4;
-			top: $pad / 4;
 		}
 
-		&[data-projectName="neilsenSurvey"]{
+		&[data-projectCurrent="travelHub"]{
 
-			li[data-projectCurrent="0"]{
-				background-image: url(../img/neilsen-frame1-micro.jpg);
-				@include breakpoint(LARGE){ background-image: url(../img/neilsen-frame1-large.jpg); }
+			&[data-projectImage="1"]{
+				background-image: url(../img/travel-hub/1-portrait.jpg);
+				@include breakpoint(SMALL){ background-image: url(../img/travel-hub/1-landscape.jpg); }
+			}
+
+			&[data-projectImage="2"]{
+				background-image: url(../img/travel-hub/2-portrait.png);
+				@include breakpoint(SMALL){ background-image: url(../img/travel-hub/2-landscape.png); }
+			}
+
+			&[data-projectImage="3"]{
+				background-image: url(../img/travel-hub/3-portrait.jpg);
+				@include breakpoint(SMALL){ background-image: url(../img/travel-hub/3-landscape.jpg); }
+			}
+		}
+
+		&[data-projectCurrent="rateCard"]{
+
+			&[data-projectImage="1"]{
+				background-image: url(../img/rate-card/1-portrait.png);
+				@include breakpoint(SMALL){ background-image: url(../img/rate-card/1-landscape.png); }
+			}
+
+			&[data-projectImage="2"]{
+				background-image: url(../img/rate-card/2-portrait.jpg);
+				@include breakpoint(SMALL){ background-image: url(../img/rate-card/2-landscape.jpg); }
+			}
+		}
+
+		&[data-projectCurrent="nielsen"]{
+
+			&[data-projectImage="1"]{
+				background-image: url(../img/nielsen/1-portrait.png);
+				@include breakpoint(SMALL){ background-image: url(../img/nielsen/1-landscape.png); }
+			}
+
+			&[data-projectImage="2"]{
+				background-image: url(../img/nielsen/2-portrait.png);
+				@include breakpoint(SMALL){ background-image: url(../img/nielsen/2-landscape.png); }
+			}
+
+			&[data-projectImage="3"]{
+				background-image: url(../img/nielsen/3-portrait.jpg);
+				@include breakpoint(SMALL){ background-image: url(../img/nielsen/3-landscape.jpg); }
+			}
+		}
+
+		&[data-projectCurrent="dealsSection"]{
+
+			&[data-projectImage="1"]{
+				background-image: url(../img/deals-section/1-portrait.png);
+				@include breakpoint(SMALL){ background-image: url(../img/deals-section/1-landscape.png); }
+			}
+
+			&[data-projectImage="2"]{
+				background-image: url(../img/deals-section/2-portrait.jpg);
+				@include breakpoint(SMALL){ background-image: url(../img/deals-section/2-landscape.jpg); }
+			}
+
+			&[data-projectImage="3"]{
+				background-image: url(../img/deals-section/3-portrait.jpg);
+				@include breakpoint(SMALL){ background-image: url(../img/deals-section/3-landscape.jpg); }
+			}
+		}
+
+		&[data-projectCurrent="silverFernFarms"]{
+
+			&[data-projectImage="1"]{
+				background-image: url(../img/silver-fern-farms/1-portrait.png);
+				@include breakpoint(SMALL){ background-image: url(../img/silver-fern-farms/1-landscape.png); }
+			}
+
+			&[data-projectImage="2"]{
+				background-image: url(../img/silver-fern-farms/2-portrait.jpg);
+				@include breakpoint(SMALL){ background-image: url(../img/silver-fern-farms/2-landscape.jpg); }
+			}
+
+			&[data-projectImage="3"]{
+				background-image: url(../img/silver-fern-farms/3-portrait.png);
+				@include breakpoint(SMALL){ background-image: url(../img/silver-fern-farms/3-landscape.png); }
+			}
+		}
+
+		&[data-projectCurrent="travelInfographic"]{
+
+			&[data-projectImage="1"]{
+				background-image: url(../img/travel-infographic/1-portrait.png);
+				@include breakpoint(SMALL){ background-image: url(../img/travel-infographic/1-landscape.png); }
+			}
+
+			&[data-projectImage="2"]{
+				background-image: url(../img/travel-infographic/2-portrait.jpg);
+				@include breakpoint(SMALL){ background-image: url(../img/travel-infographic/2-landscape.jpg); }
+			}
+
+			&[data-projectImage="3"]{
+				background-image: url(../img/travel-infographic/3-portrait.jpg);
+				@include breakpoint(SMALL){ background-image: url(../img/travel-infographic/3-landscape.jpg); }
 			}
 		}
 	}
@@ -1452,9 +1546,18 @@ header{
 
 */
 
-.no-js{
+// --- --- ---
 
+.requireJavascript{
+	color: $blueDark;
+	display: none;
 }
+
+.no-js{
+	.requireJavascript{ display: block; }
+}
+
+// --- --- ---
 
 .no-borderradius{
 
@@ -1512,6 +1615,10 @@ header{
 		background-color: rgba(white, 0.7);
 	}
 
+	#work .description:before{
+			background-color: $blueDark;
+	}
+
 	.jobList .jobPosition{
 
 		&.bma, &.digitalSpecialist{
@@ -1545,9 +1652,10 @@ header{
 	}
 
 	#lightBox{
+		background-image: url(../img/black-80percent-tile.png);
 
 		.top-ui, .bottom-ui{
-			background-image: url(../img/white-80percent-tile.png);
+			background-image: url(../img/black-80percent-tile.png);
 		}
 	}
 }
@@ -1617,13 +1725,52 @@ header{
 		}
 	}
 
-	#work li{
-		width: 25%;
+	#work{
 
-		.icon:after{
-			left: 50%;
-			margin: -0.5em 0 0 -0.5em;
-			top: 50%
+		.thumbList{
+			padding-bottom: $pad / 5;
+
+			.thumbSquare{
+				padding-right: 2em;
+				width: 33.3%;
+
+				a{
+					height: 17em;
+
+					.icon{
+						height: 17em;
+
+						&:before{
+							top: 35%; // change below...
+							transform: translateY(0);
+						}
+					}
+
+					.description{
+						font: {
+							size: 1.5em;
+							weight: 100;
+						}
+						// top: 0;
+						transform: translateY(0);
+
+						&:before{ left: 5.3em; }
+					}
+				}
+
+				&[data-project="stuffRedesign"],
+				&[data-project="travelInfographic"],
+				&[data-project="smithCity"]
+				{
+					a .description{
+						top: 45%;
+					}
+				}
+
+				&[data-project="silverFernFarms"] a .description{
+					top: 35%;
+				}
+			}
 		}
 	}
 
@@ -1652,6 +1799,7 @@ header{
 
 			.close, .previous, .next, .projectCurrent{
 				top: 25px;
+				transform: translateY(0);
 
 				.text{
 					font-size: 2em;
@@ -1665,19 +1813,46 @@ header{
 			}
 
 			.projectCurrent{
-				font-size: 2em;
+				font-size: 1em;
 			}
 		}
 
 		.content{
-			bottom: $pad;
-			top: $pad;
+			min-height: 800px;
+			width: 100%;
 
-			li{
-				bottom: 0;
-				left: 0;
-				right: 0;
-				top: 0;
+			&[data-projectCurrent="travelHub"]{
+				&[data-projectImage="1"]{ background-image: url(../img/travel-hub/1-landscape.png); }
+				&[data-projectImage="2"]{ background-image: url(../img/travel-hub/2-landscape.jpg); }
+			}
+
+			&[data-projectCurrent="rateCard"]{
+				&[data-projectImage="1"]{ background-image: url(../img/rate-card/1-landscape.png); }
+				&[data-projectImage="2"]{ background-image: url(../img/rate-card/2-landscape.jpg); }
+			}
+
+			&[data-projectCurrent="nielsen"]{
+				&[data-projectImage="1"]{ background-image: url(../img/nielsen/1-landscape.png); }
+				&[data-projectImage="2"]{ background-image: url(../img/nielsen/2-landscape.png); }
+				&[data-projectImage="3"]{ background-image: url(../img/nielsen/3-landscape.jpg); }
+			}
+
+			&[data-projectCurrent="dealsSection"]{
+				&[data-projectImage="1"]{ background-image: url(../img/deals-section/1-landscape.png); }
+				&[data-projectImage="2"]{ background-image: url(../img/deals-section/2-landscape.jpg); }
+				&[data-projectImage="3"]{ background-image: url(../img/deals-section/3-landscape.jpg); }
+			}
+
+			&[data-projectCurrent="silverFernFarms"]{
+				&[data-projectImage="1"]{ background-image: url(../img/silver-fern-farms/1-landscape.png); }
+				&[data-projectImage="2"]{ background-image: url(../img/silver-fern-farms/2-landscape.jpg); }
+				&[data-projectImage="3"]{ background-image: url(../img/silver-fern-farms/3-landscape.png); }
+			}
+
+			&[data-projectCurrent="travelInfographic"]{
+				&[data-projectImage="1"]{ background-image: url(../img/travel-infographic/1-landscape.png); }
+				&[data-projectImage="2"]{ background-image: url(../img/travel-infographic/2-landscape.jpg); }
+				&[data-projectImage="3"]{ background-image: url(../img/travel-infographic/3-landscape.jpg); }
 			}
 		}
 	}
@@ -1699,17 +1874,70 @@ header{
 
 .lt-ie9{
 
+	#lightBox{
+		
+		.icon-container{ display: none; }
+		.close, .next{right: 0; }
+		.previous{ left: 0; }
+	}
+
+	.extendedBg:before{ display: none; }
+	.extendedBg:after{ display: none; }
+
 	// this fixes the icon font rendering issue in IE8 where sometime the font will not load
 	// the fix is to add an extra class to any icon font in the DOM that overides the "content" CSS stribute
 	// then remove this class on document.ready via javascript to update the icon font reference correctly
-	.ie8:before{
-		content: "" !important;
-	}
+	.ie8:before{ content: "" !important; }
 }
 
+.upgradeBrowser{
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 500;
 
+	.whiteBg{ background-image: url(../img/white-80percent-tile.png); }
+	.intro{ padding: $pad / 2; }
+	.cta{ color: $blueDark; }
+}
 
+/*
+            _       _   
+ _ __  _ _ (_) _ _ | |_ 
+| '_ \| '_|| || ' \|  _|
+| .__/|_|  |_||_||_|\__|
+|_|                     
 
+*/
 
+@media print {
+
+	#portraitBody, #portraitHands{ display: none; }
+
+	header{
+		height: auto;
+
+		.hello{
+			position: relative;
+			width: auto;
+		}
+	}
+
+	.shadowTop, .shadowBottom{ display: none; }
+
+	#work .description:before{
+		background-color: #000;
+	}
+
+	#myHistory{
+		
+		.jobPosition{
+
+			&:after{ border: 1px solid #000; }
+			&:before{ background-color: #000; }
+		}
+	}
+}
 
 

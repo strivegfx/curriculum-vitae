@@ -9,13 +9,13 @@ $(document).ready(function(){
 
 		init: function(){
 
-			$m.s.init();
+			if($('html').hasClass('lt-ie9')){ $m.ie8.init(); }
+
 			$m.features.init();
-			// $m.work.init();
+			$m.work.init();
 			$m.details.init();
 			$m.fastClick();
-
-			if($('html').hasClass('lt-ie9')){ $m.ie8.init(); }
+			$m.lightBox.init();
 
 		}, // end of init
 
@@ -26,26 +26,20 @@ $(document).ready(function(){
 			dom: {}, // store references to DOM element
 
 			col: {
-				'blueDark': '#323e50'
+				'white': '255, 255, 255',
+				'blueLight': '120, 204, 254',
+				'blue': '#538ed9',
+				'blueMedium': '#325a8d',
+				'blueDark': '50, 62, 80',
+				'divider': '242, 250, 255',
+				'shadow': '220, 220, 220'
 			},
 
-			work: false, // boolean check as to if the work ul is being interacted with... dictates how the rollover animations look
-
-			init: function(){
-
-
-
-			} // end of init
+			ltie9: false
 
 		}, // end of settings
 
 		g: {
-
-			show: function($this, $state){
-
-				TweenMax.set($this, {'display': $state});
-
-			} // end of show
 
 		}, // end of general
 
@@ -54,6 +48,14 @@ $(document).ready(function(){
 			FastClick.attach(document.body);
 
 		}, // end of fastClick
+
+		/*
+          __             _                       
+         / _| ___  __ _ | |_  _  _  _ _  ___  ___
+        |  _|/ -_)/ _` ||  _|| || || '_|/ -_)(_-<
+        |_|  \___|\__,_| \__| \_,_||_|  \___|/__/
+
+		*/
 
 		features: {
 
@@ -88,6 +90,14 @@ $(document).ready(function(){
 
 		}, // end of features
 
+		/*
+                           _   
+        __ __ __ ___  _ _ | |__
+        \ V  V // _ \| '_|| / /
+         \_/\_/ \___/|_|  |_\_\
+
+		*/
+
 		work: {
 
 			init: function(){
@@ -99,20 +109,7 @@ $(document).ready(function(){
 
 			d: function(){
 
-				var $work = $('#work'),
-					$thumbInfo = $work.find('#thumbInformation'),
-					$url = $thumbInfo.find('a'),
-					$overflow = $url.find('> .overflow'),
-					$cont = $overflow.find('> .content');
-
-				// store in global settings...
-				$m.s.dom.work = $work;
-				$m.s.dom.thumbInfo = $thumbInfo;
-				$m.s.dom.url = $url;
-				$m.s.dom.cont = $cont;
-				$m.s.dom.shadowTop = $overflow.find('> .shadow.top');
-				$m.s.dom.shadowBot = $overflow.find('> .shadow.bottom');
-				$m.s.dom.desc = $cont.find('> .description');
+				$m.s.dom.work = $('#work');
 
 			}, // end of DOM
 
@@ -120,204 +117,334 @@ $(document).ready(function(){
 
 				console.log('adding WORK listeners...');
 
-				var $work = $m.s.dom.work;
+				var $work = $m.s.dom.work,
+					$ul = $work.find('> .shadowContainer').find('> .thumbList');
 
-				$work.on('mouseenter', '.thumbList', function(){
+				if(!$m.s.ltie9){
 
-					$m.work.a.listEnter();
+					$ul.on('mouseenter', '.thumbSquare', function(){
 
-				}).on('mouseleave', '.thumbList', function(){
+						$m.work.a.thumbEnter($(this));
 
-					$m.work.a.listLeave();
+					}).on('mouseleave', '.thumbSquare', function(){
 
-				}).on('mouseenter', '.thumbSquare', function(){
+						$m.work.a.thumbLeave($(this));
 
-					$m.work.a.infoEnter($(this));
+					});
+
+				} // end of statement
+
+				$ul.on('click', '.thumbSquare', function($e){
+
+					$e.preventDefault();
+
+					$m.lightBox.a.state.setDetails($(this));
+					$m.lightBox.a.state.fadeIn();
 
 				});
-
 
 			}, // end of listeners
 
 			a: {
 
-				infoEnter: function($this){
+				thumbEnter: function($this){
 
-					var $ani = $m.s.ani,
-						$pos = $this.position(),
-						$info = $m.s.dom.thumbInfo,
-						$content = $m.s.dom.cont,
-						$project = $this.attr('data-project');
+					// console.log('thumbEnter');
 
-					console.log('project = ' + $project);
+					var $ani = $m.s.ani;
 
-					$m.work.a.desc($this, $info, $project);
+					$this.attr({'data-state': 'enter'});
 
-					if($m.s.work){
-
-						TweenMax.set($info, {
-							'display': 'block'
-						});
-
-						TweenMax.to($info, $ani, {
-							'left': $pos.left,
-							'autoAlpha': '1',
-							'top': $pos.top
-						});
-
-						$m.work.a.jump.up($this, $info, $project, $ani);
-
-					}else{
-
-						TweenMax.set($info, {
-							'display': 'block',
-							'left': $pos.left,
-							'top': $pos.top
-						});
-
-						TweenMax.to($info, $ani, {
-							'autoAlpha': '1',
-							'transform': 'scale(1)'
-						});
-
-					} // end of statement
-
-					$m.work.a.overflow.check($this, $content);
-
-				}, // end of infoEnter
-
-				desc: function($this, $info, $project){
-
-					var $desc = $this.find('> .description').text();
-
-					$info.attr({'data-project': $project});
-					$m.s.dom.desc.text($desc);
-
-				}, // end of info
-
-				url: function($this, $project){
-
-					console.log('add in the URL = /' + $project + '.html');
-
-					$m.s.dom.url.attr({'href': $project + '.html'});
-
-				}, // end of url
-
-				overflow: {
-
-					check: function($this, $content){
-
-						var $thumb = $this.height(),
-							$contHgt = $content.outerHeight(true),
-							$dif = $thumb - $contHgt,
-							$top = $m.s.dom.shadowTop,
-							$bot = $m.s.dom.shadowBot;
-
-						console.log('thumb height = ' + $thumb);
-						console.log('content height = ' + $contHgt);
-						console.log('difference = ' + $dif);
-
-						if($dif < 0){
-
-							TweenMax.set($content, {
-								'bottom': $dif,
-								'transform': 'translateY(0)'
-							});
-							TweenMax.set($top, {'opacity': '0'});
-							TweenMax.set($bot, {'opacity': '1'});
-
-							$m.work.a.overflow.reveal($content, $dif, $top, $bot);
-
-						}else{
-
-							TweenMax.set($content, {
-								'bottom': '50%',
-								'transform': 'translateY(50%)'
-							});
-							TweenMax.set($top, {'autoAlpha': '0'});
-							TweenMax.set($bot, {'autoAlpha': '0'});
-
-						} // end of statement;
-
-					}, // end of check
-
-					reveal: function($content, $dif, $top, $bot){
-
-						console.log('overflow = true');
-
-						var $ani = ($dif * -1) / 20; // scroll up "?"px per second
-
-						console.log('animation time = ' + $ani);
-
-						TweenMax.to($content, $ani, {
-							'bottom': '0'
-						});
-
-						TweenMax.to($top, $ani, {
-							'autoAlpha': '1'
-						});
-
-						TweenMax.to($bot, $ani, {
-							'autoAlpha': '0'
-						});
-
-					} // end of reveal
-
-				}, // end of overflow
-
-				jump: {
-
-					up: function($this, $info, $project, $ani){
-
-						TweenMax.to($info, ($ani / 2), {
-							'boxShadow': '0 30px 30px 0 rgba(0, 0, 0, 0.15)',
-							'scale': '1.1',
-							'onComplete': $m.work.a.jump.down,
-							'onCompleteParams': [$this, $info, $project, $ani]
-						});
-
-					}, // end of up
-
-					down: function($this, $info, $project, $ani){
-
-						console.log('- jump down = ' + $project);
-
-						TweenMax.to($info, ($ani / 2), {
-							'boxShadow': 'none',
-							'scale': '1',
-							'onComplete': $m.work.a.url,
-							'onCompleteParams': [$this, $project]
-						});
-
-					} // end of down
-
-				}, // end of jump
-
-				listEnter: function(){
-
-					console.log('work list = active');
-					$m.s.work = true;
-
-				}, // end of listEnter
-
-				listLeave: function(){
-
-					var $ani = $m.s.ani,
-						$info = $m.s.dom.thumbInfo;
-
-					TweenMax.to($info, $ani, {
-						'autoAlpha': '0',
-						'transform': 'scale(1.5)'
+					TweenMax.to($this.find('> a'), $ani, {
+						'color': 'rgb(' + $m.s.col.blueLight + ')',
+						'transform': 'translateY(-1.5em) scale(1.1)',
+						'textShadow': '0 1.5em 10px rgb(' + $m.s.col.shadow + ')'
 					});
 
-					console.log('work list = dormant');
-					$m.s.work = false;
+				}, // end of thumbEnter
 
-				} // end of listLeave
+				thumbLeave: function($this){
+
+					// console.log('thumbLeave');
+
+					var $ani = $m.s.ani;
+
+					$this.removeAttr('data-state');
+
+					TweenMax.to($this.find('> a'), $ani, {
+						'color': 'rgb(' + $m.s.col.blueDark + ')',
+						'transform': 'translateY(0) scale(1)',
+						'textShadow': 'none'
+					});
+
+				} // end of thumbLeave
 
 			} // end of actions
 		
 		}, // end of work
+
+		/*
+         _  _        _    _     _              
+        | |(_) __ _ | |_ | |_  | |__  ___ __ __
+        | || |/ _` || ' \|  _| | '_ \/ _ \\ \ /
+        |_||_|\__, ||_||_|\__| |_.__/\___//_\_\
+              |___/
+
+		*/
+
+		lightBox: {
+
+			init: function(){
+
+				$m.lightBox.l(); // create listeners
+
+			}, // end of init
+
+			s: {
+
+				module: $('#lightBox'),
+
+				projectCurrent: 1,
+
+				projectLength: {
+					travelHub : 3,
+					rateCard : 2,
+					nielsen : 3,
+					waterboy : 1,
+					dealsSection : 3,
+					silverFernFarms : 3,
+					stuffRedesign : 6,
+					travelInfographic : 3,
+					smithCity : 2
+				}
+
+			}, // end of settings
+
+			l: function(){
+
+				// console.log('adding LIGHT BOX listeners...');
+
+				var $lb = $m.lightBox.s.module;
+
+				if(!$m.s.ltie9){
+
+					$lb.on('mouseenter', 'a', function(){
+
+						$m.lightBox.a.changeIcon($(this), 'enter');
+
+					}).on('mouseleave', 'a', function(){
+
+						$m.lightBox.a.changeIcon($(this), 'leave');
+
+					});
+
+				} // end of statement
+
+				$lb.on('click', 'a', function($e){
+
+					$e.preventDefault();
+
+					var $this = $(this);
+
+					if($this.hasClass('close')){ $m.lightBox.a.state.fadeOut(); }
+					else if($this.hasClass('previous')){ $m.lightBox.a.updateProject.init('-'); }
+					else if($this.hasClass('next')){ $m.lightBox.a.updateProject.init('+'); }
+
+				});
+
+			}, // end of listeners
+
+			a: {
+
+				state: {
+
+					fadeIn: function(){
+
+						// console.log('open light box');
+
+						var $ani = $m.s.ani,
+							$lb = $m.lightBox.s.module;
+
+						TweenMax.to($lb, $ani, {
+							'autoAlpha': 1
+						});
+
+						if($m.s.ltie9){ $m.ie8.iconFont.lightBox(); }
+
+					}, // end of fadeIn
+
+					setDetails: function($this){
+
+						var $lb = $m.lightBox.s.module,
+							$img = $lb.find('> .content'),
+							$pC = $this.attr('data-project'), // projectCurrent
+							$pL = $m.lightBox.s.projectLength[$pC];
+
+						$m.lightBox.s.projectCurrent = $pC;
+
+						// reset the projectImage reference
+						$img.attr({
+							'data-projectCurrent': $pC,
+							'data-projectLength': $pL,
+							'data-projectImage': 1,
+						});
+
+						$lb.find('> .bottom-ui')
+							.find('.dynamic.length').text($pL)
+							.end()
+							.find('.dynamic.current').text('1');
+
+					}, // end of setDetails
+
+					fadeOut: function(){
+
+						// console.log('close light box');
+
+						var $ani = $m.s.ani,
+							$lb = $m.lightBox.s.module;
+
+						TweenMax.to($lb, $ani, {
+							'autoAlpha': 0
+						});
+
+					} // end of fadeOut
+
+				}, // end of state
+
+				changeIcon: function($this, $state){
+
+					var $ani = $m.s.ani,
+						$dormant = $this.find('.dormant'),
+						$active = $this.find('.active'),
+						$val;
+
+					if($state === 'enter'){ $val = 0; }else{ $val = 1; }
+
+					TweenMax.to($dormant, $ani, {
+						'autoAlpha': $val
+					});
+
+					if($state === 'enter'){ $val = 1; }else{ $val = 0; }
+
+					TweenMax.to($active, $ani, {
+						'autoAlpha': $val
+					});
+
+				}, // end of changeIcon
+
+				updateProject: {
+
+					init: function($dir){
+
+						console.log('direction = ' + $dir);
+
+						$m.lightBox.a.updateProject.fadeOut($dir);
+
+					}, // end of init
+
+					fadeOut: function($dir){
+
+						var $ani = $m.s.ani,
+							$lb = $m.lightBox.s.module,
+							$img = $lb.find('> .content');
+
+						TweenMax.to($img, $ani, {
+							'left': $dir + '=100px',
+							'opacity': '0',
+							'onComplete': $m.lightBox.a.updateProject.swap,
+							'onCompleteParams': [$img, $dir]
+						});
+						
+					}, // end of fadeOut
+
+					swap : function($img, $dir){
+
+						var $pC = $m.lightBox.s.projectCurrent, // projectCurrent
+							$pL = $m.lightBox.s.projectLength[$pC], // projectLength
+							$pI = parseInt($img.attr('data-projectImage'), 10); // projectImage
+
+						// console.log('projectCurrent | before = ' + $pI);
+
+						console.log('PC = ' + ($pC));
+						console.log('PL = ' + ($m.lightBox.s.projectLength[$pC]));
+						console.log('PI = ' + parseInt($img.attr('data-projectImage'), 10));
+
+						if($dir === '+'){
+
+							$pI += 1;
+
+							if($pI > $pL){
+
+								$pI = 1;
+
+							} // end of statement
+
+						}else{
+
+							$pI -= 1;
+
+							if($pI < 1){
+
+								$pI = $pL;
+
+							} // end of statement
+
+						} // end of statement
+
+						console.log('projectCurrent | after = ' + $pI);
+
+						$img.attr({
+							'data-projectImage': $pI
+						});
+
+						$img.siblings('.bottom-ui')
+							.find('.dynamic.current')
+							.text($pI);
+
+						$m.lightBox.a.updateProject.fadeIn($img, $dir);
+
+					}, // end of swap
+
+					fadeIn: function($img, $dir){
+
+						var $ani = $m.s.ani;
+
+						if($dir === '+'){
+
+							$dir = '-';
+
+						}else{
+
+							$dir = '+';
+
+						} // end of statement
+
+						console.log('left = ' + $dir + '=100');
+
+						TweenMax.set($img, {
+							'left': $dir + '=200px'
+						});
+
+						TweenMax.to($img, $ani, {
+							'left': '0',
+							'opacity': '1'
+						});
+						
+					} // end of fadeIn
+
+				} // end of updateProject
+
+			} // end of actions
+
+		}, // end of lightBox
+
+		/*
+            _       _          _  _     
+         __| | ___ | |_  __ _ (_)| | ___
+        / _` |/ -_)|  _|/ _` || || |(_-<
+        \__,_|\___| \__|\__,_||_||_|/__/
+
+		*/
 
 		details: {
 
@@ -337,17 +464,20 @@ $(document).ready(function(){
 			l: function(){
 
 				var $address = $m.s.dom.details.find('> .shadowContainer').find('> address');
-				// var $address = $m.s.dom.details.find('address');
 
-				$address.on('mouseenter', 'li', function(){
+				if(!$m.s.ltie9){
 
-					$m.details.a.userEnter($(this));
-					
-				}).on('mouseleave', 'li', function(){
+					$address.on('mouseenter', 'li', function(){
 
-					$m.details.a.userLeave($(this));
-					
-				});
+						$m.details.a.userEnter($(this));
+						
+					}).on('mouseleave', 'li', function(){
+
+						$m.details.a.userLeave($(this));
+						
+					});
+
+				} // end of statement
 
 			}, // end of listeners
 
@@ -375,7 +505,7 @@ $(document).ready(function(){
 						$dormant = $this.find('.dormant'),
 						$active = $this.find('.active');
 
-					TweenMax.to($this, $ani, {'color': $m.s.col.blueDark});
+					TweenMax.to($this, $ani, {'color': 'rgb(' + $m.s.col.blueDark + ')'});
 					TweenMax.to($dormant, $ani, {'autoAlpha': '1'});
 					TweenMax.to($active, $ani, {'autoAlpha': '0'});
 
@@ -385,17 +515,36 @@ $(document).ready(function(){
 
 		}, // end of details
 
+		/*
+         _       ___ 
+        (_) ___ ( _ )
+        | |/ -_)/ _ \
+        |_|\___|\___/
+
+		*/
+
 		ie8: {
 
 			init: function(){
 
-				$m.ie8.iconFont();
+				$m.s.ltie9 = true;
+				$m.ie8.iconFont.allRef();
 
 			}, // end if init
 
-			iconFont: function(){
+			iconFont: {
 
-				$('.icon').removeClass('ie8');
+				allRef: function(){
+
+					$('.icon').removeClass('ie8');
+
+				}, // end of allRef
+
+				lightBox: function(){
+
+					$('.icon').addClass('ie8');
+					$('.icon').removeClass('ie8');
+				} // end of lightBox
 
 			} // end of iconFont
 		}
