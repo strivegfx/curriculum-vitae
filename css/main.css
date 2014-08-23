@@ -632,8 +632,6 @@ textarea {
 @media print {
   * {
     background: transparent !important;
-    color: #000 !important;
-    /* Black prints faster: h5bp.com/s */
     -webkit-box-shadow: none !important;
             box-shadow: none !important;
     text-shadow: none !important; }
@@ -692,100 +690,6 @@ textarea {
   content: "";
   display: table;
   clear: both; }
-
-/*
-	 _                   __            _   
-	(_) __  ___  _ _    / _| ___  _ _ | |_ 
-	| |/ _|/ _ \| ' \  |  _|/ _ \| ' \|  _|
-	|_|\__|\___/|_||_| |_|  \___/|_||_|\__|
-
-*/
-@font-face {
-  font-family: 'icomoon';
-  src: url("../fnt/icomoon.eot?-npddoi");
-  src: url("../fnt/icomoon.eot?#iefix-npddoi") format("embedded-opentype"), url("../fnt/icomoon.woff?-npddoi") format("woff"), url("../fnt/icomoon.ttf?-npddoi") format("truetype"), url("../fnt/icomoon.svg?-npddoi#icomoon") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-.title {
-  color: #323e50;
-  position: relative; }
-  .title .icon, .title h2 {
-    display: inline-block; }
-  .title .icon {
-    height: 1.5em;
-    position: relative;
-    width: 3.25em; }
-  .title .icon:before {
-    display: block;
-    font-family: 'icomoon';
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    line-height: 1;
-    position: absolute;
-    speak: none;
-    text-transform: none;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-size: 2.75em;
-    left: 0;
-    top: -0.2em; }
-
-#about .intro.design .title .icon:before {
-  content: "\e600"; }
-#about .intro.development .title .icon:before {
-  content: "\e601"; }
-#about .intro.experience .title .icon:before {
-  content: "\e602"; }
-#about .intro.employment .title .icon:before {
-  content: "\e603"; }
-
-#work .intro .title .icon:before {
-  content: "\e604"; }
-
-#myHistory .intro .title .icon:before {
-  content: "\e605"; }
-
-#details .intro.contact .title .icon:before {
-  content: "\e606"; }
-#details .intro.references .title .icon:before {
-  content: "\e607"; }
-#details .phone .icon.dormant:before {
-  content: "\e60f"; }
-#details .phone .icon.active:before {
-  content: "\e610"; }
-#details .email .icon.dormant:before {
-  content: "\e611"; }
-#details .email .icon.active:before {
-  content: "\e612"; }
-
-#lightbox .close .icon.dormant:before {
-  content: "\e606"; }
-#lightbox .close .icon.active:before {
-  content: "\e606"; }
-#lightbox .icon-container .icon:before {
-  content: "\e612" !important; }
-
-.icon-icon-view:before {
-  content: "\e608"; }
-
-.icon-icon-previous-dormant:before {
-  content: "\e609"; }
-
-.icon-icon-previous-active:before {
-  content: "\e60a"; }
-
-.icon-icon-next-dormant:before {
-  content: "\e60b"; }
-
-.icon-icon-next-active:before {
-  content: "\e60c"; }
-
-.icon-icon-close-dormant:before {
-  content: "\e60d"; }
-
-.icon-icon-close-active:before {
-  content: "\e60e"; }
 
 /*
 	              _       
@@ -849,6 +753,24 @@ h4, .h4 {
 
 .oneWord {
   white-space: nowrap; }
+
+.svgIcon {
+  height: auto; }
+
+.title {
+  color: #323e50;
+  position: relative; }
+  .title h2 {
+    padding-left: 2em; }
+  .title .svgIcon {
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 2em; }
+    @media only screen and (min-width: 37.5em) {
+      .title .svgIcon {
+        top: 0;
+        width: 2.72727em; } }
 
 /*
 	     _              _                  
@@ -973,7 +895,7 @@ section, .shadowContainer {
 */
 .extendedBg {
   background-color: #78ccfe;
-  overflow-x: hidden;
+  overflow: hidden;
   position: relative;
   z-index: -1; }
   .extendedBg:before, .extendedBg:after {
@@ -1071,15 +993,19 @@ header {
 
 #about, #details {
   padding: 6em 0 3em 0; }
+  #about .seperator, #details .seperator {
+    float: left;
+    height: 0;
+    width: 100%; }
   #about .intro, #details .intro {
     padding: 0 0 3em 0; }
     @media only screen and (min-width: 56.25em) {
       #about .intro, #details .intro {
         float: left;
         width: 50%; }
-        #about .intro:nth-child(odd), #details .intro:nth-child(odd) {
+        #about .intro.left, #details .intro.left {
           padding-right: 3em; }
-        #about .intro:nth-child(even), #details .intro:nth-child(even) {
+        #about .intro.right, #details .intro.right {
           padding-left: 3em; } }
 
 /*
@@ -1091,6 +1017,16 @@ header {
 */
 #work, #myHistory {
   padding: 6em 0 0 0; }
+  #work .intro p, #myHistory .intro p {
+    padding: 0 0 3em 0; }
+    @media only screen and (min-width: 56.25em) {
+      #work .intro p, #myHistory .intro p {
+        float: left;
+        width: 50%; }
+        #work .intro p.left, #myHistory .intro p.left {
+          padding-right: 3em; }
+        #work .intro p.right, #myHistory .intro p.right {
+          padding-left: 3em; } }
 
 #work .thumbList {
   list-style-type: none;
@@ -1119,36 +1055,35 @@ header {
       color: #323e50;
       display: block;
       height: 10em;
+      position: relative;
       text-decoration: none;
       width: 100%; }
-      #work .thumbList .thumbSquare a .icon {
-        display: inline-block;
-        float: left;
-        height: 100%;
-        position: relative;
-        width: 9em; }
-        #work .thumbList .thumbSquare a .icon:before {
-          display: block;
-          font-family: 'icomoon';
-          font-style: normal;
-          font-weight: normal;
-          font-variant: normal;
-          line-height: 1;
-          position: absolute;
-          speak: none;
-          text-transform: none;
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-          font-size: 7em;
-          left: 0;
-          top: 50%;
-          -webkit-transform: translateY(-50%);
-              -ms-transform: translateY(-50%);
-                  transform: translateY(-50%); }
+      #work .thumbList .thumbSquare a .iconContainer {
+        position: absolute;
+        height: 7em;
+        margin: -3.5em 0 0 0;
+        top: 50%;
+        width: 7em; }
+        #work .thumbList .thumbSquare a .iconContainer .logo {
+          position: absolute; }
+        #work .thumbList .thumbSquare a .iconContainer .logo.dormant {
+          visibility: inherit;
+          width: 7em; }
+        #work .thumbList .thumbSquare a .iconContainer .logo.active {
+          visibility: hidden; }
+          #work .thumbList .thumbSquare a .iconContainer .logo.active .svgIcon, #work .thumbList .thumbSquare a .iconContainer .logo.active .shadowLogo {
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 7em; }
+          #work .thumbList .thumbSquare a .iconContainer .logo.active .svgIcon {
+            z-index: 1; }
+          #work .thumbList .thumbSquare a .iconContainer .logo.active .shadowLogo {
+            z-index: 0; }
       #work .thumbList .thumbSquare a .description {
         color: inherit;
-        display: block;
-        position: relative;
+        margin-left: 6.25em;
+        position: absolute;
         top: 50%;
         -webkit-transform: translateY(-50%);
             -ms-transform: translateY(-50%);
@@ -1161,39 +1096,35 @@ header {
           background-image: -webkit-linear-gradient(bottom, rgba(50, 62, 80, 0), #323e50, rgba(50, 62, 80, 0));
           background-image: linear-gradient(to top, rgba(50, 62, 80, 0), #323e50, rgba(50, 62, 80, 0));
           bottom: -0.5em;
-          left: 5.3em;
+          left: -1em;
           top: -0.5em;
           width: 1px; }
       @media only screen and (min-width: 40em) {
         #work .thumbList .thumbSquare a .description {
           font-size: 1em;
-          font-weight: 300; }
-          #work .thumbList .thumbSquare a .description:before {
-            left: 8em; } }
+          font-weight: 300;
+          margin-left: 8.75em; } }
       @media only screen and (min-width: 50em) {
         #work .thumbList .thumbSquare a {
           height: 13em; }
           #work .thumbList .thumbSquare a .description {
             font-size: 1.5em;
-            font-weight: 100; }
-            #work .thumbList .thumbSquare a .description:before {
-              left: 5.3em; } }
+            font-weight: 100;
+            margin-left: 6.25em; } }
       @media only screen and (min-width: 70em) {
         #work .thumbList .thumbSquare a {
           height: 15em; }
           #work .thumbList .thumbSquare a .description {
             font-size: 1em;
-            font-weight: 300; }
-            #work .thumbList .thumbSquare a .description:before {
-              left: 8em; } }
+            font-weight: 300;
+            margin-left: 8.75em; } }
       @media only screen and (min-width: 80em) {
         #work .thumbList .thumbSquare a {
           height: 17em; }
           #work .thumbList .thumbSquare a .description {
             font-size: 1.5em;
-            font-weight: 100; }
-            #work .thumbList .thumbSquare a .description:before {
-              left: 5.3em; } }
+            font-weight: 100;
+            margin-left: 6.25em; } }
     @media only screen and (min-width: 40em) {
       #work .thumbList .thumbSquare:nth-child(2n + 1) {
         padding: 0 2em 0 0; }
@@ -1210,24 +1141,6 @@ header {
       background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(120, 204, 254, 0)), color-stop(#78ccfe), to(rgba(120, 204, 254, 0)));
       background-image: -webkit-linear-gradient(bottom, rgba(120, 204, 254, 0), #78ccfe, rgba(120, 204, 254, 0));
       background-image: linear-gradient(to top, rgba(120, 204, 254, 0), #78ccfe, rgba(120, 204, 254, 0)); }
-    #work .thumbList .thumbSquare[data-project="travelHub"] .icon:before {
-      content: "\e615"; }
-    #work .thumbList .thumbSquare[data-project="rateCard"] .icon:before {
-      content: "\e613"; }
-    #work .thumbList .thumbSquare[data-project="nielsen"] .icon:before {
-      content: "\e616"; }
-    #work .thumbList .thumbSquare[data-project="waterboy"] .icon:before {
-      content: "\e619"; }
-    #work .thumbList .thumbSquare[data-project="dealsSection"] .icon:before {
-      content: "\e615"; }
-    #work .thumbList .thumbSquare[data-project="silverFernFarms"] .icon:before {
-      content: "\e617"; }
-    #work .thumbList .thumbSquare[data-project="stuffRedesign"] .icon:before {
-      content: "\e614"; }
-    #work .thumbList .thumbSquare[data-project="travelInfographic"] .icon:before {
-      content: "\e615"; }
-    #work .thumbList .thumbSquare[data-project="smithCity"] .icon:before {
-      content: "\e618"; }
 
 /*
 	 _     _      _                   
@@ -1245,6 +1158,7 @@ header {
 
 .jobList {
   list-style-type: none;
+  margin-top: 3em;
   padding-top: 6em;
   padding-bottom: 3em; }
   .jobList .bma:after {
@@ -1455,44 +1369,38 @@ header {
     #details address ul li a {
       color: inherit;
       text-decoration: none; }
-      #details address ul li a .icon-container {
-        position: absolute;
-        height: 4em;
-        top: 0.75em; }
-        #details address ul li a .icon-container .icon {
+      #details address ul li a .iconContainer {
+        bottom: 2.5em;
+        position: absolute; }
+        #details address ul li a .iconContainer .svgIcon {
+          bottom: 0;
           position: absolute;
-          height: 4em;
           left: 0;
-          top: 0;
-          width: 4em; }
-          #details address ul li a .icon-container .icon.active:before, #details address ul li a .icon-container .icon.dormant:before {
-            display: block;
-            font-family: 'icomoon';
-            font-style: normal;
-            font-weight: normal;
-            font-variant: normal;
-            line-height: 1;
-            position: absolute;
-            speak: none;
-            text-transform: none;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            color: white;
-            font-size: 5em;
-            height: 100%;
-            left: 0;
-            top: 0;
-            width: 100%; }
-          #details address ul li a .icon-container .icon.active {
+          width: 100%; }
+          #details address ul li a .iconContainer .svgIcon.active {
             visibility: hidden; }
-    #details address ul li.phone a {
-      margin-right: 3em; }
+    #details address ul li.phone {
+      margin-bottom: 2em; }
       @media only screen and (min-width: 37.5em) {
-        #details address ul li.phone a .icon-container {
-          left: 0.5em; } }
-    @media only screen and (min-width: 37.5em) {
-      #details address ul li.email a .icon-container {
-        left: 1.75em; } }
+        #details address ul li.phone {
+          margin-bottom: 0; } }
+      #details address ul li.phone a {
+        margin-right: 0; }
+        @media only screen and (min-width: 37.5em) {
+          #details address ul li.phone a {
+            margin-right: 3em; } }
+        #details address ul li.phone a .iconContainer {
+          height: 2.84211em;
+          width: 5.26316em; }
+          @media only screen and (min-width: 37.5em) {
+            #details address ul li.phone a .iconContainer {
+              left: 0.5em; } }
+    #details address ul li.email a .iconContainer {
+      height: 3.14286em;
+      width: 4.7619em; }
+      @media only screen and (min-width: 37.5em) {
+        #details address ul li.email a .iconContainer {
+          left: 2em; } }
 
 /*
 	 _  _        _    _     _              
@@ -1583,21 +1491,17 @@ header {
       right: 1.5em; }
       #lightBox .top-ui .close .text, #lightBox .top-ui .next .text, #lightBox .bottom-ui .close .text, #lightBox .bottom-ui .next .text {
         margin-right: 2.18182em; }
-      #lightBox .top-ui .close .icon-container, #lightBox .top-ui .next .icon-container, #lightBox .bottom-ui .close .icon-container, #lightBox .bottom-ui .next .icon-container {
+      #lightBox .top-ui .close .iconContainer, #lightBox .top-ui .next .iconContainer, #lightBox .bottom-ui .close .iconContainer, #lightBox .bottom-ui .next .iconContainer {
         right: 0; }
-        #lightBox .top-ui .close .icon-container .icon:before, #lightBox .top-ui .next .icon-container .icon:before, #lightBox .bottom-ui .close .icon-container .icon:before, #lightBox .bottom-ui .next .icon-container .icon:before {
-          right: 0; }
     #lightBox .top-ui .previous, #lightBox .bottom-ui .previous {
       left: 1.5em; }
       #lightBox .top-ui .previous .text, #lightBox .bottom-ui .previous .text {
         margin-left: 2em; }
-      #lightBox .top-ui .previous .icon-container, #lightBox .bottom-ui .previous .icon-container {
+      #lightBox .top-ui .previous .iconContainer, #lightBox .bottom-ui .previous .iconContainer {
         left: 0; }
-        #lightBox .top-ui .previous .icon-container .icon:before, #lightBox .bottom-ui .previous .icon-container .icon:before {
-          left: 0; }
     #lightBox .top-ui a, #lightBox .bottom-ui a {
       text-decoration: none; }
-    #lightBox .top-ui .icon-container, #lightBox .bottom-ui .icon-container {
+    #lightBox .top-ui .iconContainer, #lightBox .bottom-ui .iconContainer {
       height: 100%;
       position: absolute;
       top: 50%;
@@ -1605,38 +1509,11 @@ header {
           -ms-transform: translateY(-50%);
               transform: translateY(-50%);
       width: 3em; }
-      #lightBox .top-ui .icon-container .icon, #lightBox .bottom-ui .icon-container .icon {
-        height: 100%;
+      #lightBox .top-ui .iconContainer .svgIcon, #lightBox .bottom-ui .iconContainer .svgIcon {
         position: absolute;
         width: 100%; }
-        #lightBox .top-ui .icon-container .icon.active, #lightBox .bottom-ui .icon-container .icon.active {
+        #lightBox .top-ui .iconContainer .svgIcon.active, #lightBox .bottom-ui .iconContainer .svgIcon.active {
           visibility: hidden; }
-        #lightBox .top-ui .icon-container .icon:before, #lightBox .bottom-ui .icon-container .icon:before {
-          display: block;
-          font-family: 'icomoon';
-          font-style: normal;
-          font-weight: normal;
-          font-variant: normal;
-          line-height: 1;
-          position: absolute;
-          speak: none;
-          text-transform: none;
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-          text-align: center;
-          top: 0; }
-    #lightBox .top-ui .close .icon.dormant:before, #lightBox .bottom-ui .close .icon.dormant:before {
-      content: "\e60d"; }
-    #lightBox .top-ui .close .icon.active:before, #lightBox .bottom-ui .close .icon.active:before {
-      content: "\e60e"; }
-    #lightBox .top-ui .previous .icon.dormant:before, #lightBox .bottom-ui .previous .icon.dormant:before {
-      content: "\e609"; }
-    #lightBox .top-ui .previous .icon.active:before, #lightBox .bottom-ui .previous .icon.active:before {
-      content: "\e60a"; }
-    #lightBox .top-ui .next .icon.dormant:before, #lightBox .bottom-ui .next .icon.dormant:before {
-      content: "\e60b"; }
-    #lightBox .top-ui .next .icon.active:before, #lightBox .bottom-ui .next .icon.active:before {
-      content: "\e60c"; }
   #lightBox .content {
     -webkit-background-size: contain contain;
             background-size: contain;
@@ -1732,6 +1609,61 @@ header {
       @media only screen and (min-width: 37.5em) {
         #lightBox .content[data-projectCurrent="travelInfographic"][data-projectImage="3"] {
           background-image: url(../img/travel-infographic/3-landscape.jpg); } }
+    #lightBox .content[data-projectCurrent="stuffRedesign"][data-projectImage="1"] {
+      background-image: url(../img/stuff-redesign/1-portrait.jpg); }
+      @media only screen and (min-width: 37.5em) {
+        #lightBox .content[data-projectCurrent="stuffRedesign"][data-projectImage="1"] {
+          background-image: url(../img/stuff-redesign/1-landscape.jpg); } }
+    #lightBox .content[data-projectCurrent="stuffRedesign"][data-projectImage="2"] {
+      background-image: url(../img/stuff-redesign/2-portrait.png); }
+      @media only screen and (min-width: 37.5em) {
+        #lightBox .content[data-projectCurrent="stuffRedesign"][data-projectImage="2"] {
+          background-image: url(../img/stuff-redesign/2-landscape.png); } }
+    #lightBox .content[data-projectCurrent="stuffRedesign"][data-projectImage="3"] {
+      background-image: url(../img/stuff-redesign/3-portrait.jpg); }
+      @media only screen and (min-width: 37.5em) {
+        #lightBox .content[data-projectCurrent="stuffRedesign"][data-projectImage="3"] {
+          background-image: url(../img/stuff-redesign/3-landscape.jpg); } }
+    #lightBox .content[data-projectCurrent="stuffRedesign"][data-projectImage="4"] {
+      background-image: url(../img/stuff-redesign/4-portrait.png); }
+      @media only screen and (min-width: 37.5em) {
+        #lightBox .content[data-projectCurrent="stuffRedesign"][data-projectImage="4"] {
+          background-image: url(../img/stuff-redesign/4-landscape.png); } }
+    #lightBox .content[data-projectCurrent="mediaHub"][data-projectImage="1"] {
+      background-image: url(../img/media-hub/1-portrait.jpg); }
+      @media only screen and (min-width: 37.5em) {
+        #lightBox .content[data-projectCurrent="mediaHub"][data-projectImage="1"] {
+          background-image: url(../img/media-hub/1-landscape.jpg); } }
+    #lightBox .content[data-projectCurrent="mediaHub"][data-projectImage="2"] {
+      background-image: url(../img/media-hub/2-portrait.png); }
+      @media only screen and (min-width: 37.5em) {
+        #lightBox .content[data-projectCurrent="mediaHub"][data-projectImage="2"] {
+          background-image: url(../img/media-hub/2-landscape.png); } }
+    #lightBox .content[data-projectCurrent="mediaHub"][data-projectImage="3"] {
+      background-image: url(../img/media-hub/3-portrait.png); }
+      @media only screen and (min-width: 37.5em) {
+        #lightBox .content[data-projectCurrent="mediaHub"][data-projectImage="3"] {
+          background-image: url(../img/media-hub/3-landscape.png); } }
+    #lightBox .content[data-projectCurrent="mediaHub"][data-projectImage="4"] {
+      background-image: url(../img/media-hub/4-portrait.jpg); }
+      @media only screen and (min-width: 37.5em) {
+        #lightBox .content[data-projectCurrent="mediaHub"][data-projectImage="4"] {
+          background-image: url(../img/media-hub/4-landscape.jpg); } }
+    #lightBox .content[data-projectCurrent="tourismAustralia"][data-projectImage="1"] {
+      background-image: url(../img/tourism-australia/1-portrait.jpg); }
+      @media only screen and (min-width: 37.5em) {
+        #lightBox .content[data-projectCurrent="tourismAustralia"][data-projectImage="1"] {
+          background-image: url(../img/tourism-australia/1-landscape.jpg); } }
+    #lightBox .content[data-projectCurrent="tourismAustralia"][data-projectImage="2"] {
+      background-image: url(../img/tourism-australia/2-portrait.png); }
+      @media only screen and (min-width: 37.5em) {
+        #lightBox .content[data-projectCurrent="tourismAustralia"][data-projectImage="2"] {
+          background-image: url(../img/tourism-australia/2-landscape.png); } }
+    #lightBox .content[data-projectCurrent="tourismAustralia"][data-projectImage="3"] {
+      background-image: url(../img/tourism-australia/3-portrait.jpg); }
+      @media only screen and (min-width: 37.5em) {
+        #lightBox .content[data-projectCurrent="tourismAustralia"][data-projectImage="3"] {
+          background-image: url(../img/tourism-australia/3-landscape.jpg); } }
 
 /*
 	                _                  _          
@@ -1788,133 +1720,214 @@ header {
   .no-rgba #lightBox .top-ui, .no-rgba #lightBox .bottom-ui {
     background-image: url(../img/black-80percent-tile.png); }
 
-.no-mediaquery h1 {
-  font-size: 7em; }
-.no-mediaquery header {
-  height: 640px; }
-  .no-mediaquery header .hello {
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-            transform: translateY(-50%);
-    width: 33%; }
-    .no-mediaquery header .hello h1 {
-      color: white; }
-    .no-mediaquery header .hello p {
-      font-size: 1.5em;
-      font-weight: 100; }
-.no-mediaquery #portraitBody {
-  height: 1280px;
-  left: 50%;
-  margin-left: -350px;
+/*.no-mediaquery{ // reset everything to its largest STATIC state
+
+	h1{
+		font-size: 7em;
+	}
+
+	$portraitHeightLargeStatic: 1280px;
+	header{
+		height: $portraitHeightLargeStatic / 2;
+
+		.hello{
+			top: 50%;
+			transform: translateY(-50%);
+			width: 33%;
+
+			h1{
+				color: white;
+			}
+
+			p{
+				font: {
+					size: 1.5em;
+					weight: 100;
+				}
+			}
+		}
+	}
+
+	#portraitBody{
+		height: 1280px;
+		left: 50%;
+		margin-left: -350px;
+		transform: translateX(0);
+		width: 973px;
+	}
+
+	#portraitHands{
+		height: $portraitHeightLargeStatic * $bodytoHandsRatio;
+		top: $portraitHeightLargeStatic * $bodytoHandsRatio * -0.5;
+		left: 50%;
+		margin-left: -350px;
+		transform: translateX(0);
+		width: 973px;
+	}
+
+	.center{
+		width: 75em; // 1200px
+	}
+
+	#about, #details{
+
+		.intro{
+			float: left;
+			width: 50%;
+
+			&.design, &.experience, &.contact{
+				padding-right: $pad / 2;
+			}
+
+			&.development, &.employment, &.references{
+				padding-left: $pad / 2;
+			}
+		}
+	}
+
+	#work{
+
+		.thumbList{
+			padding-bottom: $pad / 5;
+
+			.thumbSquare{
+				padding-right: 2em;
+				width: 33.3%;
+
+				a{
+					height: 17em;
+
+					.icon{
+						height: 17em;
+
+						&:before{
+							top: 35%; // change below...
+							transform: translateY(0);
+						}
+					}
+
+					.description{
+						font: {
+							size: 1.5em;
+							weight: 100;
+						}
+						// top: 0;
+						transform: translateY(0);
+
+						&:before{ left: 5.3em; }
+					}
+				}
+
+				&[data-project="stuffRedesign"],
+				&[data-project="travelInfographic"],
+				&[data-project="smithCity"]
+				{
+					a .description{
+						top: 45%;
+					}
+				}
+
+				&[data-project="silverFernFarms"] a .description{
+					top: 35%;
+				}
+			}
+		}
+	}
+
+	#details address ul li{
+		display: inline;
+		width: auto;
+
+		&.phone a .iconContainer{
+			left: 0.5em
+		}
+
+		&.email a .iconContainer{
+			left: 1.75em
+		}
+	}
+
+	#lightBox{
+
+		.top-ui, .bottom-ui{
+			height: $pad;
+
+			.center{
+				height: 100%;
+				position: relative;
+			}
+
+			.close, .previous, .next, .projectCurrent{
+				top: 25px;
+				transform: translateY(0);
+
+				.text{
+					font-size: 2em;
+					visibility: inherit;
+				}
+
+				.icon:before{
+					font-size: 2.75em;
+					top: -20px;
+				}
+			}
+
+			.projectCurrent{
+				font-size: 1em;
+			}
+		}
+
+		.content{
+			min-height: 800px;
+			width: 100%;
+
+			&[data-projectCurrent="travelHub"]{
+				&[data-projectImage="1"]{ background-image: url(../img/travel-hub/1-landscape.png); }
+				&[data-projectImage="2"]{ background-image: url(../img/travel-hub/2-landscape.jpg); }
+			}
+
+			&[data-projectCurrent="rateCard"]{
+				&[data-projectImage="1"]{ background-image: url(../img/rate-card/1-landscape.png); }
+				&[data-projectImage="2"]{ background-image: url(../img/rate-card/2-landscape.jpg); }
+			}
+
+			&[data-projectCurrent="nielsen"]{
+				&[data-projectImage="1"]{ background-image: url(../img/nielsen/1-landscape.png); }
+				&[data-projectImage="2"]{ background-image: url(../img/nielsen/2-landscape.png); }
+				&[data-projectImage="3"]{ background-image: url(../img/nielsen/3-landscape.jpg); }
+			}
+
+			&[data-projectCurrent="dealsSection"]{
+				&[data-projectImage="1"]{ background-image: url(../img/deals-section/1-landscape.png); }
+				&[data-projectImage="2"]{ background-image: url(../img/deals-section/2-landscape.jpg); }
+				&[data-projectImage="3"]{ background-image: url(../img/deals-section/3-landscape.jpg); }
+			}
+
+			&[data-projectCurrent="silverFernFarms"]{
+				&[data-projectImage="1"]{ background-image: url(../img/silver-fern-farms/1-landscape.png); }
+				&[data-projectImage="2"]{ background-image: url(../img/silver-fern-farms/2-landscape.jpg); }
+				&[data-projectImage="3"]{ background-image: url(../img/silver-fern-farms/3-landscape.png); }
+			}
+
+			&[data-projectCurrent="travelInfographic"]{
+				&[data-projectImage="1"]{ background-image: url(../img/travel-infographic/1-landscape.png); }
+				&[data-projectImage="2"]{ background-image: url(../img/travel-infographic/2-landscape.jpg); }
+				&[data-projectImage="3"]{ background-image: url(../img/travel-infographic/3-landscape.jpg); }
+			}
+		}
+	}
+}*/
+.no-csstransforms #work .description {
+  top: 2.4em !important;
+  -webkit-transform: translateY(0) !important;
+      -ms-transform: translateY(0) !important;
+          transform: translateY(0) !important; }
+.no-csstransforms #portraitBody, .no-csstransforms #portraitHands {
+  left: auto;
+  right: 0;
   -webkit-transform: translateX(0);
       -ms-transform: translateX(0);
-          transform: translateX(0);
-  width: 973px; }
-.no-mediaquery #portraitHands {
-  height: 160px;
-  top: -80px;
-  left: 50%;
-  margin-left: -350px;
-  -webkit-transform: translateX(0);
-      -ms-transform: translateX(0);
-          transform: translateX(0);
-  width: 973px; }
-.no-mediaquery .center {
-  width: 75em; }
-.no-mediaquery #about .intro, .no-mediaquery #details .intro {
-  float: left;
-  width: 50%; }
-  .no-mediaquery #about .intro.design, .no-mediaquery #about .intro.experience, .no-mediaquery #about .intro.contact, .no-mediaquery #details .intro.design, .no-mediaquery #details .intro.experience, .no-mediaquery #details .intro.contact {
-    padding-right: 3em; }
-  .no-mediaquery #about .intro.development, .no-mediaquery #about .intro.employment, .no-mediaquery #about .intro.references, .no-mediaquery #details .intro.development, .no-mediaquery #details .intro.employment, .no-mediaquery #details .intro.references {
-    padding-left: 3em; }
-.no-mediaquery #work .thumbList {
-  padding-bottom: 1.2em; }
-  .no-mediaquery #work .thumbList .thumbSquare {
-    padding-right: 2em;
-    width: 33.3%; }
-    .no-mediaquery #work .thumbList .thumbSquare a {
-      height: 17em; }
-      .no-mediaquery #work .thumbList .thumbSquare a .icon {
-        height: 17em; }
-        .no-mediaquery #work .thumbList .thumbSquare a .icon:before {
-          top: 35%;
-          -webkit-transform: translateY(0);
-              -ms-transform: translateY(0);
-                  transform: translateY(0); }
-      .no-mediaquery #work .thumbList .thumbSquare a .description {
-        font-size: 1.5em;
-        font-weight: 100;
-        -webkit-transform: translateY(0);
-            -ms-transform: translateY(0);
-                transform: translateY(0); }
-        .no-mediaquery #work .thumbList .thumbSquare a .description:before {
-          left: 5.3em; }
-    .no-mediaquery #work .thumbList .thumbSquare[data-project="stuffRedesign"] a .description, .no-mediaquery #work .thumbList .thumbSquare[data-project="travelInfographic"] a .description, .no-mediaquery #work .thumbList .thumbSquare[data-project="smithCity"] a .description {
-      top: 45%; }
-    .no-mediaquery #work .thumbList .thumbSquare[data-project="silverFernFarms"] a .description {
-      top: 35%; }
-.no-mediaquery #details address ul li {
-  display: inline;
-  width: auto; }
-  .no-mediaquery #details address ul li.phone a .icon-container {
-    left: 0.5em; }
-  .no-mediaquery #details address ul li.email a .icon-container {
-    left: 1.75em; }
-.no-mediaquery #lightBox .top-ui, .no-mediaquery #lightBox .bottom-ui {
-  height: 6em; }
-  .no-mediaquery #lightBox .top-ui .center, .no-mediaquery #lightBox .bottom-ui .center {
-    height: 100%;
-    position: relative; }
-  .no-mediaquery #lightBox .top-ui .close, .no-mediaquery #lightBox .top-ui .previous, .no-mediaquery #lightBox .top-ui .next, .no-mediaquery #lightBox .top-ui .projectCurrent, .no-mediaquery #lightBox .bottom-ui .close, .no-mediaquery #lightBox .bottom-ui .previous, .no-mediaquery #lightBox .bottom-ui .next, .no-mediaquery #lightBox .bottom-ui .projectCurrent {
-    top: 25px;
-    -webkit-transform: translateY(0);
-        -ms-transform: translateY(0);
-            transform: translateY(0); }
-    .no-mediaquery #lightBox .top-ui .close .text, .no-mediaquery #lightBox .top-ui .previous .text, .no-mediaquery #lightBox .top-ui .next .text, .no-mediaquery #lightBox .top-ui .projectCurrent .text, .no-mediaquery #lightBox .bottom-ui .close .text, .no-mediaquery #lightBox .bottom-ui .previous .text, .no-mediaquery #lightBox .bottom-ui .next .text, .no-mediaquery #lightBox .bottom-ui .projectCurrent .text {
-      font-size: 2em;
-      visibility: inherit; }
-    .no-mediaquery #lightBox .top-ui .close .icon:before, .no-mediaquery #lightBox .top-ui .previous .icon:before, .no-mediaquery #lightBox .top-ui .next .icon:before, .no-mediaquery #lightBox .top-ui .projectCurrent .icon:before, .no-mediaquery #lightBox .bottom-ui .close .icon:before, .no-mediaquery #lightBox .bottom-ui .previous .icon:before, .no-mediaquery #lightBox .bottom-ui .next .icon:before, .no-mediaquery #lightBox .bottom-ui .projectCurrent .icon:before {
-      font-size: 2.75em;
-      top: -20px; }
-  .no-mediaquery #lightBox .top-ui .projectCurrent, .no-mediaquery #lightBox .bottom-ui .projectCurrent {
-    font-size: 1em; }
-.no-mediaquery #lightBox .content {
-  min-height: 800px;
-  width: 100%; }
-  .no-mediaquery #lightBox .content[data-projectCurrent="travelHub"][data-projectImage="1"] {
-    background-image: url(../img/travel-hub/1-landscape.png); }
-  .no-mediaquery #lightBox .content[data-projectCurrent="travelHub"][data-projectImage="2"] {
-    background-image: url(../img/travel-hub/2-landscape.jpg); }
-  .no-mediaquery #lightBox .content[data-projectCurrent="rateCard"][data-projectImage="1"] {
-    background-image: url(../img/rate-card/1-landscape.png); }
-  .no-mediaquery #lightBox .content[data-projectCurrent="rateCard"][data-projectImage="2"] {
-    background-image: url(../img/rate-card/2-landscape.jpg); }
-  .no-mediaquery #lightBox .content[data-projectCurrent="nielsen"][data-projectImage="1"] {
-    background-image: url(../img/nielsen/1-landscape.png); }
-  .no-mediaquery #lightBox .content[data-projectCurrent="nielsen"][data-projectImage="2"] {
-    background-image: url(../img/nielsen/2-landscape.png); }
-  .no-mediaquery #lightBox .content[data-projectCurrent="nielsen"][data-projectImage="3"] {
-    background-image: url(../img/nielsen/3-landscape.jpg); }
-  .no-mediaquery #lightBox .content[data-projectCurrent="dealsSection"][data-projectImage="1"] {
-    background-image: url(../img/deals-section/1-landscape.png); }
-  .no-mediaquery #lightBox .content[data-projectCurrent="dealsSection"][data-projectImage="2"] {
-    background-image: url(../img/deals-section/2-landscape.jpg); }
-  .no-mediaquery #lightBox .content[data-projectCurrent="dealsSection"][data-projectImage="3"] {
-    background-image: url(../img/deals-section/3-landscape.jpg); }
-  .no-mediaquery #lightBox .content[data-projectCurrent="silverFernFarms"][data-projectImage="1"] {
-    background-image: url(../img/silver-fern-farms/1-landscape.png); }
-  .no-mediaquery #lightBox .content[data-projectCurrent="silverFernFarms"][data-projectImage="2"] {
-    background-image: url(../img/silver-fern-farms/2-landscape.jpg); }
-  .no-mediaquery #lightBox .content[data-projectCurrent="silverFernFarms"][data-projectImage="3"] {
-    background-image: url(../img/silver-fern-farms/3-landscape.png); }
-  .no-mediaquery #lightBox .content[data-projectCurrent="travelInfographic"][data-projectImage="1"] {
-    background-image: url(../img/travel-infographic/1-landscape.png); }
-  .no-mediaquery #lightBox .content[data-projectCurrent="travelInfographic"][data-projectImage="2"] {
-    background-image: url(../img/travel-infographic/2-landscape.jpg); }
-  .no-mediaquery #lightBox .content[data-projectCurrent="travelInfographic"][data-projectImage="3"] {
-    background-image: url(../img/travel-infographic/3-landscape.jpg); }
+          transform: translateX(0); }
 
 .no-svg {
   	/* #portraitBody, #portraitHands{
@@ -1922,32 +1935,13 @@ header {
   		// this is taken care of via javascript / modernizer
   	
   	}*/ }
+  .no-svg .extendedBg:before {
+    background-image: url(../img/dark-rays.png); }
+  .no-svg .extendedBg:after {
+    background-image: url(../img/light-rays.png); }
 
-.lt-ie9 #lightBox .icon-container {
+.lt-ie9 .extendedBg:before, .lt-ie9 .extendedBg:after {
   display: none; }
-.lt-ie9 #lightBox .close, .lt-ie9 #lightBox .next {
-  right: 0; }
-.lt-ie9 #lightBox .previous {
-  left: 0; }
-.lt-ie9 .extendedBg:before {
-  display: none; }
-.lt-ie9 .extendedBg:after {
-  display: none; }
-.lt-ie9 .ie8:before {
-  content: "" !important; }
-
-.upgradeBrowser {
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 500; }
-  .upgradeBrowser .whiteBg {
-    background-image: url(../img/white-80percent-tile.png); }
-  .upgradeBrowser .intro {
-    padding: 3em; }
-  .upgradeBrowser .cta {
-    color: #323e50; }
 
 /*
             _       _   
@@ -1958,6 +1952,9 @@ header {
 
 */
 @media print {
+  * {
+    color: #323e50; }
+
   #portraitBody, #portraitHands {
     display: none; }
 
@@ -1971,9 +1968,14 @@ header {
     display: none; }
 
   #work .description:before {
-    background-color: #000; }
+    background-color: #323e50; }
 
   #myHistory .jobPosition:after {
-    border: 1px solid #000; }
+    border: 1px solid #323e50; }
   #myHistory .jobPosition:before {
-    background-color: #000; } }
+    background-color: #323e50; }
+
+  #details .title h2 {
+    padding-left: 0; }
+  #details .title .svgIcon {
+    display: none; } }

@@ -3,559 +3,643 @@
 /*global FastClick: true*/
 /*global Modernizr: true*/
 
-$(document).ready(function(){
+var $m = {
 
-	var $m = {
+	init: function(){
 
-		init: function(){
+		// if($('html').hasClass('lt-ie9')){ $m.ie8.init(); }
 
-			if($('html').hasClass('lt-ie9')){ $m.ie8.init(); }
-
-			$m.features.init();
+		$m.f.init(); // features
+		if(!$m.s.ltie9){
 			$m.work.init();
 			$m.details.init();
 			$m.fastClick();
 			$m.lightBox.init();
+		}
+
+
+	}, // end of init
+
+	s: {
+
+		ani: 0.25, // generic animation value
+
+		dom: {
+
+			work: $('#work')
+
+		}, // store references to DOM element
+
+		col: {
+			'white': '255, 255, 255',
+			'blueLight': '120, 204, 254',
+			'blue': '#538ed9',
+			'blueMedium': '#325a8d',
+			'blueDark': '50, 62, 80',
+			'divider': '242, 250, 255',
+			'shadow': '200, 200, 200'
+		},
+
+		ltie9: false
+
+	}, // end of settings
+
+	g: {
+
+	}, // end of general
+
+	fastClick: function(){
+
+		FastClick.attach(document.body);
+
+	}, // end of fastClick
+
+	/*
+      __             _                       
+     / _| ___  __ _ | |_  _  _  _ _  ___  ___
+    |  _|/ -_)/ _` ||  _|| || || '_|/ -_)(_-<
+    |_|  \___|\__,_| \__| \_,_||_|  \___|/__/
+
+	*/
+
+	f: {
+
+		init: function(){
+
+			console.log('checking features');
+
+			var $html = $('html');
+
+			/*if(!Modernizr.mq('only all')){
+
+				$html.addClass('no-mediaquery');
+
+			} // end of statement*/
+
+			if($html.hasClass('no-svg')){
+
+				console.log('svg suport = false');
+
+				$m.f.noSvg.init();
+
+			} // end of statement
+
+			if($html.hasClass('lt-ie9')){
+
+				$m.s.ltie9 = true;
+				$m.f.noLb.init(); // degrade lightbox
+
+			} // end of statement
 
 		}, // end of init
 
-		s: {
-
-			ani: 0.25, // generic animation value
-
-			dom: {}, // store references to DOM element
-
-			col: {
-				'white': '255, 255, 255',
-				'blueLight': '120, 204, 254',
-				'blue': '#538ed9',
-				'blueMedium': '#325a8d',
-				'blueDark': '50, 62, 80',
-				'divider': '242, 250, 255',
-				'shadow': '220, 220, 220'
-			},
-
-			ltie9: false
-
-		}, // end of settings
-
-		g: {
-
-		}, // end of general
-
-		fastClick: function(){
-
-			FastClick.attach(document.body);
-
-		}, // end of fastClick
-
-		/*
-          __             _                       
-         / _| ___  __ _ | |_  _  _  _ _  ___  ___
-        |  _|/ -_)/ _` ||  _|| || || '_|/ -_)(_-<
-        |_|  \___|\__,_| \__| \_,_||_|  \___|/__/
-
-		*/
-
-		features: {
+		noSvg: {
 
 			init: function(){
 
-				$m.features.check();
+				$('#portraitBody').attr({'src': 'img/me-body.png'});
+				$('#portraitHands').attr({'src': 'img/me-hands.png'});
 
-			}, // end of init
+				$('.svgIcon').each(function(){
 
-			check: function(){
-
-				console.log('checking features');
-
-				var $html = $('html');
-
-				if(!Modernizr.mq('only all')){
-
-					$html.addClass('no-mediaquery');
-
-				} // end of statement
-
-				if(!$html.hasClass('no-svg')){
-
-					console.log('svg suport = false');
-
-					$('#portraitBody').attr({'src': 'img/me-body.png'});
-					$('#portraitHands').attr({'src': 'img/me-hands.png'});
-
-				} // end of statement
-
-			} // end of check
-
-		}, // end of features
-
-		/*
-                           _   
-        __ __ __ ___  _ _ | |__
-        \ V  V // _ \| '_|| / /
-         \_/\_/ \___/|_|  |_\_\
-
-		*/
-
-		work: {
-
-			init: function(){
-
-				$m.work.d(); // get DOM references
-				$m.work.l(); // create listeners
-
-			}, // end of init
-
-			d: function(){
-
-				$m.s.dom.work = $('#work');
-
-			}, // end of DOM
-
-			l: function(){
-
-				console.log('adding WORK listeners...');
-
-				var $work = $m.s.dom.work,
-					$ul = $work.find('> .shadowContainer').find('> .thumbList');
-
-				if(!$m.s.ltie9){
-
-					$ul.on('mouseenter', '.thumbSquare', function(){
-
-						$m.work.a.thumbEnter($(this));
-
-					}).on('mouseleave', '.thumbSquare', function(){
-
-						$m.work.a.thumbLeave($(this));
-
-					});
-
-				} // end of statement
-
-				$ul.on('click', '.thumbSquare', function($e){
-
-					$e.preventDefault();
-
-					$m.lightBox.a.state.setDetails($(this));
-					$m.lightBox.a.state.fadeIn();
+					$m.f.noSvg.addPng($(this));
 
 				});
 
-			}, // end of listeners
+			}, // end of init
 
-			a: {
+			addPng: function($this){
 
-				thumbEnter: function($this){
+				var $url = $this.attr('data-noSvg');
 
-					// console.log('thumbEnter');
+				$this.attr({
+					'src': $url
+				});
 
-					var $ani = $m.s.ani;
+			} // end of addPng
 
-					$this.attr({'data-state': 'enter'});
+		}, // end of noSvg
 
-					TweenMax.to($this.find('> a'), $ani, {
-						'color': 'rgb(' + $m.s.col.blueLight + ')',
-						'transform': 'translateY(-1.5em) scale(1.1)',
-						'textShadow': '0 1.5em 10px rgb(' + $m.s.col.shadow + ')'
-					});
-
-				}, // end of thumbEnter
-
-				thumbLeave: function($this){
-
-					// console.log('thumbLeave');
-
-					var $ani = $m.s.ani;
-
-					$this.removeAttr('data-state');
-
-					TweenMax.to($this.find('> a'), $ani, {
-						'color': 'rgb(' + $m.s.col.blueDark + ')',
-						'transform': 'translateY(0) scale(1)',
-						'textShadow': 'none'
-					});
-
-				} // end of thumbLeave
-
-			} // end of actions
-		
-		}, // end of work
-
-		/*
-         _  _        _    _     _              
-        | |(_) __ _ | |_ | |_  | |__  ___ __ __
-        | || |/ _` || ' \|  _| | '_ \/ _ \\ \ /
-        |_||_|\__, ||_||_|\__| |_.__/\___//_\_\
-              |___/
-
-		*/
-
-		lightBox: {
+		noLb: {
 
 			init: function(){
 
-				$m.lightBox.l(); // create listeners
+				console.log('expand lightbox');
+
+				var $work = $m.s.dom.work,
+					$ul = $work.find('> .shadowContainer').find('> .thumbList'),
+					$s = $m.f.noLb.s.projectURL,
+					$len = $s.length,
+					$i, $this;
+
+				for($i = 0; $i < $len; $i++){
+
+					$this = $ul.find('> .thumbSquare[data-project="' + $s[$i].project + '"]');
+
+					$this.find('> a').attr({
+						'href': 'img/' + $s[$i].url,
+						'target': '_blank'
+					});
+
+				} // end of loop
 
 			}, // end of init
 
 			s: {
 
-				module: $('#lightBox'),
-
-				projectCurrent: 1,
-
-				projectLength: {
-					travelHub : 3,
-					rateCard : 2,
-					nielsen : 3,
-					waterboy : 1,
-					dealsSection : 3,
-					silverFernFarms : 3,
-					stuffRedesign : 6,
-					travelInfographic : 3,
-					smithCity : 2
-				}
+				projectURL: [
+					{
+						project: 'travelHub',
+						url: 'travel-hub/1-landscape.jpg'
+					},
+					{
+						project: 'rateCard',
+						url: 'rate-card/1-landscape.png'
+					},
+					{
+						project: 'nielsen',
+						url: 'nielsen/2-landscape.png'
+					},
+					{
+						project: 'xxxx',
+						url: 'xxxx'
+					},
+					{
+						project: 'dealsSection',
+						url: 'deals-section/1-landscape.png'
+					},
+					{
+						project: 'silverFernFarms',
+						url: 'silver-fern-farms/3-landscape.png'
+					},
+					{
+						project: 'stuffRedesign',
+						url: 'stuff-redesign/1-landscape.jpg'
+					},
+					{
+						project: 'travelInfographic',
+						url: 'travel-infographic/1-landscape.png'
+					},
+					{
+						project: 'mediaHub',
+						url: 'media-hub/2-landscape.png'
+					}
+				]
 
 			}, // end of settings
 
-			l: function(){
+			
 
-				// console.log('adding LIGHT BOX listeners...');
+		} // end of noLb
 
-				var $lb = $m.lightBox.s.module;
+	}, // end of features
 
-				if(!$m.s.ltie9){
+	/*
+                       _   
+    __ __ __ ___  _ _ | |__
+    \ V  V // _ \| '_|| / /
+     \_/\_/ \___/|_|  |_\_\
 
-					$lb.on('mouseenter', 'a', function(){
+	*/
 
-						$m.lightBox.a.changeIcon($(this), 'enter');
+	work: {
 
-					}).on('mouseleave', 'a', function(){
+		init: function(){
 
-						$m.lightBox.a.changeIcon($(this), 'leave');
+			$m.work.l(); // create listeners
 
-					});
+		}, // end of init
 
-				} // end of statement
+		l: function(){
 
-				$lb.on('click', 'a', function($e){
+			console.log('adding WORK listeners...');
 
-					$e.preventDefault();
+			var $work = $m.s.dom.work,
+				$ul = $work.find('> .shadowContainer').find('> .thumbList');
 
-					var $this = $(this);
 
-					if($this.hasClass('close')){ $m.lightBox.a.state.fadeOut(); }
-					else if($this.hasClass('previous')){ $m.lightBox.a.updateProject.init('-'); }
-					else if($this.hasClass('next')){ $m.lightBox.a.updateProject.init('+'); }
+			$ul.on('mouseenter', '.thumbSquare', function(){
 
+				$m.work.a.thumbEnter($(this));
+
+			}).on('mouseleave', '.thumbSquare', function(){
+
+				$m.work.a.thumbLeave($(this));
+
+			}).on('click', '.thumbSquare', function($e){
+
+				$e.preventDefault();
+
+				$m.lightBox.a.state.setDetails($(this));
+				$m.lightBox.a.state.fadeIn();
+
+			});
+
+		}, // end of listeners
+
+		a: {
+
+			thumbEnter: function($this){
+
+				// console.log('thumbEnter');
+
+				var $ani = $m.s.ani,
+					$a = $this.find('> a'),
+					$ic = $a.find('> .iconContainer'),
+					$dor = $ic.find('> .dormant'), // dormant
+					$atv = $ic.find('> .active'), // active
+					$sha = $atv.find('> .shadowLogo'); // shadow
+
+				$this.attr({'data-state': 'enter'});
+
+				TweenMax.to($a, $ani, {
+					'color': 'rgb(' + $m.s.col.blueLight + ')',
+					'transform': 'translateY(-1.5em) scale(1.1)',
+					'textShadow': '0 1.5em 10px rgb(' + $m.s.col.shadow + ')'
 				});
 
-			}, // end of listeners
+				TweenMax.to($dor, $ani, {
+					'autoAlpha': 0
+				});
 
-			a: {
+				TweenMax.to($atv, $ani, {
+					'autoAlpha': 1
+				});
 
-				state: {
+				TweenMax.to($sha, $ani, {
+					'transform': 'translateY(1.5em)',
+				});
 
-					fadeIn: function(){
+			}, // end of thumbEnter
 
-						// console.log('open light box');
+			thumbLeave: function($this){
 
-						var $ani = $m.s.ani,
-							$lb = $m.lightBox.s.module;
+				// console.log('thumbLeave');
 
-						TweenMax.to($lb, $ani, {
-							'autoAlpha': 1
-						});
+				var $ani = $m.s.ani,
+					$a = $this.find('> a'),
+					$ic = $a.find('> .iconContainer'),
+					$dor = $ic.find('> .dormant'), // dormant
+					$atv = $ic.find('> .active'), // active
+					$sha = $atv.find('> .shadowLogo'); // shadow
 
-						if($m.s.ltie9){ $m.ie8.iconFont.lightBox(); }
+				$this.removeAttr('data-state');
 
-					}, // end of fadeIn
+				TweenMax.to($this.find('> a'), $ani, {
+					'color': 'rgb(' + $m.s.col.blueDark + ')',
+					'transform': 'translateY(0) scale(1)',
+					'textShadow': 'none'
+				});
 
-					setDetails: function($this){
+				TweenMax.to($dor, $ani, {
+					'autoAlpha': 1
+				});
 
-						var $lb = $m.lightBox.s.module,
-							$img = $lb.find('> .content'),
-							$pC = $this.attr('data-project'), // projectCurrent
-							$pL = $m.lightBox.s.projectLength[$pC];
+				TweenMax.to($atv, $ani, {
+					'autoAlpha': 0
+				});
 
-						$m.lightBox.s.projectCurrent = $pC;
+				TweenMax.to($sha, $ani, {
+					'transform': 'translateY(0)',
+				});
 
-						// reset the projectImage reference
-						$img.attr({
-							'data-projectCurrent': $pC,
-							'data-projectLength': $pL,
-							'data-projectImage': 1,
-						});
+			} // end of thumbLeave
 
-						$lb.find('> .bottom-ui')
-							.find('.dynamic.length').text($pL)
-							.end()
-							.find('.dynamic.current').text('1');
+		} // end of actions
+	
+	}, // end of work
 
-					}, // end of setDetails
+	/*
+     _  _        _    _     _              
+    | |(_) __ _ | |_ | |_  | |__  ___ __ __
+    | || |/ _` || ' \|  _| | '_ \/ _ \\ \ /
+    |_||_|\__, ||_||_|\__| |_.__/\___//_\_\
+          |___/
 
-					fadeOut: function(){
+	*/
 
-						// console.log('close light box');
+	lightBox: {
 
-						var $ani = $m.s.ani,
-							$lb = $m.lightBox.s.module;
+		init: function(){
 
-						TweenMax.to($lb, $ani, {
-							'autoAlpha': 0
-						});
+			$m.lightBox.l(); // create listeners
 
-					} // end of fadeOut
+		}, // end of init
 
-				}, // end of state
+		s: {
 
-				changeIcon: function($this, $state){
+			module: $('#lightBox'),
+
+			projectCurrent: 1,
+
+			projectLength: {
+				travelHub : 3,
+				rateCard : 2,
+				nielsen : 3,
+				tourismAustralia : 3,
+				dealsSection : 3,
+				silverFernFarms : 3,
+				stuffRedesign : 4,
+				travelInfographic : 3,
+				mediaHub : 4
+			}
+
+		}, // end of settings
+
+		l: function(){
+
+			// console.log('adding LIGHT BOX listeners...');
+
+			var $lb = $m.lightBox.s.module;
+
+			$lb.on('mouseenter', 'a', function(){
+
+				$m.lightBox.a.changeIcon($(this), 'enter');
+
+			}).on('mouseleave', 'a', function(){
+
+				$m.lightBox.a.changeIcon($(this), 'leave');
+
+			}).on('click', 'a', function($e){
+
+				$e.preventDefault();
+
+				var $this = $(this);
+
+				if($this.hasClass('close')){ $m.lightBox.a.state.fadeOut(); }
+				else if($this.hasClass('previous')){ $m.lightBox.a.updateProject.init('-'); }
+				else if($this.hasClass('next')){ $m.lightBox.a.updateProject.init('+'); }
+
+			});
+
+		}, // end of listeners
+
+		a: {
+
+			state: {
+
+				fadeIn: function(){
+
+					// console.log('open light box');
 
 					var $ani = $m.s.ani,
-						$dormant = $this.find('.dormant'),
-						$active = $this.find('.active'),
-						$val;
+						$lb = $m.lightBox.s.module;
 
-					if($state === 'enter'){ $val = 0; }else{ $val = 1; }
-
-					TweenMax.to($dormant, $ani, {
-						'autoAlpha': $val
+					TweenMax.to($lb, $ani, {
+						'autoAlpha': 1
 					});
 
-					if($state === 'enter'){ $val = 1; }else{ $val = 0; }
+					if($m.s.ltie9){ $m.ie8.iconFont.lightBox(); }
 
-					TweenMax.to($active, $ani, {
-						'autoAlpha': $val
+				}, // end of fadeIn
+
+				setDetails: function($this){
+
+					var $lb = $m.lightBox.s.module,
+						$img = $lb.find('> .content'),
+						$pC = $this.attr('data-project'), // projectCurrent
+						$pL = $m.lightBox.s.projectLength[$pC];
+
+					$m.lightBox.s.projectCurrent = $pC;
+
+					// reset the projectImage reference
+					$img.attr({
+						'data-projectCurrent': $pC,
+						'data-projectLength': $pL,
+						'data-projectImage': 1,
 					});
 
-				}, // end of changeIcon
+					$lb.find('> .bottom-ui')
+						.find('.dynamic.length').text($pL)
+						.end()
+						.find('.dynamic.current').text('1');
 
-				updateProject: {
+				}, // end of setDetails
 
-					init: function($dir){
+				fadeOut: function(){
 
-						console.log('direction = ' + $dir);
+					// console.log('close light box');
 
-						$m.lightBox.a.updateProject.fadeOut($dir);
+					var $ani = $m.s.ani,
+						$lb = $m.lightBox.s.module;
 
-					}, // end of init
+					TweenMax.to($lb, $ani, {
+						'autoAlpha': 0
+					});
 
-					fadeOut: function($dir){
+				} // end of fadeOut
 
-						var $ani = $m.s.ani,
-							$lb = $m.lightBox.s.module,
-							$img = $lb.find('> .content');
+			}, // end of state
 
-						TweenMax.to($img, $ani, {
-							'left': $dir + '=100px',
-							'opacity': '0',
-							'onComplete': $m.lightBox.a.updateProject.swap,
-							'onCompleteParams': [$img, $dir]
-						});
-						
-					}, // end of fadeOut
+			changeIcon: function($this, $state){
 
-					swap : function($img, $dir){
+				var $ani = $m.s.ani,
+					$dormant = $this.find('.dormant'),
+					$active = $this.find('.active'),
+					$val;
 
-						var $pC = $m.lightBox.s.projectCurrent, // projectCurrent
-							$pL = $m.lightBox.s.projectLength[$pC], // projectLength
-							$pI = parseInt($img.attr('data-projectImage'), 10); // projectImage
+				if($state === 'enter'){ $val = 0; }else{ $val = 1; }
 
-						// console.log('projectCurrent | before = ' + $pI);
+				TweenMax.to($dormant, $ani, {
+					'autoAlpha': $val
+				});
 
-						console.log('PC = ' + ($pC));
-						console.log('PL = ' + ($m.lightBox.s.projectLength[$pC]));
-						console.log('PI = ' + parseInt($img.attr('data-projectImage'), 10));
+				if($state === 'enter'){ $val = 1; }else{ $val = 0; }
 
-						if($dir === '+'){
+				TweenMax.to($active, $ani, {
+					'autoAlpha': $val
+				});
 
-							$pI += 1;
+			}, // end of changeIcon
 
-							if($pI > $pL){
+			updateProject: {
 
-								$pI = 1;
+				init: function($dir){
 
-							} // end of statement
+					console.log('direction = ' + $dir);
 
-						}else{
+					$m.lightBox.a.updateProject.fadeOut($dir);
 
-							$pI -= 1;
+				}, // end of init
 
-							if($pI < 1){
+				fadeOut: function($dir){
 
-								$pI = $pL;
+					var $ani = $m.s.ani,
+						$lb = $m.lightBox.s.module,
+						$img = $lb.find('> .content');
 
-							} // end of statement
+					TweenMax.to($img, $ani, {
+						'left': $dir + '=100px',
+						'opacity': '0',
+						'onComplete': $m.lightBox.a.updateProject.swap,
+						'onCompleteParams': [$img, $dir]
+					});
+					
+				}, // end of fadeOut
+
+				swap : function($img, $dir){
+
+					var $pC = $m.lightBox.s.projectCurrent, // projectCurrent
+						$pL = $m.lightBox.s.projectLength[$pC], // projectLength
+						$pI = parseInt($img.attr('data-projectImage'), 10); // projectImage
+
+					// console.log('projectCurrent | before = ' + $pI);
+
+					console.log('PC = ' + ($pC));
+					console.log('PL = ' + ($m.lightBox.s.projectLength[$pC]));
+					console.log('PI = ' + parseInt($img.attr('data-projectImage'), 10));
+
+					if($dir === '+'){
+
+						$pI += 1;
+
+						if($pI > $pL){
+
+							$pI = 1;
 
 						} // end of statement
 
-						console.log('projectCurrent | after = ' + $pI);
+					}else{
 
-						$img.attr({
-							'data-projectImage': $pI
-						});
+						$pI -= 1;
 
-						$img.siblings('.bottom-ui')
-							.find('.dynamic.current')
-							.text($pI);
+						if($pI < 1){
 
-						$m.lightBox.a.updateProject.fadeIn($img, $dir);
-
-					}, // end of swap
-
-					fadeIn: function($img, $dir){
-
-						var $ani = $m.s.ani;
-
-						if($dir === '+'){
-
-							$dir = '-';
-
-						}else{
-
-							$dir = '+';
+							$pI = $pL;
 
 						} // end of statement
 
-						console.log('left = ' + $dir + '=100');
+					} // end of statement
 
-						TweenMax.set($img, {
-							'left': $dir + '=200px'
-						});
+					console.log('projectCurrent | after = ' + $pI);
 
-						TweenMax.to($img, $ani, {
-							'left': '0',
-							'opacity': '1'
-						});
-						
-					} // end of fadeIn
-
-				} // end of updateProject
-
-			} // end of actions
-
-		}, // end of lightBox
-
-		/*
-            _       _          _  _     
-         __| | ___ | |_  __ _ (_)| | ___
-        / _` |/ -_)|  _|/ _` || || |(_-<
-        \__,_|\___| \__|\__,_||_||_|/__/
-
-		*/
-
-		details: {
-
-			init: function(){
-
-				$m.details.d(); // get DOM references
-				$m.details.l(); // create listeners
-
-			}, // end of init
-
-			d: function(){
-
-				$m.s.dom.details = $('#details');
-
-			}, // end of DOM
-
-			l: function(){
-
-				var $address = $m.s.dom.details.find('> .shadowContainer').find('> address');
-
-				if(!$m.s.ltie9){
-
-					$address.on('mouseenter', 'li', function(){
-
-						$m.details.a.userEnter($(this));
-						
-					}).on('mouseleave', 'li', function(){
-
-						$m.details.a.userLeave($(this));
-						
+					$img.attr({
+						'data-projectImage': $pI
 					});
 
-				} // end of statement
+					$img.siblings('.bottom-ui')
+						.find('.dynamic.current')
+						.text($pI);
 
-			}, // end of listeners
+					$m.lightBox.a.updateProject.fadeIn($img, $dir);
 
-			a: {
+				}, // end of swap
 
-				userEnter: function($this){
+				fadeIn: function($img, $dir){
 
-					console.log('detail enter');
+					var $ani = $m.s.ani;
 
-					var $ani = $m.s.ani,
-						$dormant = $this.find('.dormant'),
-						$active = $this.find('.active');
+					if($dir === '+'){
 
-					TweenMax.to($this, $ani, {'color': '#fff'});
-					TweenMax.to($dormant, $ani, {'autoAlpha': '0'});
-					TweenMax.to($active, $ani, {'autoAlpha': '1'});
+						$dir = '-';
 
-				}, // end of userEnter
+					}else{
 
-				userLeave: function($this){
+						$dir = '+';
 
-					console.log('detail leave');
+					} // end of statement
 
-					var $ani = $m.s.ani,
-						$dormant = $this.find('.dormant'),
-						$active = $this.find('.active');
+					console.log('left = ' + $dir + '=100');
 
-					TweenMax.to($this, $ani, {'color': 'rgb(' + $m.s.col.blueDark + ')'});
-					TweenMax.to($dormant, $ani, {'autoAlpha': '1'});
-					TweenMax.to($active, $ani, {'autoAlpha': '0'});
+					TweenMax.set($img, {
+						'left': $dir + '=200px'
+					});
 
-				}, // end of userLeave
+					TweenMax.to($img, $ani, {
+						'left': '0',
+						'opacity': '1'
+					});
+					
+				} // end of fadeIn
 
-			} // end of actions
+			} // end of updateProject
 
-		}, // end of details
+		} // end of actions
 
-		/*
-         _       ___ 
-        (_) ___ ( _ )
-        | |/ -_)/ _ \
-        |_|\___|\___/
+	}, // end of lightBox
 
-		*/
+	/*
+        _       _          _  _     
+     __| | ___ | |_  __ _ (_)| | ___
+    / _` |/ -_)|  _|/ _` || || |(_-<
+    \__,_|\___| \__|\__,_||_||_|/__/
 
-		ie8: {
+	*/
 
-			init: function(){
+	details: {
 
-				$m.s.ltie9 = true;
-				$m.ie8.iconFont.allRef();
+		init: function(){
 
-			}, // end if init
+			$m.details.d(); // get DOM references
+			$m.details.l(); // create listeners
 
-			iconFont: {
+		}, // end of init
 
-				allRef: function(){
+		d: function(){
 
-					$('.icon').removeClass('ie8');
+			$m.s.dom.details = $('#details');
 
-				}, // end of allRef
+		}, // end of DOM
 
-				lightBox: function(){
+		l: function(){
 
-					$('.icon').addClass('ie8');
-					$('.icon').removeClass('ie8');
-				} // end of lightBox
+			var $address = $m.s.dom.details.find('> .shadowContainer').find('> address');
 
-			} // end of iconFont
-		}
+			if(!$m.s.ltie9){
 
-	}; // end of $m module container
+				$address.on('mouseenter', 'li', function(){
 
-	(function(){
+					$m.details.a.userEnter($(this));
+					
+				}).on('mouseleave', 'li', function(){
+
+					$m.details.a.userLeave($(this));
+					
+				});
+
+			} // end of statement
+
+		}, // end of listeners
+
+		a: {
+
+			userEnter: function($this){
+
+				console.log('detail enter');
+
+				var $ani = $m.s.ani,
+					$dormant = $this.find('.dormant'),
+					$active = $this.find('.active');
+
+				TweenMax.to($this, $ani, {'color': '#fff'});
+				TweenMax.to($dormant, $ani, {'autoAlpha': '0'});
+				TweenMax.to($active, $ani, {'autoAlpha': '1'});
+
+			}, // end of userEnter
+
+			userLeave: function($this){
+
+				console.log('detail leave');
+
+				var $ani = $m.s.ani,
+					$dormant = $this.find('.dormant'),
+					$active = $this.find('.active');
+
+				TweenMax.to($this, $ani, {'color': 'rgb(' + $m.s.col.blueDark + ')'});
+				TweenMax.to($dormant, $ani, {'autoAlpha': '1'});
+				TweenMax.to($active, $ani, {'autoAlpha': '0'});
+
+			}, // end of userLeave
+
+		} // end of actions
+
+	} // end of details
+
+}; // end of $m module container
+
+$(document).ready(function(){
 
 		$m.init();
-
-	})();
 
 }); // end of document.ready
 
