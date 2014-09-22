@@ -18,8 +18,10 @@ $gray: #787878; // generic
 $grayD: darken($gray, 25%); // dark
 $grayL: lighten($gray, 35%); // light
 
-$blueLight: #78ccfe;
-$blue: #538ed9;
+$blueBg: #78ccfe;
+$blueDull: #7fe7ff;
+$blueLight: #00cfff;
+$blue: #3fa9f5;
 $blueMedium: #325a8d;
 $blueDark: #323e50;
 
@@ -106,11 +108,39 @@ html, body{
 	width: 100%;
 }
 
+head{
+	background-color: red;
+
+	@include breakpoint(MEDIUM){ background-color: green; }
+}
+
 body{
+	background-color: $blueBg;
 	color: $blue;
 	font: {
 		family: "Roboto", sans-serif;
 		weight: 300;
+	}
+
+	&:before{
+		@include pseudo;
+		background:{
+			image: url(../img/light-rays.svg);
+			position: right top;
+			repeat: no-repeat;
+			size: 200%;
+		}
+		height: 100%;
+		opacity: 0.5;
+		pointer-events: none; // just encase they pop up over actual content
+		position: fixed;
+		right: 0;
+		top: 0;
+		width: 100%;
+		z-index: -100; // move light rays under other DOM content
+
+		@include breakpoint(SMALL){ background-size: 150%; }
+		@include breakpoint(MEDIUM){ background-size: 100%; }
 	}
 }
 
@@ -162,6 +192,11 @@ h4, .h4{
 		weight: 100;
 	}
 	margin: 0;
+}
+
+.siteWrapper{
+	overflow: hidden;
+	position: relative;
 }
 
 .center{
@@ -248,14 +283,21 @@ section, .shadowContainer{
 	position: relative; // make these the anchor for the shadows to be positioned around
 }
 
-#work, #myHistory{
+#tools, #work, #myHistory{
 
 	& > .shadowBottom{
 		top: 0;
 	}
 }
 
-#about, #work{
+#about, #tools{
+
+	.shadowBottom:before{
+		box-shadow: 0px 0px 20px 0px $shadowLight;
+	}
+}
+
+#about, #tools{
 
 	.shadowTop{
 		bottom: 100%;
@@ -273,7 +315,7 @@ section, .shadowContainer{
 	}
 }
 
-#work, #myHistory, #details{
+#tools, #work, #myHistory, #details{
 
 	.shadowContainer .shadowTop{
 		bottom: 100%;
@@ -352,62 +394,6 @@ $bodytoHandsRatio: 0.125; // the relation between the portrait body and hands sv
 	}
 }
 
-/*
-           _                  _          _   _               _                                   _ 
- ___ __ __| |_  ___  _ _   __| | ___  __| | | |__  __ _  __ | |__ __ _  _ _  ___  _  _  _ _   __| |
-/ -_)\ \ /|  _|/ -_)| ' \ / _` |/ -_)/ _` | | '_ \/ _` |/ _|| / // _` || '_|/ _ \| || || ' \ / _` |
-\___|/_\_\ \__|\___||_||_|\__,_|\___|\__,_| |_.__/\__,_|\__||_\_\\__, ||_|  \___/ \_,_||_||_|\__,_|
-                                                                 |___/                                                                
-	
-*/
-
-.extendedBg{
-	background-color: $blueLight;
-	overflow: hidden; // stopps the x and y overhang of the portrait image
-	position: relative; // for portraitBody image to reference
-	z-index: -1; // push below all other content (moves light rays to the back also)
-
-	&:before, &:after{
-		@include pseudo;
-		background:{
-			repeat: no-repeat;
-			size: 400%;
-		}
-		height: 100%;
-		opacity: 0.5;
-		top: 0;
-		width: 100%;
-		z-index: -100; // move light rays under other DOM content
-
-		@include breakpoint(MICRO){ background-size: 300%; }
-		@include breakpoint(SMALL){ background-size: 150%; }
-
-		@include breakpoint(MEDIUM){
-			background-size: 100%;
-			opacity: 0.75;
-			
-		}
-
-		@include breakpoint(LARGE){ opacity: 1; }
-	}
-
-	&:before{
-		background: {
-			image: url(../img/dark-rays.svg);
-			position: left top;
-		}
-		left: 0;
-	}
-
-	&:after{
-		background: {
-			image: url(../img/light-rays.svg);
-			position: right top;
-		}
-		right: 0;
-	}
-}
-
 header{
 	height: $portraitHeightTiny / 2;
 	position: relative; // for hello copy to reference
@@ -432,9 +418,7 @@ header{
 
 		@include breakpoint(MEDIUM){ width: 33%; }
 
-		h1{
-			color: white;
-		}
+		h1{ color: white; }
 
 		p{
 			color: $blueDark;
@@ -481,8 +465,202 @@ header{
 		@include breakpoint(MEDIUM){
 			&.left{ padding-right: $pad / 2; }
 			&.right{ padding-left: $pad / 2; }
+			&.left, &.right{ width: 50%; }
 			float: left;
+		}
+	}
+}
+
+/*
+     _              _     
+    | |_  ___  ___ | | ___
+    |  _|/ _ \/ _ \| |(_-<
+     \__|\___/\___/|_|/__/
+
+*/
+
+#tools{
+	background-color: white;
+	padding: $pad 0 0 0;
+	z-index: 2; // bump up above work container so that the bottom shadow is visible
+
+	@mixin breakpoint($point){
+
+		@if $point == threeROWS{
+			@media only screen and (min-width: 21em){ @content; }
+		}
+
+		@if $point == twoROWS{
+			@media only screen and (min-width: 35em){ @content; }
+		}
+
+		@else if $point == oneROW{
+			@media only screen and (min-width: 50em){ @content; }
+		}
+	}
+
+	.thumbList{
+		margin-top: $pad / 2;
+	}
+
+	.thumbSquare{
+		$fourRows: 100% / 2;
+		$threeRows: 100% / 5;
+		$twoRows: 100% / 7;
+		$oneRow: 100% / 15;
+		float: left;
+		margin-left: 0;
+		padding: ($pad / 3) 0;
+		position: relative;
+		width: $fourRows;
+
+		&:nth-child(2n + 1){ margin-left: 0; }
+
+		@include breakpoint(threeROWS){
+
+			margin-left: $threeRows;
+			width: $threeRows;
+
+			&:nth-child(1n + 1){ margin-left: $threeRows; } // reset margin
+			&:nth-child(3n + 1){ margin-left: 0; }
+		}
+
+		@include breakpoint(twoROWS){
+
+			margin-left: $twoRows;
+			width: $twoRows;
+
+			&:nth-child(1n + 1){ margin-left: $twoRows; } // reset margin
+			&:nth-child(4n + 1){ margin-left: 0; }
+		}
+
+		@include breakpoint(oneROW){
+
+			width: $oneRow;
+
+			&:nth-child(1n + 1){ margin-left: $oneRow; } // reset margin
+			&:nth-child(1){ margin-left: 0; }
+		}
+
+		a{
+			display: block;
+			height: 100%;
+			width: 100%;
+		}
+
+		.iconContainer{
+			position: relative;
+		}
+
+		img{
+			height: auto;
+			margin-left: 25%;
 			width: 50%;
+
+			@include breakpoint(threeROWS){
+				margin-left: 15%;
+				width: 70%;
+			}
+
+			@include breakpoint(twoROWS){
+				margin-left: 0;
+				width: 100%;
+			}
+		}
+
+		.active{
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 100%;
+			visibility: hidden;
+
+			.svgIcon{ z-index: 1; }
+
+			.shadowLogo{
+				left: 0;
+				position: absolute;
+				top: 0;
+				z-index: -1;
+			}
+		}
+
+		.description{
+			background-color: white;
+			border: 1px solid $blueLight;
+			box-shadow: 0 20px 5px -10px $shadowLight;
+			left: 50%;
+			padding: 0.5em 1em;
+			pointer-events: none;
+			position: absolute;
+			text-align: center;
+			top: 90%;
+			transform: translateX(-50%); // scale(0.5);
+			visibility: hidden;
+			width: 150%;
+			z-index: 100;
+
+			@include breakpoint(threeROWS){ width: 200%; }
+			@include breakpoint(twoROWS){ width: 200%; }
+			@include breakpoint(oneROW){ width: 250%; }
+
+			&:before{
+				$width: 2em;
+				@include pseudo;
+				background-color: white;
+				border: 1px solid $blueLight;
+				height: $width;
+				margin-left: -0.3em;
+				width: $width;
+				z-index: -3;
+				left: 50%;
+				top: 0;
+				transform: rotate(45deg) translateX(-50%);
+			}
+
+			h3:before{
+				@include pseudo;
+				background-color: white;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				top: 0;
+				z-index: -1;
+			}
+
+			h3{
+				color: $blueLight;
+			}
+
+			p{
+				color: $blueDull;
+			}
+
+			@include breakpoint(threeROWS){
+
+				h3{
+					font: {
+						size: 1.1em;
+						weight: 300;
+					}
+				}
+
+				p{ font-size: 0.8em; }
+			}
+
+			@include breakpoint(twoROWS){
+
+				h3{
+					font: {
+						size: 1.5em;
+						weight: 100;
+					}
+				}
+
+				p{ font-size: 1em; }
+			}
+
+			p{ margin: 0; }
 		}
 	}
 }
@@ -495,38 +673,30 @@ header{
 
 */
 
-#work, #myHistory{
-	padding: $pad 0 0 0;
-
-	.intro p{
-		padding: 0 0 ($pad / 2) 0;
-
-		@include breakpoint(MEDIUM){
-			&.left{ padding-right: $pad / 2; }
-			&.right{ padding-left: $pad / 2; }
-			float: left;
-			width: 50%;
-		}
-	}
-}
-
 #work{
+	background-color: white;
+	padding: $pad 0 0 0;
+	z-index: 1;  // bump up above history and below the tools container so that the bottom shadow is visible
 
 	@mixin breakpoint($point){
 
 		@if $point == twoSMALL{
-			@media only screen and (min-width: 40em){ @content; }
+			@media only screen and (min-width: 33em){ @content; }
 		}
 
 		@else if $point == twoBIG{
-			@media only screen and (min-width: 50em){ @content; }
+			@media only screen and (min-width: 41em){ @content; }
 		}
 
 		@else if $point == threeSMALL{
-			@media only screen and (min-width: 70em){ @content; }
+			@media only screen and (min-width: 55em){ @content; }
 		}
 
 		@else if $point == threeBIG{
+			@media only screen and (min-width: 64em){ @content; }
+		}
+
+		@else if $point == threeHUGE{
 			@media only screen and (min-width: 80em){ @content; }
 		}
 
@@ -534,6 +704,7 @@ header{
 
 	.thumbList{
 		list-style-type: none;
+		margin-top: $pad / 2;
 		padding-bottom: $pad / 2;
 		@include breakpoint(twoBIG){ padding-bottom: $pad / 3; }
 		@include breakpoint(threeSMALL){ padding-bottom: $pad / 4; }
@@ -586,7 +757,6 @@ header{
 						.svgIcon{ z-index: 1; }
 
 						.shadowLogo{ 
-							// top: 1.25em;
 							z-index: 0;
 						}
 					}
@@ -594,7 +764,6 @@ header{
 				}
 
 				.description{
-					// background-color: red;
 					color: inherit;
 					margin-left: $width - 0.75em;
 					position: absolute;
@@ -660,18 +829,41 @@ header{
 			}
 
 			@include breakpoint(twoSMALL){
+				$gap: 1em;
+
+				&:nth-child(2n + 1){ padding: 0 $gap 0 0; }
+				&:nth-child(2n + 2){ padding: 0 0 0 $gap; }
+			}
+
+			@include breakpoint(twoBIG){
 				$gap: 2em;
 
 				&:nth-child(2n + 1){ padding: 0 $gap 0 0; }
-				&:nth-child(2n + 2){ padding-left: 0 0 0 $gap; }
+				&:nth-child(2n + 2){ padding: 0 0 0 $gap; }
 			}
 
 			@include breakpoint(threeSMALL){
-				$gap: 2.5em;
+				$gap: 3em;
 
-				&:nth-child(3n + 1){ padding-right: 0 $gap 0 0; }
+				&:nth-child(3n + 1){ padding: 0 $gap 0 0; }
 				&:nth-child(3n + 2){ padding: 0 ($gap / 2); }
-				&:nth-child(3n + 3){ padding-left: 0 0 0 $gap; }
+				&:nth-child(3n + 3){ padding: 0 0 0 $gap; }
+			}
+
+			@include breakpoint(threeBIG){
+				$gap: 4em;
+
+				&:nth-child(3n + 1){ padding: 0 $gap 0 0; }
+				&:nth-child(3n + 2){ padding: 0 ($gap / 2); }
+				&:nth-child(3n + 3){ padding: 0 0 0 $gap; }
+			}
+
+			@include breakpoint(threeHUGE){
+				$gap: 8.5em;
+
+				&:nth-child(3n + 1){ padding: 0 $gap 0 0; }
+				&:nth-child(3n + 2){ padding: 0 ($gap / 2); }
+				&:nth-child(3n + 3){ padding: 0 0 0 $gap; }
 			}
 
 			&[data-state="enter"] .description:before{
@@ -693,6 +885,7 @@ header{
 #myHistory{
 	background-image: linear-gradient(to top, rgba(white, 0.25), rgba(white, 0.8));
 	padding: $pad 0 0 0;
+	z-index: 0; // bump up below work container so that the bottom shadow is visible
 }
 
 .jobList{
@@ -954,11 +1147,7 @@ header{
 */
 
 #details{
-	color: $blueDark;
-
-	&:before{ background-position: left center; }
-
-	&:after{ background-position: right center; }	
+	color: $blueDark;	
 
 	.title{ color: white; }
 
@@ -983,7 +1172,6 @@ header{
 			text-decoration: none;
 
 			.iconContainer{
-				// background-color: gray;
 				bottom: 2.5em;
 				position: absolute;
 
@@ -1043,33 +1231,18 @@ header{
 	$width: $pad / 4;
 	$grad: lighten($blueLight, 20%);
 	background-color: $lightBoxBg;
-	bottom: $pad / 1.5;
+	height: 100%;
 	left: 0;
 	position: fixed;
-	top: $pad / 1.5;
+	top: 0;
+	// transform: translateZ(0); // GPU hack for scrollreveal.js to stop the background flickering when the elements transform in
 	visibility: hidden;
 	width: 100%;
 	z-index: 9999;
 
-	@include breakpoint(MEDIUM){
-		bottom: $pad / 1.25;
-		top: $pad / 1.25;
-	}
+	.top-ui{ top: 0; }
 
-	@include breakpoint(LARGE){
-		bottom: $pad;
-		top: $pad;
-	}
-
-	.top-ui{
-		background-color: $lightBoxBg;
-		bottom: 100%
-	}
-
-	.bottom-ui{
-		background-color: $lightBoxBg;
-		top: 100%;
-	}
+	.bottom-ui{ bottom: 0; }
 
 	.top-ui, .bottom-ui{
 		height: $pad / 1.5;
@@ -1122,8 +1295,11 @@ header{
 		.projectCurrent{
 			left: 0;
 			text-align: center;
+			visibility: hidden;
 			width: 100%;
 			z-index: 0;
+
+			@include breakpoint(SMALL){  visibility: inherit; }
 
 			.dynamic{
 				display: inline-block;
@@ -1154,13 +1330,13 @@ header{
 		.iconContainer{
 			height: 100%;
 			position: absolute;
-			top: 50%;
-			transform: translateY(-50%);
+			top: 0;
 			width: 3em;
 
 			.svgIcon{
-				// height: 100%;
 				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
 				width: 100%;
 
 				&.active{ visibility: hidden; }
@@ -1171,14 +1347,25 @@ header{
 	.content{
 		$gap: 0.35em;
 		background: {
-			// color: gold;
 			size: contain;
 			position: center center;
 			repeat: no-repeat;
 		};
-		height: 100%;
-		position: relative;
+		bottom: $pad / 1.5;
+		margin-left: 5%;
+		position: absolute;
+		top: $pad / 1.5;
 		width: 90%;
+
+		@include breakpoint(MEDIUM){
+			bottom: $pad / 1.25;
+			top: $pad / 1.25;
+		}
+
+		@include breakpoint(LARGE){
+			bottom: $pad;
+			top: $pad;
+		}
 
 		// get rid of the next and previous buttons if there is only one image in the lighbox
 		&[data-projectLength="1"] + .bottom-ui{
@@ -1309,8 +1496,8 @@ header{
 			}
 
 			&[data-projectImage="4"]{
-				background-image: url(../img/stuff-redesign/4-portrait.png);
-				@include breakpoint(SMALL){ background-image: url(../img/stuff-redesign/4-landscape.png); }
+				background-image: url(../img/stuff-redesign/4-portrait.jpg);
+				@include breakpoint(SMALL){ background-image: url(../img/stuff-redesign/4-landscape.jpg); }
 			}
 		}
 
@@ -1434,8 +1621,18 @@ header{
 		background-color: rgba(white, 0.7);
 	}
 
-	#work .description:before{
+	#work .thumbSquare{
+
+		.description:before{
 			background-color: $blueDark;
+			bottom: auto !important;
+			height: 33%;
+			top: 33% !important;
+		}
+
+		&[data-state="enter"] .description:before{
+			background-color: $blueLight;
+		}
 	}
 
 	.jobList .jobPosition{
@@ -1479,204 +1676,6 @@ header{
 	}
 }
 
-/*.no-mediaquery{ // reset everything to its largest STATIC state
-
-	h1{
-		font-size: 7em;
-	}
-
-	$portraitHeightLargeStatic: 1280px;
-	header{
-		height: $portraitHeightLargeStatic / 2;
-
-		.hello{
-			top: 50%;
-			transform: translateY(-50%);
-			width: 33%;
-
-			h1{
-				color: white;
-			}
-
-			p{
-				font: {
-					size: 1.5em;
-					weight: 100;
-				}
-			}
-		}
-	}
-
-	#portraitBody{
-		height: 1280px;
-		left: 50%;
-		margin-left: -350px;
-		transform: translateX(0);
-		width: 973px;
-	}
-
-	#portraitHands{
-		height: $portraitHeightLargeStatic * $bodytoHandsRatio;
-		top: $portraitHeightLargeStatic * $bodytoHandsRatio * -0.5;
-		left: 50%;
-		margin-left: -350px;
-		transform: translateX(0);
-		width: 973px;
-	}
-
-	.center{
-		width: 75em; // 1200px
-	}
-
-	#about, #details{
-
-		.intro{
-			float: left;
-			width: 50%;
-
-			&.design, &.experience, &.contact{
-				padding-right: $pad / 2;
-			}
-
-			&.development, &.employment, &.references{
-				padding-left: $pad / 2;
-			}
-		}
-	}
-
-	#work{
-
-		.thumbList{
-			padding-bottom: $pad / 5;
-
-			.thumbSquare{
-				padding-right: 2em;
-				width: 33.3%;
-
-				a{
-					height: 17em;
-
-					.icon{
-						height: 17em;
-
-						&:before{
-							top: 35%; // change below...
-							transform: translateY(0);
-						}
-					}
-
-					.description{
-						font: {
-							size: 1.5em;
-							weight: 100;
-						}
-						// top: 0;
-						transform: translateY(0);
-
-						&:before{ left: 5.3em; }
-					}
-				}
-
-				&[data-project="stuffRedesign"],
-				&[data-project="travelInfographic"],
-				&[data-project="smithCity"]
-				{
-					a .description{
-						top: 45%;
-					}
-				}
-
-				&[data-project="silverFernFarms"] a .description{
-					top: 35%;
-				}
-			}
-		}
-	}
-
-	#details address ul li{
-		display: inline;
-		width: auto;
-
-		&.phone a .iconContainer{
-			left: 0.5em
-		}
-
-		&.email a .iconContainer{
-			left: 1.75em
-		}
-	}
-
-	#lightBox{
-
-		.top-ui, .bottom-ui{
-			height: $pad;
-
-			.center{
-				height: 100%;
-				position: relative;
-			}
-
-			.close, .previous, .next, .projectCurrent{
-				top: 25px;
-				transform: translateY(0);
-
-				.text{
-					font-size: 2em;
-					visibility: inherit;
-				}
-
-				.icon:before{
-					font-size: 2.75em;
-					top: -20px;
-				}
-			}
-
-			.projectCurrent{
-				font-size: 1em;
-			}
-		}
-
-		.content{
-			min-height: 800px;
-			width: 100%;
-
-			&[data-projectCurrent="travelHub"]{
-				&[data-projectImage="1"]{ background-image: url(../img/travel-hub/1-landscape.png); }
-				&[data-projectImage="2"]{ background-image: url(../img/travel-hub/2-landscape.jpg); }
-			}
-
-			&[data-projectCurrent="rateCard"]{
-				&[data-projectImage="1"]{ background-image: url(../img/rate-card/1-landscape.png); }
-				&[data-projectImage="2"]{ background-image: url(../img/rate-card/2-landscape.jpg); }
-			}
-
-			&[data-projectCurrent="nielsen"]{
-				&[data-projectImage="1"]{ background-image: url(../img/nielsen/1-landscape.png); }
-				&[data-projectImage="2"]{ background-image: url(../img/nielsen/2-landscape.png); }
-				&[data-projectImage="3"]{ background-image: url(../img/nielsen/3-landscape.jpg); }
-			}
-
-			&[data-projectCurrent="dealsSection"]{
-				&[data-projectImage="1"]{ background-image: url(../img/deals-section/1-landscape.png); }
-				&[data-projectImage="2"]{ background-image: url(../img/deals-section/2-landscape.jpg); }
-				&[data-projectImage="3"]{ background-image: url(../img/deals-section/3-landscape.jpg); }
-			}
-
-			&[data-projectCurrent="silverFernFarms"]{
-				&[data-projectImage="1"]{ background-image: url(../img/silver-fern-farms/1-landscape.png); }
-				&[data-projectImage="2"]{ background-image: url(../img/silver-fern-farms/2-landscape.jpg); }
-				&[data-projectImage="3"]{ background-image: url(../img/silver-fern-farms/3-landscape.png); }
-			}
-
-			&[data-projectCurrent="travelInfographic"]{
-				&[data-projectImage="1"]{ background-image: url(../img/travel-infographic/1-landscape.png); }
-				&[data-projectImage="2"]{ background-image: url(../img/travel-infographic/2-landscape.jpg); }
-				&[data-projectImage="3"]{ background-image: url(../img/travel-infographic/3-landscape.jpg); }
-			}
-		}
-	}
-}*/
-
 .no-csstransforms{
 
 	#work{
@@ -1703,26 +1702,41 @@ header{
 	
 	}*/
 
-	.extendedBg{
+	body:before{
+		background-image: url(../img/light-rays.png);
+		opacity: 1 !important;
+	}
 
-		&:before{
-			background-image: url(../img/dark-rays.png);
-		}
+}
 
-		&:after{
-			background-image: url(../img/light-rays.png);
+.no-mediaqueries{
+
+	.siteWrapper{ min-width: 1000px; }
+
+	#tools{
+
+		.thumbSquare{
+			$width: 100% / 16;
+			margin: 0 ($width / 2) 0 ($width / 2);
+			width: $width;
+
+			img{
+				margin-left: 0;
+				width: 100%;
+			}
 		}
 	}
+
 }
 
 .lt-ie9{
 
-	.extendedBg{
+	/* body{
 
 		&:before, &:after{
 			display: none;
 		}
-	}
+	} */
 }
 
 /*
@@ -1753,11 +1767,46 @@ header{
 
 	.shadowTop, .shadowBottom{ display: none; }
 
-	#work .description:before{
-		background-color: $blueDark;
+	#tools{
+		padding: 0 !important;
+
+		.thumbList{
+			margin: 0;
+		}
+
+		.thumbSquare{
+			$width: 100% / 16;
+			margin: 0 ($width / 2) 0 ($width / 2);
+			width: $width;
+
+			img{
+				margin-left: 0;
+				width: 100%;
+			}
+		}
+	}
+
+	#work{
+
+		.thumbList{
+			margin: 0;
+
+			.thumbSquare{
+				height: auto !important;
+			}
+		}
+
+		.description:before{
+			background-color: $blueDark;
+		}
 	}
 
 	#myHistory{
+		padding: 0 !important;
+
+		.jobList{
+			padding: 0 !important;
+		}
 		
 		.jobPosition{
 
@@ -1766,15 +1815,30 @@ header{
 		}
 	}
 
-	#details .title{
-		
-		h2{ padding-left: 0; }
+	#details{
+		padding: 0 !important;
 
-		.svgIcon{
-			display: none;
+		address li{
+			padding: 0 !important;
+		}
+
+		.title{
+		
+			h2{ padding-left: 0; }
+
+			.iconContainer, .svgIcon{
+				display: none;
+			}
 		}
 	}
 
+	*[data-scroll-reveal="enter left over 1s"]{
+		opacity: 1 !important;
+		transform: translateX(0) !important;
+	}
+
+	*[data-scroll-reveal="enter top over 1s"]{
+		opacity: 1 !important;
+		transform: translateY(0) !important;
+	}
 }
-
-

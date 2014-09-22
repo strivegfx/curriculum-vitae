@@ -2,6 +2,7 @@
 /*global TweenMax: true*/
 /*global FastClick: true*/
 /*global Modernizr: true*/
+/*global scrollReveal: true*/
 
 var $m = {
 
@@ -11,6 +12,7 @@ var $m = {
 
 		$m.f.init(); // features
 		if(!$m.s.ltie9){
+			$m.tools.init();
 			$m.work.init();
 			$m.details.init();
 			$m.fastClick();
@@ -26,13 +28,14 @@ var $m = {
 
 		dom: {
 
+			tools: $('#tools'),
 			work: $('#work')
 
 		}, // store references to DOM element
 
 		col: {
 			'white': '255, 255, 255',
-			'blueLight': '120, 204, 254',
+			'blueLight': '0, 207, 255',
 			'blue': '#538ed9',
 			'blueMedium': '#325a8d',
 			'blueDark': '50, 62, 80',
@@ -88,6 +91,14 @@ var $m = {
 
 				$m.s.ltie9 = true;
 				$m.f.noLb.init(); // degrade lightbox
+
+			} // end of statement
+
+			if($m.f.win()){ // i fthe window size = green for go then activate the scrollReveal script
+
+				console.log('screen size = big');
+
+				window.scrollReveal = new scrollReveal();
 
 			} // end of statement
 
@@ -161,8 +172,8 @@ var $m = {
 						url: 'nielsen/2-landscape.png'
 					},
 					{
-						project: 'xxxx',
-						url: 'xxxx'
+						project: 'tourismAustralia',
+						url: 'tourism-australia/2-landscape.png'
 					},
 					{
 						project: 'dealsSection',
@@ -186,13 +197,152 @@ var $m = {
 					}
 				]
 
-			}, // end of settings
+			} // end of settings
 
-			
+		}, // end of noLb
 
-		} // end of noLb
+		win: function(){
+
+			var $col = $('head').css('background-color'),
+				$big = false;
+
+			console.log($col);
+
+			if($col === 'rgb(0, 128, 0)'){ $big = true; }
+
+			return $big;
+
+		} // end fo window size
 
 	}, // end of features
+
+	/*
+     _              _     
+    | |_  ___  ___ | | ___
+    |  _|/ _ \/ _ \| |(_-<
+     \__|\___/\___/|_|/__/
+
+	*/
+
+	tools: {
+
+		init: function(){
+
+			$m.tools.l(); // create listeners
+
+		}, // end of init
+
+		l: function(){
+
+			console.log('adding TOOLS listeners...');
+
+			var $tools = $m.s.dom.tools,
+				$ul = $tools.find('> .shadowContainer').find('> .thumbList'),
+				$t = $ul.find('> .thumbSquare');
+
+			$ul.on('mouseenter', '.thumbSquare', function(){
+
+				$m.tools.a.thumbEnter($(this));
+
+			}).on('mouseleave', '.thumbSquare', function(){
+
+				$m.tools.a.thumbLeave($(this));
+
+			}).on('click', '.thumbSquare', function($e){
+
+				$e.preventDefault();
+				$m.tools.a.thumbLeave($t);
+				$m.tools.a.thumbEnter($(this));
+
+			});
+
+		}, // end of listeners
+
+		a: {
+
+			thumbEnter: function($this){
+
+				console.log('tool enter');
+
+				var $ani = $m.s.ani,
+					$a = $this.find('> a'),
+					$ic = $a.find('> .iconContainer'),
+					$dor = $ic.find('> .dormant'), // dormant
+					$atv = $ic.find('> .active'), // active
+					$sha = $atv.find('> .shadowLogo'), // shadow
+					$des = $this.find('> .description');
+
+				TweenMax.to($a, $ani, {
+					'color': 'rgb(' + $m.s.col.blueLight + ')',
+					'transform': 'translateY(-1.5em) scale(1.1)'
+				});
+
+				TweenMax.to($dor, $ani, {
+					'autoAlpha': 0
+				});
+
+				TweenMax.to($atv, $ani, {
+					'autoAlpha': 1
+				});
+
+				TweenMax.to($sha, $ani, {
+					'transform': 'translateY(1.5em)',
+				});
+
+				TweenMax.set($des, {
+					'z-index': '100'
+				});
+
+				TweenMax.to($des, $ani, {
+					'autoAlpha': '1'
+					// 'transform': 'scale(1)'
+				});
+
+			}, // end of thumbEnter
+
+			thumbLeave: function($this){
+
+				console.log('tool leave');
+
+				var $ani = $m.s.ani,
+					$a = $this.find('> a'),
+					$ic = $a.find('> .iconContainer'),
+					$dor = $ic.find('> .dormant'), // dormant
+					$atv = $ic.find('> .active'), // active
+					$sha = $atv.find('> .shadowLogo'), // shadow
+					$des = $this.find('> .description');
+
+				TweenMax.to($a, $ani, {
+					'color': 'rgb(' + $m.s.col.blueDark + ')',
+					'transform': 'translateY(0) scale(1)'
+				});
+
+				TweenMax.to($dor, $ani, {
+					'autoAlpha': 1
+				});
+
+				TweenMax.to($atv, $ani, {
+					'autoAlpha': 0
+				});
+
+				TweenMax.to($sha, $ani, {
+					'transform': 'translateY(0)',
+				});
+
+				TweenMax.set($des, {
+					'z-index': '0'
+				});
+
+				TweenMax.to($des, $ani, {
+					'autoAlpha': '0'
+					// 'transform': 'scale(1)'
+				});
+
+			}
+
+		} // end of actions
+	
+	}, // end of tools
 
 	/*
                        _   
@@ -285,7 +435,7 @@ var $m = {
 
 				$this.removeAttr('data-state');
 
-				TweenMax.to($this.find('> a'), $ani, {
+				TweenMax.to($a, $ani, {
 					'color': 'rgb(' + $m.s.col.blueDark + ')',
 					'transform': 'translateY(0) scale(1)',
 					'textShadow': 'none'

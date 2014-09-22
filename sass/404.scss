@@ -1,0 +1,133 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,300,700);
+
+// @import "normalize";
+// @import "ht5bp";
+
+*, *:after, *:before {
+	box-sizing: border-box;
+}
+
+.clearFix:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+// color values
+
+$blueBg: #78ccfe;
+$blueLight: #00cfff;
+$blue: #3fa9f5;
+$blueMedium: #325a8d;
+$blueDark: #323e50;
+
+$lightBoxBg: rgba(black, 0.8);
+
+$pad: 6em;
+
+@mixin breakpoint($point){
+
+	@if $point == MICRO{
+		@media only screen and (min-width: 23em){ @content; } // 370px
+	}
+
+	/*else if  $point == TINY{
+		@media only screen and (min-width: 30em){ @content; } // 480px
+	}*/
+
+	@else if $point == SMALL{
+		@media only screen and (min-width: 37.5em){ @content; } // 600px
+	}
+
+	@else if $point == MEDIUM{
+		@media only screen and (min-width: 56.25em){ @content; } // 900px
+	}
+
+	/*@else if $point == BIG{
+		@media only screen and (min-width: 69em){ @content; } // 1104px
+	}*/
+
+	@else if $point == LARGE{
+		@media only screen and (min-width: 80em){ @content; } // 1280px (more than 1200px so that there is a slight amount of padding when the .center width becomes static at 1200px)
+	}
+
+}
+
+@mixin pseudo{
+	content: "";
+	display: block;
+	position: absolute;
+}
+
+html, body{
+	height: 100%; // is this messing up the vertical scrolling on some devices?
+	width: 100%;
+}
+
+body{
+	background-color: $blueBg;
+	color: $blue;
+	font: {
+		family: "Roboto", sans-serif;
+		weight: 300;
+	}
+	overflow-x: hidden;
+
+	&:before{
+		@include pseudo;
+		background:{
+			image: url(../img/light-rays.svg);
+			position: right top;
+			repeat: no-repeat;
+			size: 200%;
+		}
+		height: 100%;
+		opacity: 0.5;
+		pointer-events: none; // just encase they pop up over actual content
+		position: fixed;
+		right: 0;
+		top: 0;
+		width: 100%;
+		z-index: -100; // move light rays under other DOM content
+
+		@include breakpoint(SMALL){ background-size: 150%; }
+		@include breakpoint(MEDIUM){ background-size: 100%; }
+	}
+}
+
+h1, .h1{
+	font: {
+		color: white;
+		size: 6em;
+		weight: 100;
+	}
+	margin: 0;
+
+	@include breakpoint(SMALL){ font-size: 9em; }
+}
+
+.pageNotFound{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 80%;
+
+	@include breakpoint(SMALL){ width: auto; }
+
+	h1{ color: white; }
+
+	p{
+		color: $blueDark;
+		font: {
+			size: 1.5em;
+			weight: 100;
+		}
+		margin: 0 0 1em 0;
+
+		a{
+			color: white;
+			text-decoration: none;
+		}
+	}
+}

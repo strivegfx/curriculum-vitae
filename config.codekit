@@ -1,6 +1,6 @@
 {
 "CodeKitInfo": "This is a CodeKit 2.x project configuration file. It is designed to sync project settings across multiple machines. MODIFYING THE CONTENTS OF THIS FILE IS A POOR LIFE DECISION. If you do so, you will likely cause CodeKit to crash. This file is not useful unless accompanied by the project that created it in CodeKit 2. This file is not backwards-compatible with CodeKit 1.x. For more information, see: http:\/\/incident57.com\/codekit",
-"creatorBuild": "17682",
+"creatorBuild": "17756",
 "files": {
 	"\/404.html": {
 		"fileType": 8192,
@@ -22,6 +22,15 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/css\/404.css": {
+		"fileType": 16,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/css\/404.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/css\/main.css": {
 		"fileType": 16,
 		"ignore": 1,
@@ -31,6 +40,26 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/email-signature.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/email-signature.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/favicon.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 5328,
+		"inputAbbreviatedPath": "\/favicon.png",
+		"outputAbbreviatedPath": "\/favicon.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/img\/black-80percent-tile.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -38,17 +67,6 @@
 		"initialSize": 925,
 		"inputAbbreviatedPath": "\/img\/black-80percent-tile.png",
 		"outputAbbreviatedPath": "\/img\/black-80percent-tile.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/img\/dark-rays.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 16729,
-		"inputAbbreviatedPath": "\/img\/dark-rays.png",
-		"outputAbbreviatedPath": "\/img\/dark-rays.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -119,6 +137,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/img\/email-signature-logo.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 4317,
+		"inputAbbreviatedPath": "\/img\/email-signature-logo.png",
+		"outputAbbreviatedPath": "\/img\/email-signature-logo.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/img\/history-dot.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -141,6 +170,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/img\/logo-shadow\/css3-shadow.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 407,
+		"inputAbbreviatedPath": "\/img\/logo-shadow\/css3-shadow.jpg",
+		"outputAbbreviatedPath": "\/img\/logo-shadow\/css3-shadow.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/img\/logo-shadow\/fairfax-shadow.jpg": {
 		"fileType": 16384,
 		"ignore": 0,
@@ -148,6 +188,28 @@
 		"initialSize": 590,
 		"inputAbbreviatedPath": "\/img\/logo-shadow\/fairfax-shadow.jpg",
 		"outputAbbreviatedPath": "\/img\/logo-shadow\/fairfax-shadow.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/logo-shadow\/github-shadow.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 411,
+		"inputAbbreviatedPath": "\/img\/logo-shadow\/github-shadow.jpg",
+		"outputAbbreviatedPath": "\/img\/logo-shadow\/github-shadow.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/logo-shadow\/greensock-shadow.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 415,
+		"inputAbbreviatedPath": "\/img\/logo-shadow\/greensock-shadow.jpg",
+		"outputAbbreviatedPath": "\/img\/logo-shadow\/greensock-shadow.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -163,6 +225,39 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/img\/logo-shadow\/html5-shadow.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 417,
+		"inputAbbreviatedPath": "\/img\/logo-shadow\/html5-shadow.jpg",
+		"outputAbbreviatedPath": "\/img\/logo-shadow\/html5-shadow.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/logo-shadow\/jquery-shadow.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 424,
+		"inputAbbreviatedPath": "\/img\/logo-shadow\/jquery-shadow.jpg",
+		"outputAbbreviatedPath": "\/img\/logo-shadow\/jquery-shadow.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/logo-shadow\/mysql-shadow.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 406,
+		"inputAbbreviatedPath": "\/img\/logo-shadow\/mysql-shadow.jpg",
+		"outputAbbreviatedPath": "\/img\/logo-shadow\/mysql-shadow.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/img\/logo-shadow\/nielsen-shadow.jpg": {
 		"fileType": 16384,
 		"ignore": 0,
@@ -170,6 +265,28 @@
 		"initialSize": 601,
 		"inputAbbreviatedPath": "\/img\/logo-shadow\/nielsen-shadow.jpg",
 		"outputAbbreviatedPath": "\/img\/logo-shadow\/nielsen-shadow.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/logo-shadow\/php-shadow.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 396,
+		"inputAbbreviatedPath": "\/img\/logo-shadow\/php-shadow.jpg",
+		"outputAbbreviatedPath": "\/img\/logo-shadow\/php-shadow.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/logo-shadow\/sass-shadow.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 383,
+		"inputAbbreviatedPath": "\/img\/logo-shadow\/sass-shadow.jpg",
+		"outputAbbreviatedPath": "\/img\/logo-shadow\/sass-shadow.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -438,6 +555,28 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/img\/png-icon\/css3-active.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 490,
+		"inputAbbreviatedPath": "\/img\/png-icon\/css3-active.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/css3-active.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/png-icon\/css3-dormant.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 493,
+		"inputAbbreviatedPath": "\/img\/png-icon\/css3-dormant.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/css3-dormant.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/img\/png-icon\/design.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -537,6 +676,50 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/img\/png-icon\/github-active.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1291,
+		"inputAbbreviatedPath": "\/img\/png-icon\/github-active.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/github-active.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/png-icon\/github-dormant.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 660,
+		"inputAbbreviatedPath": "\/img\/png-icon\/github-dormant.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/github-dormant.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/png-icon\/greensock-active.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1883,
+		"inputAbbreviatedPath": "\/img\/png-icon\/greensock-active.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/greensock-active.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/png-icon\/greensock-dormant.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1087,
+		"inputAbbreviatedPath": "\/img\/png-icon\/greensock-dormant.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/greensock-dormant.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/img\/png-icon\/history.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -577,6 +760,72 @@
 		"initialSize": 1692,
 		"inputAbbreviatedPath": "\/img\/png-icon\/house-of-travel.png",
 		"outputAbbreviatedPath": "\/img\/png-icon\/house-of-travel.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/png-icon\/html5-active.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 677,
+		"inputAbbreviatedPath": "\/img\/png-icon\/html5-active.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/html5-active.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/png-icon\/html5-dormant.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 726,
+		"inputAbbreviatedPath": "\/img\/png-icon\/html5-dormant.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/html5-dormant.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/png-icon\/jquery-active.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1522,
+		"inputAbbreviatedPath": "\/img\/png-icon\/jquery-active.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/jquery-active.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/png-icon\/jquery-dormant.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1599,
+		"inputAbbreviatedPath": "\/img\/png-icon\/jquery-dormant.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/jquery-dormant.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/png-icon\/mysql-active.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1567,
+		"inputAbbreviatedPath": "\/img\/png-icon\/mysql-active.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/mysql-active.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/png-icon\/mysql-dormant.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1711,
+		"inputAbbreviatedPath": "\/img\/png-icon\/mysql-dormant.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/mysql-dormant.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -636,6 +885,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/img\/png-icon\/personality.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 603,
+		"inputAbbreviatedPath": "\/img\/png-icon\/personality.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/personality.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/img\/png-icon\/phone-active.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -654,6 +914,28 @@
 		"initialSize": 2250,
 		"inputAbbreviatedPath": "\/img\/png-icon\/phone-dormant.png",
 		"outputAbbreviatedPath": "\/img\/png-icon\/phone-dormant.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/png-icon\/php-active.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1018,
+		"inputAbbreviatedPath": "\/img\/png-icon\/php-active.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/php-active.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/png-icon\/php-dormant.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1020,
+		"inputAbbreviatedPath": "\/img\/png-icon\/php-dormant.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/php-dormant.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -687,6 +969,28 @@
 		"initialSize": 1875,
 		"inputAbbreviatedPath": "\/img\/png-icon\/references.png",
 		"outputAbbreviatedPath": "\/img\/png-icon\/references.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/png-icon\/sass-active.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1493,
+		"inputAbbreviatedPath": "\/img\/png-icon\/sass-active.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/sass-active.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/png-icon\/sass-dormant.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1474,
+		"inputAbbreviatedPath": "\/img\/png-icon\/sass-dormant.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/sass-dormant.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -764,6 +1068,17 @@
 		"initialSize": 1674,
 		"inputAbbreviatedPath": "\/img\/png-icon\/stuff.png",
 		"outputAbbreviatedPath": "\/img\/png-icon\/stuff.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/png-icon\/tools.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 743,
+		"inputAbbreviatedPath": "\/img\/png-icon\/tools.png",
+		"outputAbbreviatedPath": "\/img\/png-icon\/tools.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -988,24 +1303,24 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/img\/stuff-redesign\/4-landscape.png": {
-		"fileType": 32768,
+	"\/img\/stuff-redesign\/4-landscape.jpg": {
+		"fileType": 16384,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 113495,
-		"inputAbbreviatedPath": "\/img\/stuff-redesign\/4-landscape.png",
-		"outputAbbreviatedPath": "\/img\/stuff-redesign\/4-landscape.png",
+		"initialSize": 92884,
+		"inputAbbreviatedPath": "\/img\/stuff-redesign\/4-landscape.jpg",
+		"outputAbbreviatedPath": "\/img\/stuff-redesign\/4-landscape.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/img\/stuff-redesign\/4-portrait.png": {
-		"fileType": 32768,
+	"\/img\/stuff-redesign\/4-portrait.jpg": {
+		"fileType": 16384,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 147080,
-		"inputAbbreviatedPath": "\/img\/stuff-redesign\/4-portrait.png",
-		"outputAbbreviatedPath": "\/img\/stuff-redesign\/4-portrait.png",
+		"initialSize": 102118,
+		"inputAbbreviatedPath": "\/img\/stuff-redesign\/4-portrait.jpg",
+		"outputAbbreviatedPath": "\/img\/stuff-redesign\/4-portrait.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -1239,6 +1554,17 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/js\/_plugins.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/_plugins.js",
+		"outputAbbreviatedPath": "\/js\/min\/_plugins-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/js\/main.js": {
 		"fileType": 64,
 		"ignore": 0,
@@ -1261,23 +1587,23 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/js\/plugins.js": {
+	"\/js\/vendor\/_fastclick.js": {
 		"fileType": 64,
-		"ignore": 0,
+		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/js\/plugins.js",
-		"outputAbbreviatedPath": "\/js\/min\/plugins-ck.js",
+		"inputAbbreviatedPath": "\/js\/vendor\/_fastclick.js",
+		"outputAbbreviatedPath": "\/js\/vendor\/min\/_fastclick-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/js\/vendor\/fastclick.js": {
+	"\/js\/vendor\/_scrollReveal.js": {
 		"fileType": 64,
-		"ignore": 0,
+		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/js\/vendor\/fastclick.js",
-		"outputAbbreviatedPath": "\/js\/vendor\/min\/fastclick-ck.js",
+		"inputAbbreviatedPath": "\/js\/vendor\/_scrollReveal.js",
+		"outputAbbreviatedPath": "\/js\/vendor\/min\/_scrollReveal-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -1294,16 +1620,32 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/js\/vendor\/modernizr-2.6.2-custom-build.min.js": {
+	"\/js\/vendor\/modernizr.js": {
 		"fileType": 64,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/js\/vendor\/modernizr-2.6.2-custom-build.min.js",
-		"outputAbbreviatedPath": "\/js\/vendor\/min\/modernizr-2.6.2-custom-build.min-ck.js",
+		"inputAbbreviatedPath": "\/js\/vendor\/modernizr.js",
+		"outputAbbreviatedPath": "\/js\/vendor\/min\/modernizr-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
+		},
+	"\/sass\/404.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 5,
+		"fileType": 4,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/sass\/404.scss",
+		"outputAbbreviatedPath": "\/css\/404.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 0
 		},
 	"\/sass\/_ht5bp.scss": {
 		"createSourceMap": 0,
@@ -1348,7 +1690,7 @@
 		"outputAbbreviatedPath": "\/css\/main.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 0,
+		"outputStyle": 3,
 		"shouldRunAutoprefixer": 1,
 		"shouldRunBless": 1,
 		"useLibsass": 0
@@ -1358,6 +1700,26 @@
 	],
 "lastSavedByUser": "Devon Church",
 "manualImportLinks": {
+	"\/js\/main.js": [
+		{
+			"followForSyntaxChecking": 1,
+			"linkedFileAbbreviatedPath": "\/js\/_plugins.js",
+			"position": 0,
+			"type": 0
+			},
+		{
+			"followForSyntaxChecking": 1,
+			"linkedFileAbbreviatedPath": "\/js\/vendor\/_scrollReveal.js",
+			"position": 1,
+			"type": 0
+			},
+		{
+			"followForSyntaxChecking": 1,
+			"linkedFileAbbreviatedPath": "\/js\/vendor\/_fastclick.js",
+			"position": 2,
+			"type": 0
+			}
+		]
 	},
 "projectAttributes": {
 	"bowerAbbreviatedPath": "",
@@ -1485,6 +1847,10 @@
 			"flagValue": -1
 			},
 		"non_empty_constructor_needs_parens": {
+			"active": 0,
+			"flagValue": -1
+			},
+		"prefer_english_operator": {
 			"active": 0,
 			"flagValue": -1
 			},
@@ -1963,6 +2329,7 @@
 	"stylusAutoOutputPathReplace1": "stylus",
 	"stylusAutoOutputPathReplace2": "css",
 	"stylusAutoOutputPathStyle": 2,
+	"stylusCreateSourceMap": 0,
 	"stylusDebugStyle": 0,
 	"stylusImportCSS": 0,
 	"stylusOutputStyle": 0,
